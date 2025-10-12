@@ -1,7 +1,7 @@
 import Highcharts from 'highcharts';
 import HighchartsReact from 'highcharts-react-official';
 import { kilometerDataLabelFormatter, kilometerFormatter, meterDataLabelFormatter, meterFormatter } from '../utils/formatters';
-import { DistanceType } from '../interfaces';
+import type { DistanceType } from '../interfaces';
 
 function getOptions(distance: DistanceType, index: string[]): Highcharts.Options {
     return {

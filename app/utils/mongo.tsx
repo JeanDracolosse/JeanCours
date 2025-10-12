@@ -1,4 +1,4 @@
-import type { DistanceType, HrInTimeZoneType } from "~/interfaces";
+import type { DistanceType, HrInTimeZoneType } from "../interfaces";
 
 export async function getHrTimeInZone(): Promise<HrInTimeZoneType> {
   const hrTimeInZoneApiUrl = `${process.env.BACKEND_URL}/hrTimeInZone`;

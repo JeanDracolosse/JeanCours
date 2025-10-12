@@ -23,7 +23,7 @@ export default function Home() {
   }
 
   return (
-    <ClientOnly fallback={<p>Loading...</p>}>
+    <ClientOnly fallback={<p>Chargement ...</p>}>
       {() => (
         <div>
           <HrTimeInZoneChart index={index} hrTimeInZone={hrTimeInZone} />

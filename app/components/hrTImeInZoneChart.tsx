@@ -1,6 +1,6 @@
 import Highcharts from 'highcharts';
 import HighchartsReact from 'highcharts-react-official';
-import { HrInTimeZoneType } from '../interfaces';
+import type { HrInTimeZoneType } from '../interfaces';
 
 function getOptions(hrTimeInZone: HrInTimeZoneType, index: string[]): Highcharts.Options {
     return {
