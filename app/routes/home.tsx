@@ -6,7 +6,7 @@ import HrTimeInZoneChart from "~/components/hrTImeInZoneChart";
 import DistanceChart from "~/components/distanceChart";
 import type { HrInTimeZoneType, DistanceType } from "~/interfaces";
 import { getHrTimeInZone, getDistance, getIndex } from "~/utils/mongo";
-import { Accordion } from '@mantine/core';
+import { Accordion, Flex } from '@mantine/core';
 import { ActivityHeartbeat, ArrowsDoubleNeSw } from 'tabler-icons-react';
 
 export async function loader() {
@@ -20,14 +20,14 @@ export async function loader() {
 function hrTimeInZoneIcon() {
   return <ActivityHeartbeat
     size={48}
-    strokeWidth={2}
+    strokeWidth={1}
     color={'black'} />;
 }
 
 function distanceIcon() {
   return <ArrowsDoubleNeSw
     size={48}
-    strokeWidth={2}
+    strokeWidth={1}
     color={'black'} />;
 }
 
@@ -41,21 +41,23 @@ export default function Home() {
   return (
     <ClientOnly fallback={<p>Chargement ...</p>}>
       {() => (
-        <div>
-          <Accordion>
-            <Accordion.Item key="hrTimeInZone" value="hrTimeInZone">
-              <Accordion.Control icon={hrTimeInZoneIcon()}>hrTimeInZone</Accordion.Control>
+        <Flex mih={50}
+          gap="md"
+          justify="center"
+          align="flex-start"
+          direction="column"
+          wrap="nowrap">
+          <Accordion multiple={true} style={{ width: '100%' }}>
+            <Accordion.Item key="hrTimeInZone" value="hrTimeInZone" >
+              <Accordion.Control icon={hrTimeInZoneIcon()}>BPM Zone</Accordion.Control>
               <Accordion.Panel><HrTimeInZoneChart index={index} hrTimeInZone={hrTimeInZone} /></Accordion.Panel>
             </Accordion.Item>
-          </Accordion>
-          <Accordion>
             <Accordion.Item key="distance" value="distance">
-              <Accordion.Control icon={distanceIcon()}>distance</Accordion.Control>
+              <Accordion.Control icon={distanceIcon()}>Distance</Accordion.Control>
               <Accordion.Panel><DistanceChart index={index} distance={distance} /></Accordion.Panel>
             </Accordion.Item>
           </Accordion>
-        </div>
-      )}
+        </Flex>)}
     </ClientOnly>
 
   );

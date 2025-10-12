@@ -8,7 +8,7 @@ function getOptions(hrTimeInZone: HrInTimeZoneType, index: string[]): Highcharts
             type: 'column',
         },
         title: {
-            text: 'Zone BPM',
+            text: ""
         },
         xAxis: {
             categories: index,

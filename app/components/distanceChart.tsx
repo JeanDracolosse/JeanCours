@@ -9,7 +9,7 @@ function getOptions(distance: DistanceType, index: string[]): Highcharts.Options
             type: 'column',
         },
         title: {
-            text: 'Distance',
+            text: '',
         },
         xAxis: {
             categories: index,
