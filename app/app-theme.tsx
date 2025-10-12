@@ -2,6 +2,7 @@ import {
   createTheme,
   DEFAULT_THEME,
   MantineProvider,
+  Paper,
   type MantineProviderProps,
 } from "@mantine/core";
 
@@ -12,6 +13,12 @@ export const appTheme = createTheme({
   primaryColor: "brand",
 })
 
-export function AppTheme({ children, theme = appTheme,...props }: MantineProviderProps) {
-  return <MantineProvider theme={theme} {...props}>{children}</MantineProvider>
+export function AppTheme({ children, theme = appTheme, ...props }: MantineProviderProps) {
+  return <MantineProvider theme={theme} {...props}>
+    <Paper p="xl">
+      <Paper p="xl" shadow="xs">
+        {children}
+      </Paper>
+    </Paper>
+  </MantineProvider>
 }
