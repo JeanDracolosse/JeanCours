@@ -1,87 +1,68 @@
-# Welcome to React Router!
+# Welcome to Remix!
 
-A modern, production-ready template for building full-stack React applications using React Router.
+- [Remix Docs](https://remix.run/docs)
+- [Netlify Functions Overview](https://docs.netlify.com/functions/overview)
 
-[![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/remix-run/react-router-templates/tree/main/default)
+## Netlify Setup
 
-## Features
+1. Install the [Netlify CLI](https://docs.netlify.com/cli/get-started/):
 
-- 🚀 Server-side rendering
-- ⚡️ Hot Module Replacement (HMR)
-- 📦 Asset bundling and optimization
-- 🔄 Data loading and mutations
-- 🔒 TypeScript by default
-- 🎉 TailwindCSS for styling
-- 📖 [React Router docs](https://reactrouter.com/)
+```sh
+npm i -g netlify-cli
+```
 
-## Getting Started
+If you have previously installed the Netlify CLI, you should update it to the latest version:
 
-### Installation
+```sh
+npm i -g netlify-cli@latest
+```
 
-Install the dependencies:
+2. Sign up and log in to Netlify:
 
-```bash
+```sh
+netlify login
+```
+
+3. Create a new site:
+
+```sh
+netlify init
+```
+
+## Development
+
+Ensure all packages are installed by running:
+
+```sh
 npm install
 ```
 
-### Development
+Run
 
-Start the development server with HMR:
-
-```bash
-npm run dev
+```sh
+netlify dev
 ```
 
-Your application will be available at `http://localhost:5173`.
+Open up [http://localhost:8888](http://localhost:8888), and you're ready to go!
 
-## Building for Production
+### Serve your site locally
 
-Create a production build:
+To serve your site locally in a production-like environment, run
 
-```bash
-npm run build
+```sh
+netlify serve
 ```
+
+Your site will be available at [http://localhost:8888](http://localhost:8888). Note that it will not auto-reload when you make changes.
 
 ## Deployment
 
-### Docker Deployment
+There are two ways to deploy your app to Netlify, you can either link your app to your git repo and have it auto deploy changes to Netlify, or you can deploy your app manually. If you've followed the setup instructions already, all you need to do is run this:
 
-To build and run using Docker:
+```sh
+# preview deployment
+netlify deploy --build
 
-```bash
-docker build -t my-app .
-
-# Run the container
-docker run -p 3000:3000 my-app
+# production deployment
+netlify deploy --build --prod
 ```
-
-The containerized application can be deployed to any platform that supports Docker, including:
-
-- AWS ECS
-- Google Cloud Run
-- Azure Container Apps
-- Digital Ocean App Platform
-- Fly.io
-- Railway
-
-### DIY Deployment
-
-If you're familiar with deploying Node applications, the built-in app server is production-ready.
-
-Make sure to deploy the output of `npm run build`
-
-```
-├── package.json
-├── package-lock.json (or pnpm-lock.yaml, or bun.lockb)
-├── build/
-│   ├── client/    # Static assets
-│   └── server/    # Server-side code
-```
-
-## Styling
-
-This template comes with [Tailwind CSS](https://tailwindcss.com/) already configured for a simple default starting experience. You can use whatever CSS framework you prefer.
-
----
-
-Built with ❤️ using React Router.

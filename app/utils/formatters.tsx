@@ -8,7 +8,7 @@ export const kilometerFormatter: FormatterCallbackFunction<Series> = function (t
   return ((this?.data[this.index]?.y || 0) / 1000) + "km"
 }
 
-export const meterDataLabelFormatter: DataLabelsFormatterCallbackFunction = function (this: Point, options: DataLabelsOptions): number | string | null | undefined {
+export const meterDataLabelFormatter: DataLabelsFormatterCallbackFunction = function (this: Point): string {
   if (!this.index) {
     if (this.index === 0 && this.series.data[0].y) {
       return Math.round(this.series.data[0].y) + "m"
@@ -26,7 +26,7 @@ export const meterDataLabelFormatter: DataLabelsFormatterCallbackFunction = func
   return Math.round(currentValue) + "m (" + (currentValue - previousValue > 0 ? "+" : "") + Math.round(100 * (currentValue - previousValue) / previousValue) + "%)"
 }
 
-export const kilometerDataLabelFormatter: DataLabelsFormatterCallbackFunction = function (this: Point, options: DataLabelsOptions): number | string | null | undefined {
+export const kilometerDataLabelFormatter: DataLabelsFormatterCallbackFunction = function (this: Point): string {
   if (!this.index) {
     if (this.index === 0 && this.series.data[0].y) {
       return Math.round(this.series.data[0].y / 1000) + "km"

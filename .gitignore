@@ -1,7 +1,10 @@
-.DS_Store
-.env
-/node_modules/
+node_modules
 
-# React Router
-/.react-router/
-/build/
+/.cache
+/public/build
+/build
+.env
+
+# Local Netlify folder
+.netlify
+.DS_Store
