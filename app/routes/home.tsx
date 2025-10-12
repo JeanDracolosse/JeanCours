@@ -6,6 +6,8 @@ import HrTimeInZoneChart from "~/components/hrTImeInZoneChart";
 import DistanceChart from "~/components/distanceChart";
 import type { HrInTimeZoneType, DistanceType } from "~/interfaces";
 import { getHrTimeInZone, getDistance, getIndex } from "~/utils/mongo";
+import { Accordion } from '@mantine/core';
+import { ActivityHeartbeat, ArrowsDoubleNeSw } from 'tabler-icons-react';
 
 export async function loader() {
   const hrTimeInZone = await getHrTimeInZone();
@@ -13,6 +15,20 @@ export async function loader() {
   const index = await getIndex()
 
   return { hrTimeInZone, distance, index };
+}
+
+function hrTimeInZoneIcon() {
+  return <ActivityHeartbeat
+    size={48}
+    strokeWidth={2}
+    color={'black'} />;
+}
+
+function distanceIcon() {
+  return <ArrowsDoubleNeSw
+    size={48}
+    strokeWidth={2}
+    color={'black'} />;
 }
 
 export default function Home() {
@@ -26,11 +42,23 @@ export default function Home() {
     <ClientOnly fallback={<p>Chargement ...</p>}>
       {() => (
         <div>
-          <HrTimeInZoneChart index={index} hrTimeInZone={hrTimeInZone} />
-          <DistanceChart index={index} distance={distance} />
+          <Accordion>
+            <Accordion.Item key="hrTimeInZone" value="hrTimeInZone">
+              <Accordion.Control icon={hrTimeInZoneIcon()}>hrTimeInZone</Accordion.Control>
+              <Accordion.Panel><HrTimeInZoneChart index={index} hrTimeInZone={hrTimeInZone} /></Accordion.Panel>
+            </Accordion.Item>
+          </Accordion>
+          <Accordion>
+            <Accordion.Item key="distance" value="distance">
+              <Accordion.Control icon={distanceIcon()}>distance</Accordion.Control>
+              <Accordion.Panel><DistanceChart index={index} distance={distance} /></Accordion.Panel>
+            </Accordion.Item>
+          </Accordion>
         </div>
       )}
     </ClientOnly>
 
   );
 }
+
+
