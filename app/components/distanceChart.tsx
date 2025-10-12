@@ -1,0 +1,40 @@
+import { Chart, Title, XAxis, YAxis } from "@highcharts/react";
+import { Column } from "@highcharts/react/series";
+import type { DistanceType } from "~/interfaces";
+import { kilometerDataLabelFormatter, kilometerFormatter, meterDataLabelFormatter, meterFormatter } from "~/utils/formatters";
+
+export default function DistanceChart({ distance, index }: { distance: DistanceType, index: string[] }) {
+    return (
+        <Chart>
+            <Title>{"Distance"}</Title>
+            <XAxis
+                categories={index} />
+            <YAxis
+                title={{ text: 'Distance' }} />
+            <YAxis
+                title={{ text: 'Elevation' }} opposite={true} />
+            <Column.Series
+                options={{
+                    color: "#22333b", yAxis: 0, name: "Distance", label: {
+                        enabled: true,
+                        formatter: kilometerFormatter
+                    }, dataLabels: {
+                        enabled: true,
+                        formatter: kilometerDataLabelFormatter
+                    }
+                }}
+                data={distance["distance"]} />
+            <Column.Series
+                options={{
+                    color: "#22333b", yAxis: 1, name: "Elevation", label: {
+                        enabled: true,
+                        formatter: meterFormatter
+                    }, dataLabels: {
+                        enabled: true,
+                        formatter: meterDataLabelFormatter
+                    }
+                }}
+                data={distance["elevationGain"]} />
+        </Chart>
+    );
+}
