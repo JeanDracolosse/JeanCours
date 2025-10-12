@@ -1,35 +1,35 @@
 import Highcharts from 'highcharts';
 import HighchartsReact from 'highcharts-react-official';
-import type { DistanceType, } from '~/interfaces';
-import { kilometerDataLabelFormatter, kilometerFormatter, meterDataLabelFormatter, meterFormatter } from '~/utils/formatters';
+import { kilometerDataLabelFormatter, kilometerFormatter, meterDataLabelFormatter, meterFormatter } from '../utils/formatters';
+import { DistanceType } from '../interfaces';
 
 function getOptions(distance: DistanceType, index: string[]): Highcharts.Options {
     return {
         chart: {
-            type: 'column', // Type de graphique (ici un graphique en colonnes)
+            type: 'column',
         },
         title: {
-            text: 'Distance', // Titre du graphique
+            text: 'Distance',
         },
         xAxis: {
-            categories: index, // Les catégories pour l'axe X
+            categories: index,
         },
         yAxis: [
             {
                 title: {
-                    text: 'Distance', // Titre de l'axe Y 1
+                    text: 'Distance',
                 },
                 labels: {
-                    //formatter: kilometerFormatter, // Formatte les labels de l'axe Y 1 avec la fonction `kilometerFormatter`
+                    formatter: kilometerFormatter,
                 },
             },
             {
                 title: {
-                    text: 'Elevation', // Titre de l'axe Y 2
+                    text: 'Elevation',
                 },
-                opposite: true, // Positionne l'axe à droite
+                opposite: true,
                 labels: {
-                    //formatter: meterFormatter, // Formatte les labels de l'axe Y 2 avec la fonction `meterFormatter`
+                    formatter: meterFormatter,
                 },
             },
         ],
@@ -37,23 +37,23 @@ function getOptions(distance: DistanceType, index: string[]): Highcharts.Options
             {
                 name: 'Distance',
                 color: '#22333b',
-                yAxis: 0, // Lier cette série à l'axe Y 1
+                yAxis: 0,
                 dataLabels: {
-                    enabled: true, // Active les data labels
-                    formatter: kilometerDataLabelFormatter, // Formatte les labels de données pour cette série
+                    enabled: true,
+                    formatter: kilometerDataLabelFormatter,
                 },
-                data: distance['distance'], // Les données pour la série Distance
+                data: distance['distance'],
                 type: 'line'
             },
             {
                 name: 'Elevation',
                 color: '#22333b',
-                yAxis: 1, // Lier cette série à l'axe Y 2
+                yAxis: 1,
                 dataLabels: {
-                    enabled: true, // Active les data labels
-                    formatter: meterDataLabelFormatter, // Formatte les labels de données pour cette série
+                    enabled: true,
+                    formatter: meterDataLabelFormatter,
                 },
-                data: distance['elevationGain'], // Les données pour la série Elevation
+                data: distance['elevationGain'],
                 type: 'line'
             },
         ],

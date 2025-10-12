@@ -1,28 +1,28 @@
 import Highcharts from 'highcharts';
 import HighchartsReact from 'highcharts-react-official';
-import type { HrInTimeZoneType } from '~/interfaces';
+import { HrInTimeZoneType } from '../interfaces';
 
 function getOptions(hrTimeInZone: HrInTimeZoneType, index: string[]): Highcharts.Options {
     return {
         chart: {
-            type: 'column', // Type de graphique (ici un histogramme)
+            type: 'column',
         },
         title: {
-            text: 'Zone BPM', // Titre du graphique
+            text: 'Zone BPM',
         },
         xAxis: {
-            categories: index, // Données pour les catégories de l'axe X
+            categories: index,
         },
         yAxis: {
             title: {
-                text: 'Zone BPM', // Titre de l'axe Y
+                text: 'Zone BPM',
             },
         },
         plotOptions: {
             series: {
-                stacking: 'normal', // Empilement des séries
+                stacking: 'normal',
                 dataLabels: {
-                    enabled: true, // Activer les labels de données
+                    enabled: true,
                 },
             },
         },
@@ -32,7 +32,7 @@ function getOptions(hrTimeInZone: HrInTimeZoneType, index: string[]): Highcharts
                 color: '#233d4d',
                 yAxis: 0,
                 dataLabels: {
-                    format: '{point.percentage:.0f}%', 
+                    format: '{point.percentage:.0f}%',
                 },
                 data: hrTimeInZone['hrTimeInZone_5'],
                 type: 'column'

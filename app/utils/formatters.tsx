@@ -1,11 +1,11 @@
-import type { DataLabelsFormatterCallbackFunction, DataLabelsOptions, FormatterCallbackFunction, Point, Series } from "highcharts"
+import type { AxisLabelsFormatterCallbackFunction, AxisLabelsFormatterContextObject, DataLabelsFormatterCallbackFunction, Point } from "highcharts"
 
-export const meterFormatter: FormatterCallbackFunction<Series> = function (this: Series): string {
-  return (this?.data[this.index]?.y || 0) + "m"
+export const meterFormatter: AxisLabelsFormatterCallbackFunction = function (this: AxisLabelsFormatterContextObject): string {
+  return this.value + "m"
 }
 
-export const kilometerFormatter: FormatterCallbackFunction<Series> = function (this: Series): string {
-  return ((this?.data[this.index]?.y || 0) / 1000) + "km"
+export const kilometerFormatter: AxisLabelsFormatterCallbackFunction = function (this: AxisLabelsFormatterContextObject): string {
+  return ((typeof this.value === "number" ? this.value : 0) / 1000) + "km"
 }
 
 export const meterDataLabelFormatter: DataLabelsFormatterCallbackFunction = function (this: Point): string {
