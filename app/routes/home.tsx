@@ -1,11 +1,11 @@
 
 import { useLoaderData } from "react-router";
-import { DistanceType, HrInTimeZoneType } from "~/interfaces";
-import { getDistance, getHrTimeInZone, getIndex } from "~/utils/mongo";
 
 import { ClientOnly } from 'remix-utils/client-only';
 import HrTimeInZoneChart from "~/components/hrTImeInZoneChart";
 import DistanceChart from "~/components/distanceChart";
+import type { HrInTimeZoneType, DistanceType } from "~/interfaces";
+import { getHrTimeInZone, getDistance, getIndex } from "~/utils/mongo";
 
 export async function loader() {
   const hrTimeInZone = await getHrTimeInZone();
