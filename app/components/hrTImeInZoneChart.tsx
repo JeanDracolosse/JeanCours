@@ -1,88 +1,39 @@
-import Highcharts from 'highcharts';
-import HighchartsReact from 'highcharts-react-official';
-import type { HrInTimeZoneType } from '../interfaces';
-
-function getOptions(hrTimeInZone: HrInTimeZoneType, index: string[]): Highcharts.Options {
-    return {
-        chart: {
-            type: 'column',
-        },
-        title: {
-            text: ""
-        },
-        xAxis: {
-            categories: index,
-        },
-        yAxis: {
-            title: {
-                text: 'Zone BPM',
-            },
-        },
-        plotOptions: {
-            series: {
-                stacking: 'normal',
-                dataLabels: {
-                    enabled: true,
-                },
-            },
-        },
-        series: [
-            {
-                name: 'Zone 5',
-                color: '#233d4d',
-                yAxis: 0,
-                dataLabels: {
-                    format: '{point.percentage:.0f}%',
-                },
-                data: hrTimeInZone['hrTimeInZone_5'],
-                type: 'column'
-            },
-            {
-                name: 'Zone 4',
-                color: '#fe7f2d',
-                dataLabels: {
-                    format: '{point.percentage:.0f}%',
-                },
-                data: hrTimeInZone['hrTimeInZone_4'],
-                type: 'column'
-            },
-            {
-                name: 'Zone 3',
-                color: '#fcca46',
-                dataLabels: {
-                    format: '{point.percentage:.0f}%',
-                },
-                data: hrTimeInZone['hrTimeInZone_3'],
-                type: 'column'
-
-            },
-            {
-                name: 'Zone 2',
-                color: '#a1c181',
-                dataLabels: {
-                    format: '{point.percentage:.0f}%',
-                },
-                data: hrTimeInZone['hrTimeInZone_2'],
-                type: 'column'
-
-            },
-            {
-                name: 'Zone 1',
-                color: '#619b8a',
-                dataLabels: {
-                    format: '{point.percentage:.0f}%',
-                },
-                data: hrTimeInZone['hrTimeInZone_1'],
-                type: 'column'
-
-            },
-        ],
-    };
-}
+import { Chart, PlotOptions, Title, XAxis, YAxis } from "@highcharts/react";
+import { Column } from "@highcharts/react/series";
+import type { HrInTimeZoneType } from "~/interfaces";
 
 export default function HrTimeInZoneChart({ hrTimeInZone, index }: { hrTimeInZone: HrInTimeZoneType, index: string[] }) {
-    const options: Highcharts.Options = getOptions(hrTimeInZone, index)
     return (
-        <HighchartsReact highcharts={Highcharts} options={options} />
+        <Chart>
+            <Title>{"Zone BPM"}</Title>
+            <XAxis
+                categories={index} />
+            <YAxis
+                title={{ text: 'Zone BPM' }} />
+            <PlotOptions
+                series={{
+                    stacking: 'normal',
+                    dataLabels: {
+                        enabled: true
+                    }
+                }} />
+            <Column.Series
+                options={{
+                    color: "#233d4d", yAxis: 0, name: "Zone 5", dataLabels: { format: '{point.percentage:.0f}%' }
+                }}
+                data={hrTimeInZone["hrTimeInZone_5"]} />
+            <Column.Series
+                options={{ color: "#fe7f2d", name: "Zone 4", dataLabels: { format: '{point.percentage:.0f}%' } }}
+                data={hrTimeInZone["hrTimeInZone_4"]} />
+            <Column.Series
+                options={{ color: "#fcca46", name: "Zone 3", dataLabels: { format: '{point.percentage:.0f}%' } }}
+                data={hrTimeInZone["hrTimeInZone_3"]} />
+            <Column.Series
+                options={{ color: "#a1c181", name: "Zone 2", dataLabels: { format: '{point.percentage:.0f}%' } }}
+                data={hrTimeInZone["hrTimeInZone_2"]} />
+            <Column.Series
+                options={{ color: "#619b8a", name: "Zone 1", dataLabels: { format: '{point.percentage:.0f}%' } }}
+                data={hrTimeInZone["hrTimeInZone_1"]} />
+        </Chart>
     );
-};
+}

@@ -1,68 +1,40 @@
-import Highcharts from 'highcharts';
-import HighchartsReact from 'highcharts-react-official';
-import { kilometerDataLabelFormatter, kilometerFormatter, meterDataLabelFormatter, meterFormatter } from '../utils/formatters';
-import type { DistanceType } from '../interfaces';
-
-function getOptions(distance: DistanceType, index: string[]): Highcharts.Options {
-    return {
-        chart: {
-            type: 'column',
-        },
-        title: {
-            text: '',
-        },
-        xAxis: {
-            categories: index,
-        },
-        yAxis: [
-            {
-                title: {
-                    text: 'Distance',
-                },
-                labels: {
-                    formatter: kilometerFormatter,
-                },
-            },
-            {
-                title: {
-                    text: 'Elevation',
-                },
-                opposite: true,
-                labels: {
-                    formatter: meterFormatter,
-                },
-            },
-        ],
-        series: [
-            {
-                name: 'Distance',
-                color: '#22333b',
-                yAxis: 0,
-                dataLabels: {
-                    enabled: true,
-                    formatter: kilometerDataLabelFormatter,
-                },
-                data: distance['distance'],
-                type: 'line'
-            },
-            {
-                name: 'Elevation',
-                color: '#22333b',
-                yAxis: 1,
-                dataLabels: {
-                    enabled: true,
-                    formatter: meterDataLabelFormatter,
-                },
-                data: distance['elevationGain'],
-                type: 'line'
-            },
-        ],
-    }
-}
+import { Chart, Title, XAxis, YAxis } from "@highcharts/react";
+import { Column, Line } from "@highcharts/react/series";
+import type { DistanceType } from "~/interfaces";
+import { kilometerDataLabelFormatter, kilometerFormatter, meterDataLabelFormatter, meterFormatter } from "~/utils/formatters";
 
 export default function DistanceChart({ distance, index }: { distance: DistanceType, index: string[] }) {
-    const options: Highcharts.Options = getOptions(distance, index)
     return (
-        <HighchartsReact highcharts={Highcharts} options={options} />
+        <Chart>
+            <Title>{"Distance"}</Title>
+            <XAxis
+                categories={index} />
+            <YAxis
+                title={{ text: 'Distance' }} />
+            <YAxis
+                title={{ text: 'Elevation' }} opposite={true} />
+            <Line.Series
+                options={{
+                    color: "#22333b", yAxis: 0, name: "Distance", label: {
+                        enabled: true,
+                        //formatter: kilometerFormatter
+                    }, dataLabels: {
+                        enabled: true,
+                        formatter: kilometerDataLabelFormatter
+                    }
+                }}
+                data={distance["distance"]} />
+            <Line.Series
+                options={{
+                    color: "#22333b", yAxis: 1, name: "Elevation", label: {
+                        enabled: true,
+                        //formatter: meterFormatter
+                    }, dataLabels: {
+                        enabled: true,
+                        formatter: meterDataLabelFormatter
+                    }
+                }}
+                data={distance["elevationGain"]} />
+        </Chart>
     );
-};
+}
