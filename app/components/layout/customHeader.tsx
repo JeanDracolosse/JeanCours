@@ -3,6 +3,8 @@ import { useState } from 'react';
 import { Flex, Group } from '@mantine/core';
 import { Link } from 'react-router';
 
+import './customHeader.css';
+
 const links = [
     { link: '/', label: 'Home' },
     { link: '/charts', label: 'Charts' },
@@ -28,12 +30,14 @@ export function CustomHeader() {
     return (
         <header>
             <Flex mih={50}
+                className="heroBackground"
                 gap="xl"
                 justify="flex-start"
                 align="center"
                 direction="row"
-                ml="xl"
-                mt="sm">
+                pl="xl"
+                pt="sm"
+                pb="sm">
                 <Run
                     size={48}
                     strokeWidth={1}
