@@ -6,9 +6,13 @@ function getOptions(powerTimeInZone: PowerTimeInZoneType, index: string[]): High
     return {
         chart: {
             type: 'column',
+            backgroundColor: undefined,
         },
         title: {
             text: ""
+        },
+        tooltip: {
+            enabled: false
         },
         xAxis: {
             categories: index,

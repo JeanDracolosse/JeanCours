@@ -1,25 +1,46 @@
 import {
+  ColorSchemeScript,
+  Container,
   createTheme,
-  DEFAULT_THEME,
   MantineProvider,
   Paper,
+  type MantineColorsTuple,
   type MantineProviderProps,
 } from "@mantine/core";
 import { CustomHeader } from "./components/layout/customHeader";
 
-export const appTheme = createTheme({
-  colors: {
-    brand: DEFAULT_THEME.colors.blue,
-  },
-  primaryColor: "brand",
-})
+const myColor: MantineColorsTuple = [
+  '#ffede5',
+  '#ffdace',
+  '#ffbda8',
+  '#fe8a65',
+  '#fe6738',
+  '#fe511b',
+  '#fe460b',
+  '#e33700',
+  '#cb2f00',
+  '#b12400'
+];
 
-export function AppTheme({ children, theme = appTheme, ...props }: MantineProviderProps) {
-  return <MantineProvider theme={theme} {...props}>
-    <CustomHeader />
-    <Paper
-      p="xl">
-      {children}
-    </Paper>
-  </MantineProvider>
+const appTheme = createTheme({
+  colors: {
+    myColor: myColor,
+  },
+  primaryColor: "myColor"
+});
+
+
+export function AppTheme({ children, ...props }: MantineProviderProps) {
+  return <>
+    <ColorSchemeScript defaultColorScheme="auto" />
+    <MantineProvider theme={appTheme} {...props} defaultColorScheme="auto">
+      <Container fluid>
+        <CustomHeader />
+        <Paper
+          p="xl">
+          {children}
+        </Paper>
+      </Container>
+    </MantineProvider>
+  </>
 }

@@ -4,12 +4,17 @@ import { kilometerDataLabelFormatter, kilometerFormatter, meterDataLabelFormatte
 import type { DistanceType } from '../interfaces';
 
 function getOptions(distance: DistanceType, index: string[]): Highcharts.Options {
+
     return {
         chart: {
             type: 'column',
+            backgroundColor: undefined,
         },
         title: {
             text: '',
+        },
+        tooltip: {
+            enabled: false
         },
         xAxis: {
             categories: index,
@@ -53,7 +58,7 @@ function getOptions(distance: DistanceType, index: string[]): Highcharts.Options
                     enabled: true,
                     formatter: kilometerDataLabelFormatter,
                 },
-                data: distance['distance'],
+                data: distance['fullKilometerEffort'],
                 type: 'line'
             },
             {
@@ -75,7 +80,7 @@ function getOptions(distance: DistanceType, index: string[]): Highcharts.Options
                     enabled: true,
                     formatter: meterDataLabelFormatter,
                 },
-                data: distance['fullKilometerEffort'],
+                data: distance['elevationGain'],
                 type: 'line'
             },
         ],
