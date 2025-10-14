@@ -1,8 +1,8 @@
 import Highcharts from 'highcharts';
 import HighchartsReact from 'highcharts-react-official';
-import type { HrTimeInZoneType } from '../interfaces';
+import type { PowerTimeInZoneType } from '../interfaces';
 
-function getOptions(hrTimeInZone: HrTimeInZoneType, index: string[]): Highcharts.Options {
+function getOptions(powerTimeInZone: PowerTimeInZoneType, index: string[]): Highcharts.Options {
     return {
         chart: {
             type: 'column',
@@ -34,7 +34,7 @@ function getOptions(hrTimeInZone: HrTimeInZoneType, index: string[]): Highcharts
                 dataLabels: {
                     format: '{point.percentage:.0f}%',
                 },
-                data: hrTimeInZone['hrTimeInZone_5'],
+                data: powerTimeInZone['powerTimeInZone_5'],
                 type: 'column'
             },
             {
@@ -43,7 +43,7 @@ function getOptions(hrTimeInZone: HrTimeInZoneType, index: string[]): Highcharts
                 dataLabels: {
                     format: '{point.percentage:.0f}%',
                 },
-                data: hrTimeInZone['hrTimeInZone_4'],
+                data: powerTimeInZone['powerTimeInZone_4'],
                 type: 'column'
             },
             {
@@ -52,7 +52,7 @@ function getOptions(hrTimeInZone: HrTimeInZoneType, index: string[]): Highcharts
                 dataLabels: {
                     format: '{point.percentage:.0f}%',
                 },
-                data: hrTimeInZone['hrTimeInZone_3'],
+                data: powerTimeInZone['powerTimeInZone_3'],
                 type: 'column'
 
             },
@@ -62,7 +62,7 @@ function getOptions(hrTimeInZone: HrTimeInZoneType, index: string[]): Highcharts
                 dataLabels: {
                     format: '{point.percentage:.0f}%',
                 },
-                data: hrTimeInZone['hrTimeInZone_2'],
+                data: powerTimeInZone['powerTimeInZone_2'],
                 type: 'column'
 
             },
@@ -72,7 +72,7 @@ function getOptions(hrTimeInZone: HrTimeInZoneType, index: string[]): Highcharts
                 dataLabels: {
                     format: '{point.percentage:.0f}%',
                 },
-                data: hrTimeInZone['hrTimeInZone_1'],
+                data: powerTimeInZone['powerTimeInZone_1'],
                 type: 'column'
 
             },
@@ -80,8 +80,8 @@ function getOptions(hrTimeInZone: HrTimeInZoneType, index: string[]): Highcharts
     };
 }
 
-export default function HrTimeInZoneChart({ hrTimeInZone, index }: { hrTimeInZone: HrTimeInZoneType, index: string[] }) {
-    const options: Highcharts.Options = getOptions(hrTimeInZone, index)
+export default function PowerTimeInZoneChart({ powerTimeInZone, index }: { powerTimeInZone: PowerTimeInZoneType, index: string[] }) {
+    const options: Highcharts.Options = getOptions(powerTimeInZone, index)
     return (
         <HighchartsReact highcharts={Highcharts} options={options} />
     );

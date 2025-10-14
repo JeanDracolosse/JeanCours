@@ -46,6 +46,28 @@ function getOptions(distance: DistanceType, index: string[]): Highcharts.Options
                 type: 'line'
             },
             {
+                name: 'Kilomètre effort',
+                color: '#22333b',
+                yAxis: 0,
+                dataLabels: {
+                    enabled: true,
+                    formatter: kilometerDataLabelFormatter,
+                },
+                data: distance['distance'],
+                type: 'line'
+            },
+            {
+                name: 'Kilomètre effort complet',
+                color: '#22333b',
+                yAxis: 0,
+                dataLabels: {
+                    enabled: true,
+                    formatter: kilometerDataLabelFormatter,
+                },
+                data: distance['kilometerEffort'],
+                type: 'line'
+            },
+            {
                 name: 'Elevation',
                 color: '#22333b',
                 yAxis: 1,
@@ -53,7 +75,7 @@ function getOptions(distance: DistanceType, index: string[]): Highcharts.Options
                     enabled: true,
                     formatter: meterDataLabelFormatter,
                 },
-                data: distance['elevationGain'],
+                data: distance['fullKilometerEffort'],
                 type: 'line'
             },
         ],

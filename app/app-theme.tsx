@@ -16,8 +16,9 @@ export const appTheme = createTheme({
 
 export function AppTheme({ children, theme = appTheme, ...props }: MantineProviderProps) {
   return <MantineProvider theme={theme} {...props}>
-    <CustomHeader/>
-    <Paper p="xl">
+    <CustomHeader />
+    <Paper
+      p="xl">
       {children}
     </Paper>
   </MantineProvider>

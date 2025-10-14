@@ -3,7 +3,6 @@ import { useState } from 'react';
 import { Flex, Group } from '@mantine/core';
 import { Link } from 'react-router';
 
-import './customHeader.css';
 
 const links = [
     { link: '/', label: 'Home' },
@@ -30,7 +29,6 @@ export function CustomHeader() {
     return (
         <header>
             <Flex mih={50}
-                className="heroBackground"
                 gap="xl"
                 justify="flex-start"
                 align="center"
@@ -42,7 +40,7 @@ export function CustomHeader() {
                     size={48}
                     strokeWidth={1}
                     color={'black'} />
-                <Group gap={5} visibleFrom="xs">
+                <Group gap={5}>
                     {items}
                 </Group>
             </Flex>

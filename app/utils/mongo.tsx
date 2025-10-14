@@ -1,10 +1,17 @@
-import type { DistanceType, HrInTimeZoneType } from "../interfaces";
+import type { DistanceType, HrTimeInZoneType, PowerTimeInZoneType } from "../interfaces";
 
-export async function getHrTimeInZone(): Promise<HrInTimeZoneType> {
+export async function getHrTimeInZone(): Promise<HrTimeInZoneType> {
   const hrTimeInZoneApiUrl = `${process.env.BACKEND_URL}/hrTimeInZone`;
   const hrTimeInZoneRes = await fetch(hrTimeInZoneApiUrl);
   const hrTimeInZone = await hrTimeInZoneRes.json();
   return hrTimeInZone
+}
+
+export async function getPowerTimeInZone(): Promise<PowerTimeInZoneType> {
+  const powerTimeInZoneApiUrl = `${process.env.BACKEND_URL}/powerTimeInZone`;
+  const powerTimeInZoneRes = await fetch(powerTimeInZoneApiUrl);
+  const powerTimeInZone = await powerTimeInZoneRes.json();
+  return powerTimeInZone
 }
 
 export async function getIndex(): Promise<string[]> {
