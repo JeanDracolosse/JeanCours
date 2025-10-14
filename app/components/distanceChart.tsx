@@ -2,10 +2,11 @@ import { Chart, Title, XAxis, YAxis } from "@highcharts/react";
 import { Column, Line } from "@highcharts/react/series";
 import type { DistanceType } from "~/interfaces";
 import { kilometerDataLabelFormatter, kilometerFormatter, meterDataLabelFormatter, meterFormatter } from "~/utils/formatters";
+import Highcharts from "highcharts/highcharts.src";
 
 export default function DistanceChart({ distance, index }: { distance: DistanceType, index: string[] }) {
     return (
-        <Chart>
+        <Chart highcharts={Highcharts}>
             <Title>{"Distance"}</Title>
             <XAxis
                 categories={index} />

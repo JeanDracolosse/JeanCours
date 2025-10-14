@@ -1,10 +1,11 @@
 import { Chart, PlotOptions, Title, XAxis, YAxis } from "@highcharts/react";
 import { Column } from "@highcharts/react/series";
 import type { HrInTimeZoneType } from "~/interfaces";
+import Highcharts from "highcharts/highcharts.src";
 
 export default function HrTimeInZoneChart({ hrTimeInZone, index }: { hrTimeInZone: HrInTimeZoneType, index: string[] }) {
     return (
-        <Chart>
+        <Chart highcharts={Highcharts}>
             <Title>{"Zone BPM"}</Title>
             <XAxis
                 categories={index} />
