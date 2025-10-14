@@ -56,7 +56,7 @@ export default function Charts() {
                 <div>
                     <Title order={2}>Data charts</Title>
                     <Space h="md" />
-                    <Accordion variant="unstyled" multiple={true} defaultValue={['hrTimeInZone']}>
+                    <Accordion multiple={true} defaultValue={['hrTimeInZone']}>
                         <Accordion.Item key="hrTimeInZone" value="hrTimeInZone" >
                             <Accordion.Control icon={hrTimeInZoneIcon(iconColor)}>BPM Zone</Accordion.Control>
                             <Accordion.Panel><HrTimeInZoneChart index={index} hrTimeInZone={hrTimeInZone} /></Accordion.Panel>
