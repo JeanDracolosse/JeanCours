@@ -1,7 +1,7 @@
 import { Chart, PlotOptions, Title, XAxis, YAxis } from "@highcharts/react";
 import { Column } from "@highcharts/react/series";
 import type { HrInTimeZoneType } from "~/interfaces";
-import Highcharts from "highcharts/highcharts.src";
+import Highcharts from "highcharts/esm/highcharts.src";
 
 export default function HrTimeInZoneChart({ hrTimeInZone, index }: { hrTimeInZone: HrInTimeZoneType, index: string[] }) {
     return (
