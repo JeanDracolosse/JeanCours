@@ -1,5 +1,5 @@
 import { Run, ChevronDown } from 'tabler-icons-react';
-import { Text, Button, Center, Flex, Group, Menu, Space, ThemeIcon, Title } from '@mantine/core';
+import { Button, Center, Flex, Group, Menu, Space, ThemeIcon, Title } from '@mantine/core';
 import { NavLink } from 'react-router';
 
 let links = [
@@ -8,7 +8,7 @@ let links = [
         label: 'Graphes',
         links: [
             { link: '/charts#hrInTimeZoneChart', label: 'Zone BPM' },
-            { link: '/charts#powerrInTimeZoneChart', label: 'Zones de puissance' },
+            { link: '/charts#powerInTimeZoneChart', label: 'Zones de puissance' },
             { link: '/charts#distanceChart', label: 'Distances' },
         ],
     },
@@ -20,7 +20,7 @@ export function CustomHeader() {
 
     const items = links.map((link) => {
         const menuItems = link.links?.map((item) => (
-            <Menu.Item key={item.link}>{item.label}</Menu.Item>
+            <Menu.Item component={NavLink} to={item.link} key={item.link}>{item.label}</Menu.Item>
         ));
 
         if (menuItems) {
