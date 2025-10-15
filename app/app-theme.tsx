@@ -9,16 +9,16 @@ import {
 import { CustomHeader } from "./components/layout/customHeader";
 
 const myColor: MantineColorsTuple = [
-  '#ffede5',
-  '#ffdace',
-  '#ffbda8',
-  '#fe8a65',
-  '#fe6738',
-  '#fe511b',
-  '#fe460b',
-  '#e33700',
-  '#cb2f00',
-  '#b12400'
+  "#ffe9e9",
+  "#ffd3d2",
+  "#f7a5a4",
+  "#f27b79",
+  "#ec4b48",
+  "#ea312d",
+  "#e9221f",
+  "#d01513",
+  "#ba0c0f",
+  "#a30009"
 ];
 
 const appTheme = createTheme({

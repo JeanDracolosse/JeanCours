@@ -3,6 +3,7 @@ import { Button, Center, Flex, Group, Menu, Space, ThemeIcon, Title } from '@man
 import { NavLink } from 'react-router';
 
 let links = [
+    { link: '/', label: 'Accueil' },
     {
         link: '/charts',
         label: 'Graphes',

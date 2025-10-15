@@ -2,8 +2,12 @@ import Highcharts from 'highcharts';
 import HighchartsReact from 'highcharts-react-official';
 import type { HrTimeInZoneType } from '../interfaces';
 import { ClientOnly } from 'remix-utils/client-only';
+import { useMantineTheme } from '@mantine/core';
+import { useColorScheme } from '@mantine/hooks';
 
 function getOptions(hrTimeInZone: HrTimeInZoneType, index: string[]): Highcharts.Options {
+    const theme = useMantineTheme()
+    const colorScheme = useColorScheme() === 'dark' ? theme.colors.dark[0] : theme.black
     return {
         chart: {
             type: 'column',
@@ -17,11 +21,21 @@ function getOptions(hrTimeInZone: HrTimeInZoneType, index: string[]): Highcharts
         },
         xAxis: {
             categories: index,
+            labels: {
+                style: {
+                    color: colorScheme
+                }
+            }
         },
         yAxis: {
             title: {
                 text: 'Zone BPM',
             },
+            labels: {
+                style: {
+                    color: colorScheme
+                }
+            }
         },
         plotOptions: {
             series: {
@@ -31,10 +45,18 @@ function getOptions(hrTimeInZone: HrTimeInZoneType, index: string[]): Highcharts
                 },
             },
         },
+        legend: {
+            itemStyle: {
+                color: colorScheme,
+            },
+            itemHiddenStyle: {
+                color: colorScheme,
+            }
+        },
         series: [
             {
                 name: 'Zone 5',
-                color: '#233d4d',
+                color: theme.colors.myColor[8],
                 yAxis: 0,
                 dataLabels: {
                     format: '{point.percentage:.0f}%',
@@ -44,7 +66,7 @@ function getOptions(hrTimeInZone: HrTimeInZoneType, index: string[]): Highcharts
             },
             {
                 name: 'Zone 4',
-                color: '#fe7f2d',
+                color: theme.colors.myColor[6],
                 dataLabels: {
                     format: '{point.percentage:.0f}%',
                 },
@@ -53,7 +75,7 @@ function getOptions(hrTimeInZone: HrTimeInZoneType, index: string[]): Highcharts
             },
             {
                 name: 'Zone 3',
-                color: '#fcca46',
+                color: theme.colors.myColor[4],
                 dataLabels: {
                     format: '{point.percentage:.0f}%',
                 },
@@ -63,7 +85,7 @@ function getOptions(hrTimeInZone: HrTimeInZoneType, index: string[]): Highcharts
             },
             {
                 name: 'Zone 2',
-                color: '#a1c181',
+                color: theme.colors.myColor[2],
                 dataLabels: {
                     format: '{point.percentage:.0f}%',
                 },
@@ -73,7 +95,7 @@ function getOptions(hrTimeInZone: HrTimeInZoneType, index: string[]): Highcharts
             },
             {
                 name: 'Zone 1',
-                color: '#619b8a',
+                color: theme.colors.myColor[0],
                 dataLabels: {
                     format: '{point.percentage:.0f}%',
                 },
