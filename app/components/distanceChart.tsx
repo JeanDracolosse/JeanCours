@@ -46,7 +46,6 @@ function getOptions(distance: DistanceType, index: string[]): Highcharts.Options
                 title: {
                     text: 'Elevation',
                 },
-                opposite: true,
                 labels: {
                     formatter: meterFormatter,
                     style: {
