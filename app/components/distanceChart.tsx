@@ -9,7 +9,7 @@ import { useColorScheme } from '@mantine/hooks';
 function getOptions(distance: DistanceType, index: string[]): Highcharts.Options {
     const theme = useMantineTheme()
     const colorScheme = useColorScheme() === 'dark' ? theme.colors.dark[0] : theme.black
-    const dataColor = useColorScheme() === 'dark' ? theme.colors.myColor[2] : theme.colors.myColor[8]
+    const dataColor = useColorScheme() === 'dark' ? theme.colors.myColor[2] : theme.colors.myColor[6]
 
     return {
         chart: {
@@ -52,6 +52,7 @@ function getOptions(distance: DistanceType, index: string[]): Highcharts.Options
                         color: colorScheme
                     }
                 },
+                visible: false
             },
         ],
         legend: {
@@ -76,6 +77,8 @@ function getOptions(distance: DistanceType, index: string[]): Highcharts.Options
                                 otherSeries.hide();
                             }
                         }
+                        this.chart.yAxis[0].update({ visible: !this.chart.series[3].visible })
+                        this.chart.yAxis[1].update({ visible: this.chart.series[3].visible })
                     })
                 }
             }
