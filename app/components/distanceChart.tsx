@@ -1,6 +1,6 @@
 import Highcharts from 'highcharts';
 import HighchartsReact from 'highcharts-react-official';
-import { kilometerDataLabelFormatter, kilometerFormatter, meterDataLabelFormatter, meterFormatter } from '../utils/formatters';
+import { dateFormatter, kilometerDataLabelFormatter, kilometerFormatter, meterDataLabelFormatter, meterFormatter } from '../utils/formatters';
 import type { DistanceType } from '../interfaces';
 import { ClientOnly } from 'remix-utils/client-only';
 import { useMantineTheme } from '@mantine/core';
@@ -27,8 +27,9 @@ function getOptions(distance: DistanceType, index: string[]): Highcharts.Options
             labels: {
                 style: {
                     color: colorScheme
-                }
-            }
+                },
+                formatter: dateFormatter
+            },
         },
         yAxis: [
             {

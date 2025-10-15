@@ -1,5 +1,9 @@
 import type { AxisLabelsFormatterCallbackFunction, AxisLabelsFormatterContextObject, DataLabelsFormatterCallbackFunction, Point } from "highcharts"
 
+export const dateFormatter: AxisLabelsFormatterCallbackFunction = function (this: AxisLabelsFormatterContextObject): string {
+  return new Intl.DateTimeFormat('fr-FR', { year: 'numeric', month: 'long', day: 'numeric' }).format(Date.parse(this.value.toString()));
+}
+
 export const meterFormatter: AxisLabelsFormatterCallbackFunction = function (this: AxisLabelsFormatterContextObject): string {
   return this.value + "m"
 }
