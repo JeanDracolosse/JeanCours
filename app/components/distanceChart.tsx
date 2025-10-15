@@ -63,6 +63,24 @@ function getOptions(distance: DistanceType, index: string[]): Highcharts.Options
                 color: colorScheme,
             }
         },
+        plotOptions: {
+            series: {
+                events: {
+                    show: (function () {
+                        var chart = this.chart,
+                            series = chart.series,
+                            i = series.length,
+                            otherSeries;
+                        while (i--) {
+                            otherSeries = series[i];
+                            if (otherSeries != this && otherSeries.visible) {
+                                otherSeries.hide();
+                            }
+                        }
+                    })
+                }
+            }
+        },
         series: [
             {
                 name: 'Distance',
@@ -73,7 +91,8 @@ function getOptions(distance: DistanceType, index: string[]): Highcharts.Options
                     formatter: kilometerDataLabelFormatter,
                 },
                 data: distance['distance'],
-                type: 'line'
+                type: 'line',
+                selected: true
             },
             {
                 name: 'Kilomètre effort',
@@ -84,7 +103,8 @@ function getOptions(distance: DistanceType, index: string[]): Highcharts.Options
                     formatter: kilometerDataLabelFormatter,
                 },
                 data: distance['fullKilometerEffort'],
-                type: 'line'
+                type: 'line',
+                visible: false
             },
             {
                 name: 'Kilomètre effort complet',
@@ -95,7 +115,8 @@ function getOptions(distance: DistanceType, index: string[]): Highcharts.Options
                     formatter: kilometerDataLabelFormatter,
                 },
                 data: distance['kilometerEffort'],
-                type: 'line'
+                type: 'line',
+                visible: false
             },
             {
                 name: 'Elevation',
@@ -106,7 +127,8 @@ function getOptions(distance: DistanceType, index: string[]): Highcharts.Options
                     formatter: meterDataLabelFormatter,
                 },
                 data: distance['elevationGain'],
-                type: 'line'
+                type: 'line',
+                visible: false
             },
         ],
     }
