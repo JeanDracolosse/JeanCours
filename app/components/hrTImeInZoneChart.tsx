@@ -1,6 +1,7 @@
 import Highcharts from 'highcharts';
 import HighchartsReact from 'highcharts-react-official';
 import type { HrTimeInZoneType } from '../interfaces';
+import { ClientOnly } from 'remix-utils/client-only';
 
 function getOptions(hrTimeInZone: HrTimeInZoneType, index: string[]): Highcharts.Options {
     return {
@@ -87,6 +88,9 @@ function getOptions(hrTimeInZone: HrTimeInZoneType, index: string[]): Highcharts
 export default function HrTimeInZoneChart({ hrTimeInZone, index }: { hrTimeInZone: HrTimeInZoneType, index: string[] }) {
     const options: Highcharts.Options = getOptions(hrTimeInZone, index)
     return (
-        <HighchartsReact highcharts={Highcharts} options={options} />
+        <ClientOnly fallback={<p>Chargement ...</p>}>
+            {() => (
+                <HighchartsReact highcharts={Highcharts} options={options} />
+            )}</ClientOnly>
     );
 };

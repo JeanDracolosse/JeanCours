@@ -1,6 +1,7 @@
 import Highcharts from 'highcharts';
 import HighchartsReact from 'highcharts-react-official';
 import type { PowerTimeInZoneType } from '../interfaces';
+import { ClientOnly } from 'remix-utils/client-only';
 
 function getOptions(powerTimeInZone: PowerTimeInZoneType, index: string[]): Highcharts.Options {
     return {
@@ -87,6 +88,9 @@ function getOptions(powerTimeInZone: PowerTimeInZoneType, index: string[]): High
 export default function PowerTimeInZoneChart({ powerTimeInZone, index }: { powerTimeInZone: PowerTimeInZoneType, index: string[] }) {
     const options: Highcharts.Options = getOptions(powerTimeInZone, index)
     return (
-        <HighchartsReact highcharts={Highcharts} options={options} />
+        <ClientOnly fallback={<p>Chargement ...</p>}>
+            {() => (
+                <HighchartsReact highcharts={Highcharts} options={options} />
+            )}</ClientOnly>
     );
 };

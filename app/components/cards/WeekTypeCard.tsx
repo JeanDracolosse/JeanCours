@@ -1,4 +1,4 @@
-import { Text, Paper, Title, Space, List } from '@mantine/core';
+import { Paper, Title, Space, List } from '@mantine/core';
 
 export default function WeekTypeCard(props: { title: string, content: string[] }) {
     const items = props.content.map((item) => (
@@ -7,7 +7,7 @@ export default function WeekTypeCard(props: { title: string, content: string[] }
 
     return (
         <Paper p="xl">
-            <Title order={3}>{props.title}</Title>
+            <Title order={5}>{props.title}</Title>
             <Space h="md" />
             <List>
                 {items}

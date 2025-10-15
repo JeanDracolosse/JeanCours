@@ -8,7 +8,7 @@ export default function WeekTypes() {
   return (
 
     <div>
-      <Title order={2}>Types de semaine</Title>
+      <Title order={4}>Types de semaine</Title>
       <Space h="md" />
       <WeekTypeCard
         title="Base"

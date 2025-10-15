@@ -3,7 +3,6 @@ import {
   Container,
   createTheme,
   MantineProvider,
-  Paper,
   type MantineColorsTuple,
   type MantineProviderProps,
 } from "@mantine/core";
@@ -26,7 +25,13 @@ const appTheme = createTheme({
   colors: {
     myColor: myColor,
   },
-  primaryColor: "myColor"
+  primaryColor: "myColor",
+  primaryShade: { light: 6, dark: 8 },
+  defaultGradient: {
+    from: 'orange',
+    to: 'white',
+    deg: 0,
+  }
 });
 
 
@@ -34,12 +39,9 @@ export function AppTheme({ children, ...props }: MantineProviderProps) {
   return <>
     <ColorSchemeScript defaultColorScheme="auto" />
     <MantineProvider theme={appTheme} {...props} defaultColorScheme="auto">
-      <Container fluid>
-        <CustomHeader />
-        <Paper
-          p="xl">
-          {children}
-        </Paper>
+      <CustomHeader />
+      <Container size="xl" mt="xl">
+        {children}
       </Container>
     </MantineProvider>
   </>

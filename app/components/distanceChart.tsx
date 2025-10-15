@@ -2,6 +2,7 @@ import Highcharts from 'highcharts';
 import HighchartsReact from 'highcharts-react-official';
 import { kilometerDataLabelFormatter, kilometerFormatter, meterDataLabelFormatter, meterFormatter } from '../utils/formatters';
 import type { DistanceType } from '../interfaces';
+import { ClientOnly } from 'remix-utils/client-only';
 
 function getOptions(distance: DistanceType, index: string[]): Highcharts.Options {
 
@@ -90,6 +91,9 @@ function getOptions(distance: DistanceType, index: string[]): Highcharts.Options
 export default function DistanceChart({ distance, index }: { distance: DistanceType, index: string[] }) {
     const options: Highcharts.Options = getOptions(distance, index)
     return (
-        <HighchartsReact highcharts={Highcharts} options={options} />
+        <ClientOnly fallback={<p>Chargement ...</p>}>
+            {() => (
+                <HighchartsReact highcharts={Highcharts} options={options} />
+            )}</ClientOnly>
     );
 };
