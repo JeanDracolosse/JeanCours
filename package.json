@@ -9,11 +9,13 @@
     "typecheck": "react-router typegen && tsc"
   },
   "dependencies": {
+    "@mantine/colors-generator": "^8.3.5",
     "@mantine/core": "^8.3.4",
     "@mantine/hooks": "^8.3.4",
     "@react-router/node": "^7.9.2",
     "@react-router/serve": "^7.9.2",
     "@vercel/react-router": "^1.2.3",
+    "chroma-js": "^3.1.2",
     "highcharts": "^12.4.0",
     "highcharts-react-official": "^3.2.3",
     "isbot": "^5.1.31",

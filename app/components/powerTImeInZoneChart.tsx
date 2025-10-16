@@ -32,7 +32,7 @@ function getOptions(powerTimeInZone: PowerTimeInZoneType, index: string[]): High
         },
         yAxis: {
             title: {
-                text: 'Zone de Puissance',
+                text: '',
             },
             labels: {
                 enabled: false
@@ -57,7 +57,7 @@ function getOptions(powerTimeInZone: PowerTimeInZoneType, index: string[]): High
         series: [
             {
                 name: 'Zone 5',
-                color: theme.colors.myColor[8],
+                color: theme.colors.secondaryColor[8],
                 legendIndex: 5,
                 dataLabels: {
                     format: '{point.percentage:.0f}%',
@@ -67,7 +67,7 @@ function getOptions(powerTimeInZone: PowerTimeInZoneType, index: string[]): High
             },
             {
                 name: 'Zone 4',
-                color: theme.colors.myColor[6],
+                color: theme.colors.secondaryColor[6],
                 legendIndex: 4,
                 dataLabels: {
                     format: '{point.percentage:.0f}%',
@@ -77,7 +77,7 @@ function getOptions(powerTimeInZone: PowerTimeInZoneType, index: string[]): High
             },
             {
                 name: 'Zone 3',
-                color: theme.colors.myColor[4],
+                color: theme.colors.secondaryColor[4],
                 legendIndex: 3,
                 dataLabels: {
                     format: '{point.percentage:.0f}%',
@@ -88,7 +88,7 @@ function getOptions(powerTimeInZone: PowerTimeInZoneType, index: string[]): High
             },
             {
                 name: 'Zone 2',
-                color: theme.colors.myColor[2],
+                color: theme.colors.secondaryColor[2],
                 legendIndex: 2,
                 dataLabels: {
                     format: '{point.percentage:.0f}%',
@@ -99,7 +99,7 @@ function getOptions(powerTimeInZone: PowerTimeInZoneType, index: string[]): High
             },
             {
                 name: 'Zone 1',
-                color: theme.colors.myColor[0],
+                color: theme.colors.secondaryColor[0],
                 legendIndex: 1,
                 dataLabels: {
                     format: '{point.percentage:.0f}%',

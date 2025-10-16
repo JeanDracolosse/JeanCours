@@ -1,6 +1,9 @@
+import styles from './customHeader.module.css'
+
 import { Run, ChevronDown } from 'tabler-icons-react';
 import { Button, Center, Flex, Group, Menu, Space, ThemeIcon, Title } from '@mantine/core';
 import { NavLink } from 'react-router';
+
 
 let links = [
     { link: '/', label: 'Accueil' },
@@ -17,31 +20,39 @@ let links = [
 ];
 
 export function CustomHeader() {
-
-
     const items = links.map((link) => {
         const menuItems = link.links?.map((item) => (
-            <Menu.Item component={NavLink} to={item.link} key={item.link}>{item.label}</Menu.Item>
+            <Menu.Item
+                className={styles.menuLabel}
+                component={NavLink}
+                to={item.link}
+                key={item.link}>
+                {item.label}
+            </Menu.Item>
         ));
 
         if (menuItems) {
             return (
-                <Menu key={link.label} trigger="hover" transitionProps={{ exitDuration: 0 }} withinPortal>
-                    <Menu.Target>
+                <Menu key={link.label} trigger="hover" transitionProps={{ exitDuration: 0 }} withinPortal >
+                    <Menu.Target  >
                         <Button
                             component={NavLink}
                             to={link.link}
                             key={link.label}
                             variant="subtle"
                         >
-                            <Center>
+                            <Center >
                                 <span >{link.label}</span>
                                 <Space w="xs" />
                                 <ChevronDown size={14} />
                             </Center>
                         </Button>
                     </Menu.Target>
-                    <Menu.Dropdown>{menuItems}</Menu.Dropdown>
+                    <Menu.Dropdown
+                        className={styles.menuEntry}
+                        bg="var(--mantine-color-body)">
+                        {menuItems}
+                    </Menu.Dropdown>
                 </Menu>
             );
         }
@@ -59,17 +70,22 @@ export function CustomHeader() {
     });
 
     return (
-        <header>
+        <header style={{
+            position: "sticky",
+            top: 0,
+            zIndex: 1000
+        }}>
             <Flex
                 style={{
-                    borderBottom: '1px solid #dee2e6'
+                    borderBottom: '1px solid #dee2e6',
                 }}
                 mih={50}
                 justify="space-evenly"
                 align="end"
                 direction="row"
                 pl="xl"
-                pt="sm">
+                pt="sm"
+                bg="var(--mantine-color-body)">
                 <Flex
                     gap="xs"
                     justify="center"

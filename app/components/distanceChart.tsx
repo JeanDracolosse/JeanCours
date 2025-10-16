@@ -9,7 +9,7 @@ import { useColorScheme } from '@mantine/hooks';
 function getOptions(distance: DistanceType, index: string[]): Highcharts.Options {
     const theme = useMantineTheme()
     const colorScheme = useColorScheme() === 'dark' ? theme.colors.dark[0] : theme.black
-    const dataColor = useColorScheme() === 'dark' ? theme.colors.myColor[2] : theme.colors.myColor[6]
+    const dataColor = useColorScheme() === 'dark' ? theme.colors.secondaryColor[2] : theme.colors.secondaryColor[6]
 
     return {
         chart: {
@@ -34,13 +34,10 @@ function getOptions(distance: DistanceType, index: string[]): Highcharts.Options
         yAxis: [
             {
                 title: {
-                    text: 'Distance',
+                    text: '',
                 },
                 labels: {
-                    formatter: kilometerFormatter,
-                    style: {
-                        color: colorScheme
-                    }
+                    enabled: false
                 },
             },
             {
@@ -142,7 +139,7 @@ export default function DistanceChart({ distance, index }: { distance: DistanceT
     return (
         <ClientOnly fallback={<p>Chargement ...</p>}>
             {() => (
-                <HighchartsReact highcharts={Highcharts} options={options} />
+                <HighchartsReact  highcharts={Highcharts} options={options} />
             )}</ClientOnly>
     );
 };

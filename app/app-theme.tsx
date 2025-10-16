@@ -1,48 +1,49 @@
 import {
   ColorSchemeScript,
   Container,
+  Box,
   createTheme,
+  DEFAULT_THEME,
   MantineProvider,
-  type MantineColorsTuple,
+  mergeMantineTheme,
   type MantineProviderProps,
 } from "@mantine/core";
 import { CustomHeader } from "./components/layout/customHeader";
 
-const myColor: MantineColorsTuple = [
-  "#ffe9e9",
-  "#ffd3d2",
-  "#f7a5a4",
-  "#f27b79",
-  "#ec4b48",
-  "#ea312d",
-  "#e9221f",
-  "#d01513",
-  "#ba0c0f",
-  "#a30009"
-];
+import { generateColors } from '@mantine/colors-generator';
+
 
 const appTheme = createTheme({
   colors: {
-    myColor: myColor,
+    primaryColor: generateColors('#ff715b'),
+    secondaryColor: generateColors('#4c5454')
+
   },
-  primaryColor: "myColor",
+  primaryColor: "primaryColor",
   primaryShade: { light: 6, dark: 8 },
   defaultGradient: {
     from: 'orange',
     to: 'white',
     deg: 0,
-  }
+  },
+  /*fontFamily: 'Roboto',
+  headings: {
+    fontFamily: 'Roboto',
+  }*/
 });
 
+const theme = mergeMantineTheme(DEFAULT_THEME, appTheme);
 
 export function AppTheme({ children, ...props }: MantineProviderProps) {
   return <>
     <ColorSchemeScript defaultColorScheme="auto" />
-    <MantineProvider theme={appTheme} {...props} defaultColorScheme="auto">
-      <CustomHeader />
-      <Container size="xl" mt="xl">
-        {children}
-      </Container>
+    <MantineProvider theme={theme} {...props} defaultColorScheme="auto">
+      <Box>
+        <CustomHeader />
+        <Container size="xl" mt="xl">
+          {children}
+        </Container>
+      </Box>
     </MantineProvider>
   </>
 }

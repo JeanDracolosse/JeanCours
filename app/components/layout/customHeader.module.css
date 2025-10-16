@@ -1,0 +1,8 @@
+.menuEntry :hover {
+    background: var(--mantine-color-primaryColor-light-hover);
+    color: var(--mantine-color-primaryColor-light-color);
+}
+
+.menuLabel :hover {
+    background: none;
+}
