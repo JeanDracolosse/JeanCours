@@ -1,13 +1,13 @@
 
 import { useLoaderData } from "react-router";
 
-import HrTimeInZoneChart from "~/components/hrTImeInZoneChart";
-import DistanceChart from "~/components/distanceChart";
 import type { HrTimeInZoneType, DistanceType, PowerTimeInZoneType } from "~/interfaces";
 import { getHrTimeInZone, getDistance, getIndex, getPowerTimeInZone } from "~/utils/mongo";
 import { Flex, Stack, Title, useMantineTheme } from '@mantine/core';
 import { ActivityHeartbeat, ArrowsDoubleNeSw, Windmill } from 'tabler-icons-react';
-import PowerTimeInZoneChart from "~/components/powerTImeInZoneChart";
+import LineChart from "~/components/chart/lineChart";
+import { kilometerDataLabelFormatter, meterDataLabelFormatter } from "~/utils/formatters";
+import TimeInZoneChart from "~/components/chart/tImeInZoneChart";
 
 export async function loader() {
     const hrTimeInZone = await getHrTimeInZone();
@@ -43,7 +43,13 @@ export default function Charts() {
                     color={iconColor} />
                 <Title order={5}>Zones BPM</Title>
             </Flex>
-            <HrTimeInZoneChart index={index} hrTimeInZone={hrTimeInZone} />
+            <TimeInZoneChart index={index} timeInZoneData={{
+                timeInZone1: hrTimeInZone.hrTimeInZone_1,
+                timeInZone2: hrTimeInZone.hrTimeInZone_2,
+                timeInZone3: hrTimeInZone.hrTimeInZone_3,
+                timeInZone4: hrTimeInZone.hrTimeInZone_4,
+                timeInZone5: hrTimeInZone.hrTimeInZone_5,
+            }} />
             <Flex
                 id="powerIntImeZoneChart"
                 align="center"
@@ -54,7 +60,13 @@ export default function Charts() {
                     color={iconColor} />
                 <Title order={5}>Zone de puissance</Title>
             </Flex>
-            <PowerTimeInZoneChart index={index} powerTimeInZone={powerTimeInZone} />
+            <TimeInZoneChart index={index} timeInZoneData={{
+                timeInZone1: powerTimeInZone.powerTimeInZone_1,
+                timeInZone2: powerTimeInZone.powerTimeInZone_2,
+                timeInZone3: powerTimeInZone.powerTimeInZone_3,
+                timeInZone4: powerTimeInZone.powerTimeInZone_4,
+                timeInZone5: powerTimeInZone.powerTimeInZone_5,
+            }} />
 
             <Flex
                 id="distanceChart"
@@ -66,7 +78,12 @@ export default function Charts() {
                     color={iconColor} />
                 <Title order={5} >Distance</Title>
             </Flex>
-            <DistanceChart index={index} distance={distance} />
+            <LineChart index={index} lineDataArray={[
+                { name: "Distance", serie: distance.distance, formatter: kilometerDataLabelFormatter },
+                { name: "Dénivelé", serie: distance.elevationGain, formatter: meterDataLabelFormatter },
+                { name: "Kilomètre effort", serie: distance.kilometerEffort, formatter: kilometerDataLabelFormatter },
+                { name: "Kilomètre effort complet", serie: distance.fullKilometerEffort, formatter: kilometerDataLabelFormatter },
+            ]} />
         </Stack>)
 }
 

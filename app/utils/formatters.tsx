@@ -1,4 +1,4 @@
-import type { AxisLabelsFormatterCallbackFunction, AxisLabelsFormatterContextObject, DataLabelsFormatterCallbackFunction, Point } from "highcharts"
+import { type AxisLabelsFormatterCallbackFunction, type AxisLabelsFormatterContextObject, type DataLabelsFormatterCallbackFunction, type Point } from "highcharts"
 
 export const dateFormatter: AxisLabelsFormatterCallbackFunction = function (this: AxisLabelsFormatterContextObject): string {
   return new Intl.DateTimeFormat('fr-FR', { year: 'numeric', month: 'long', day: 'numeric' }).format(Date.parse(this.value.toString()));
@@ -47,4 +47,25 @@ export const kilometerDataLabelFormatter: DataLabelsFormatterCallbackFunction = 
   }
   return Math.round(currentValue / 1000) + "km (" + (currentValue - previousValue > 0 ? "+" : "") + Math.round(100 * (currentValue - previousValue) / previousValue) + "%)"
 
+}
+
+
+export const defaultDataLabelFormatter: DataLabelsFormatterCallbackFunction = function (this: Point): string {
+  if (this.index !== undefined && this.series.data[this.index].y !== undefined) {
+    return Math.round(this.series.data[this.index].y || 0)?.toString() || ''
+  }
+  return ''
+}
+
+
+
+export function getSerieFormatterByType(serieType?: string): DataLabelsFormatterCallbackFunction {
+  switch (serieType) {
+    case "km":
+      return kilometerDataLabelFormatter
+    case "m":
+      return meterDataLabelFormatter
+    default:
+      return defaultDataLabelFormatter;
+  }
 }

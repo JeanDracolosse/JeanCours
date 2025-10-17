@@ -1,15 +1,13 @@
-import Highcharts from 'highcharts';
-import HighchartsReact from 'highcharts-react-official';
-import type { PowerTimeInZoneType } from '../interfaces';
-import { ClientOnly } from 'remix-utils/client-only';
+
 import { useMantineTheme } from '@mantine/core';
 import { useColorScheme } from '@mantine/hooks';
 import { dateFormatter } from '~/utils/formatters';
+import type { TimeInZoneDataType } from '~/interfaces';
+import Chart from './chart';
 
-function getOptions(powerTimeInZone: PowerTimeInZoneType, index: string[]): Highcharts.Options {
+function getOptions(timeInZoneData: TimeInZoneDataType, index: string[]): Highcharts.Options {
     const theme = useMantineTheme()
     const colorScheme = useColorScheme() === 'dark' ? theme.colors.dark[0] : theme.black
-
     return {
         chart: {
             type: 'column',
@@ -37,6 +35,7 @@ function getOptions(powerTimeInZone: PowerTimeInZoneType, index: string[]): High
             labels: {
                 enabled: false
             },
+
         },
         plotOptions: {
             series: {
@@ -62,7 +61,7 @@ function getOptions(powerTimeInZone: PowerTimeInZoneType, index: string[]): High
                 dataLabels: {
                     format: '{point.percentage:.0f}%',
                 },
-                data: powerTimeInZone['powerTimeInZone_5'],
+                data: timeInZoneData.timeInZone5,
                 type: 'column'
             },
             {
@@ -72,7 +71,7 @@ function getOptions(powerTimeInZone: PowerTimeInZoneType, index: string[]): High
                 dataLabels: {
                     format: '{point.percentage:.0f}%',
                 },
-                data: powerTimeInZone['powerTimeInZone_4'],
+                data: timeInZoneData.timeInZone4,
                 type: 'column'
             },
             {
@@ -82,7 +81,7 @@ function getOptions(powerTimeInZone: PowerTimeInZoneType, index: string[]): High
                 dataLabels: {
                     format: '{point.percentage:.0f}%',
                 },
-                data: powerTimeInZone['powerTimeInZone_3'],
+                data: timeInZoneData.timeInZone3,
                 type: 'column'
 
             },
@@ -93,7 +92,7 @@ function getOptions(powerTimeInZone: PowerTimeInZoneType, index: string[]): High
                 dataLabels: {
                     format: '{point.percentage:.0f}%',
                 },
-                data: powerTimeInZone['powerTimeInZone_2'],
+                data: timeInZoneData.timeInZone2,
                 type: 'column'
 
             },
@@ -104,7 +103,7 @@ function getOptions(powerTimeInZone: PowerTimeInZoneType, index: string[]): High
                 dataLabels: {
                     format: '{point.percentage:.0f}%',
                 },
-                data: powerTimeInZone['powerTimeInZone_1'],
+                data: timeInZoneData.timeInZone1,
                 type: 'column'
 
             },
@@ -112,12 +111,9 @@ function getOptions(powerTimeInZone: PowerTimeInZoneType, index: string[]): High
     };
 }
 
-export default function PowerTimeInZoneChart({ powerTimeInZone, index }: { powerTimeInZone: PowerTimeInZoneType, index: string[] }) {
-    const options: Highcharts.Options = getOptions(powerTimeInZone, index)
+export default function TimeInZoneChart({ timeInZoneData, index }: { timeInZoneData: TimeInZoneDataType, index: string[] }) {
+    const options: Highcharts.Options = getOptions(timeInZoneData, index)
     return (
-        <ClientOnly fallback={<p>Chargement ...</p>}>
-            {() => (
-                <HighchartsReact highcharts={Highcharts} options={options} />
-            )}</ClientOnly>
+        <Chart options={options} />
     );
 };
