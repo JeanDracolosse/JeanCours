@@ -15,7 +15,6 @@ export async function getPowerTimeInZone(): Promise<PowerTimeInZoneType> {
 }
 
 export async function getIndex(): Promise<string[]> {
-
   const indexApiUrl = `${process.env.BACKEND_URL}/index`;
   const indexRes = await fetch(indexApiUrl);
   const index = await indexRes.json();

@@ -4,11 +4,14 @@ import { useColorScheme } from '@mantine/hooks';
 import { dateFormatter } from '~/utils/formatters';
 import type { TimeInZoneDataType } from '~/interfaces';
 import Chart from './chart';
+import type { SeriesClickEventObject } from 'highcharts';
+import { useNavigate } from 'react-router';
+import type { NavigateFunction } from 'react-router';
 
-function getOptions(timeInZoneData: TimeInZoneDataType, index: string[]): Highcharts.Options {
+function getOptions(redirect: boolean, navigate: NavigateFunction, timeInZoneData: TimeInZoneDataType, index: string[]): Highcharts.Options {
     const theme = useMantineTheme()
     const colorScheme = useColorScheme() === 'dark' ? theme.colors.dark[0] : theme.black
-    return {
+    const plotOptions: Highcharts.Options = {
         chart: {
             type: 'column',
             backgroundColor: undefined,
@@ -43,6 +46,8 @@ function getOptions(timeInZoneData: TimeInZoneDataType, index: string[]): Highch
                 dataLabels: {
                     enabled: true,
                 },
+                events: {
+                }
             },
         },
         legend: {
@@ -109,10 +114,26 @@ function getOptions(timeInZoneData: TimeInZoneDataType, index: string[]): Highch
             },
         ],
     };
+    if (redirect && plotOptions.plotOptions?.series?.events) {
+        plotOptions.plotOptions.series.events.click = (function (event: SeriesClickEventObject) {
+            const dateString = this.chart.xAxis[0].categories[event.point.x]
+            const date = new Date(dateString)
+            const year = date.getFullYear()
+
+            const startDate = new Date(year, 0, 1);
+            const days = Math.floor((date.getTime() - startDate.getTime()) / (24 * 60 * 60 * 1000))
+            const weekNumber = Math.ceil((days + 1) / 7)
+            navigate(`/weekCharts/${year}/${weekNumber}`)
+        }
+        )
+    }
+
+    return plotOptions
 }
 
-export default function TimeInZoneChart({ timeInZoneData, index }: { timeInZoneData: TimeInZoneDataType, index: string[] }) {
-    const options: Highcharts.Options = getOptions(timeInZoneData, index)
+export default function TimeInZoneChart({ redirect, timeInZoneData, index }: { redirect: boolean, timeInZoneData: TimeInZoneDataType, index: string[] }) {
+    const navigate: NavigateFunction = useNavigate()
+    const options: Highcharts.Options = getOptions(redirect, navigate, timeInZoneData, index)
     return (
         <Chart options={options} />
     );

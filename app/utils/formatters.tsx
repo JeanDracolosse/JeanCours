@@ -1,7 +1,11 @@
 import { type AxisLabelsFormatterCallbackFunction, type AxisLabelsFormatterContextObject, type DataLabelsFormatterCallbackFunction, type Point } from "highcharts"
 
 export const dateFormatter: AxisLabelsFormatterCallbackFunction = function (this: AxisLabelsFormatterContextObject): string {
-  return new Intl.DateTimeFormat('fr-FR', { year: 'numeric', month: 'long', day: 'numeric' }).format(Date.parse(this.value.toString()));
+  let date = Date.parse(this.value.toString())
+  if (this.value.toString().includes("T00:00:00")) {
+    date = date - 7 * 24 * 60 * 60 * 1000
+  }
+  return new Intl.DateTimeFormat('fr-FR', { year: 'numeric', month: 'long', day: 'numeric' }).format(date);
 }
 
 export const meterFormatter: AxisLabelsFormatterCallbackFunction = function (this: AxisLabelsFormatterContextObject): string {

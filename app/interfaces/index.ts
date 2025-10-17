@@ -29,6 +29,18 @@ export type DataSeriesType = {
 };
 
 // Chart types
+export type ChartType = {
+  id: string;
+  title: string;
+  type: string;
+  icon: (iconColor: string) => JSX.Element;
+  series: {
+    name: string;
+    metric: string;
+    formatter: DataLabelsFormatterCallbackFunction;
+  }[]
+};
+
 export type LineDataType = {
   serie: string[]
   name: string

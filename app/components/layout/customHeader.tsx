@@ -9,11 +9,20 @@ let links = [
     { link: '/', label: 'Accueil' },
     {
         link: '/charts',
-        label: 'Graphes',
+        label: 'Saison',
         links: [
             { link: '/charts#hrInTimeZoneChart', label: 'Zone BPM' },
             { link: '/charts#powerInTimeZoneChart', label: 'Zones de puissance' },
             { link: '/charts#distanceChart', label: 'Distances' },
+        ],
+    },
+    {
+        link: '/weekCharts',
+        label: 'Semaine',
+        links: [
+            { link: '/weekCharts#hrInTimeZoneChart', label: 'Zone BPM' },
+            { link: '/weekCharts#powerInTimeZoneChart', label: 'Zones de puissance' },
+            { link: '/weekCharts#distanceChart', label: 'Distances' },
         ],
     },
     { link: '/weekTypes', label: 'Types de semaine' },
