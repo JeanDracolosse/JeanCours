@@ -1,10 +1,18 @@
+import React from 'react'
 import styles from './customHeader.module.css'
 
-import { Run, ChevronDown } from 'tabler-icons-react';
-import { Button, Center, Flex, Group, Menu, Space, ThemeIcon, Title } from '@mantine/core';
-import { NavLink } from 'react-router';
-import React from "react";
-
+import {
+    Button,
+    Center,
+    Flex,
+    Group,
+    Menu,
+    Space,
+    ThemeIcon,
+    Title,
+} from '@mantine/core'
+import { NavLink } from 'react-router'
+import { ChevronDown, Run } from 'tabler-icons-react'
 
 const links = [
     { link: '/', label: 'Accueil' },
@@ -13,7 +21,10 @@ const links = [
         label: 'Saison',
         links: [
             { link: '/charts#hrInTimeZoneChart', label: 'Zone BPM' },
-            { link: '/charts#powerInTimeZoneChart', label: 'Zones de puissance' },
+            {
+                link: '/charts#powerInTimeZoneChart',
+                label: 'Zones de puissance',
+            },
             { link: '/charts#distanceChart', label: 'Distances' },
         ],
     },
@@ -22,12 +33,15 @@ const links = [
         label: 'Semaine',
         links: [
             { link: '/weekCharts#hrInTimeZoneChart', label: 'Zone BPM' },
-            { link: '/weekCharts#powerInTimeZoneChart', label: 'Zones de puissance' },
+            {
+                link: '/weekCharts#powerInTimeZoneChart',
+                label: 'Zones de puissance',
+            },
             { link: '/weekCharts#distanceChart', label: 'Distances' },
         ],
     },
     { link: '/weekTypes', label: 'Types de semaine' },
-];
+]
 
 export function CustomHeader() {
     const items = links.map((link) => {
@@ -36,23 +50,29 @@ export function CustomHeader() {
                 className={styles.menuLabel}
                 component={NavLink}
                 to={item.link}
-                key={item.link}>
+                key={item.link}
+            >
                 {item.label}
             </Menu.Item>
-        ));
+        ))
 
         if (menuItems) {
             return (
-                <Menu key={link.label} trigger="hover" transitionProps={{ exitDuration: 0 }} withinPortal >
-                    <Menu.Target  >
+                <Menu
+                    key={link.label}
+                    trigger="hover"
+                    transitionProps={{ exitDuration: 0 }}
+                    withinPortal
+                >
+                    <Menu.Target>
                         <Button
                             component={NavLink}
                             to={link.link}
                             key={link.label}
                             variant="subtle"
                         >
-                            <Center >
-                                <span >{link.label}</span>
+                            <Center>
+                                <span>{link.label}</span>
                                 <Space w="xs" />
                                 <ChevronDown size={14} />
                             </Center>
@@ -60,11 +80,12 @@ export function CustomHeader() {
                     </Menu.Target>
                     <Menu.Dropdown
                         className={styles.menuEntry}
-                        bg="var(--mantine-color-body)">
+                        bg="var(--mantine-color-body)"
+                    >
                         {menuItems}
                     </Menu.Dropdown>
                 </Menu>
-            );
+            )
         }
 
         return (
@@ -76,15 +97,17 @@ export function CustomHeader() {
             >
                 {link.label}
             </Button>
-        );
-    });
+        )
+    })
 
     return (
-        <header style={{
-            position: "sticky",
-            top: 0,
-            zIndex: 1000
-        }}>
+        <header
+            style={{
+                position: 'sticky',
+                top: 0,
+                zIndex: 1000,
+            }}
+        >
             <Flex
                 style={{
                     borderBottom: '1px solid #dee2e6',
@@ -95,24 +118,18 @@ export function CustomHeader() {
                 direction="row"
                 pl="xl"
                 pt="sm"
-                bg="var(--mantine-color-body)">
-                <Flex
-                    gap="xs"
-                    justify="center"
-                    align="end"
-                    direction="row"
-                >
+                bg="var(--mantine-color-body)"
+            >
+                <Flex gap="xs" justify="center" align="end" direction="row">
                     <ThemeIcon size="lg" radius="xl" mb="sm">
-                        <Run
-                            size={48}
-                        />
+                        <Run size={48} />
                     </ThemeIcon>
-                    <Title mb="xs" order={4}>Jean Cours</Title>
+                    <Title mb="xs" order={4}>
+                        Jean Cours
+                    </Title>
                 </Flex>
-                <Group gap={5}>
-                    {items}
-                </Group>
+                <Group gap={5}>{items}</Group>
             </Flex>
         </header>
-    );
+    )
 }
