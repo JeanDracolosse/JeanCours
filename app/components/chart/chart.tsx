@@ -1,8 +1,8 @@
-import React from 'react';
-import { Flex, Loader } from '@mantine/core';
-import Highcharts from 'highcharts';
-import HighchartsReact from 'highcharts-react-official';
-import { ClientOnly } from 'remix-utils/client-only';
+import React from "react";
+import { Flex, Loader } from "@mantine/core";
+import Highcharts from "highcharts";
+import HighchartsReact from "highcharts-react-official";
+import { ClientOnly } from "remix-utils/client-only";
 
 export default function Chart({ options }: { options: Highcharts.Options }) {
   return (

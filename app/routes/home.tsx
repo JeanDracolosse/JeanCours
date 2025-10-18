@@ -1,5 +1,5 @@
-import React from 'react';
-import { Container, Space, Text, Title } from '@mantine/core';
+import React from "react";
+import { Container, Space, Text, Title } from "@mantine/core";
 
 export default function Home() {
   return (

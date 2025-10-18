@@ -1,37 +1,37 @@
-import React from 'react';
-import styles from './customHeader.module.css';
+import React from "react";
+import styles from "./customHeader.module.css";
 
-import { Button, Center, Flex, Group, Menu, Space, ThemeIcon, Title } from '@mantine/core';
-import { NavLink } from 'react-router';
-import { ChevronDown, Run } from 'tabler-icons-react';
+import { Button, Center, Flex, Group, Menu, Space, ThemeIcon, Title } from "@mantine/core";
+import { NavLink } from "react-router";
+import { ChevronDown, Run } from "tabler-icons-react";
 
 const links = [
-  { link: '/', label: 'Accueil' },
+  { link: "/", label: "Accueil" },
   {
-    link: '/charts',
-    label: 'Saison',
+    link: "/charts",
+    label: "Saison",
     links: [
-      { link: '/charts#hrInTimeZoneChart', label: 'Zone BPM' },
+      { link: "/charts#hrInTimeZoneChart", label: "Zone BPM" },
       {
-        link: '/charts#powerInTimeZoneChart',
-        label: 'Zones de puissance',
+        link: "/charts#powerInTimeZoneChart",
+        label: "Zones de puissance",
       },
-      { link: '/charts#distanceChart', label: 'Distances' },
+      { link: "/charts#distanceChart", label: "Distances" },
     ],
   },
   {
-    link: '/weekCharts',
-    label: 'Semaine',
+    link: "/weekCharts",
+    label: "Semaine",
     links: [
-      { link: '/weekCharts#hrInTimeZoneChart', label: 'Zone BPM' },
+      { link: "/weekCharts#hrInTimeZoneChart", label: "Zone BPM" },
       {
-        link: '/weekCharts#powerInTimeZoneChart',
-        label: 'Zones de puissance',
+        link: "/weekCharts#powerInTimeZoneChart",
+        label: "Zones de puissance",
       },
-      { link: '/weekCharts#distanceChart', label: 'Distances' },
+      { link: "/weekCharts#distanceChart", label: "Distances" },
     ],
   },
-  { link: '/weekTypes', label: 'Types de semaine' },
+  { link: "/weekTypes", label: "Types de semaine" },
 ];
 
 export function CustomHeader() {
@@ -71,14 +71,14 @@ export function CustomHeader() {
   return (
     <header
       style={{
-        position: 'sticky',
+        position: "sticky",
         top: 0,
         zIndex: 1000,
       }}
     >
       <Flex
         style={{
-          borderBottom: '1px solid #dee2e6',
+          borderBottom: "1px solid #dee2e6",
         }}
         mih={50}
         justify="space-evenly"

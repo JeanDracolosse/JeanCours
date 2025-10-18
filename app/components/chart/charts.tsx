@@ -1,8 +1,8 @@
-import React from 'react';
-import { Flex, Stack, Title, useMantineTheme } from '@mantine/core';
-import LineChart from '~/components/chart/lineChart';
-import TimeInZoneChart from '~/components/chart/tImeInZoneChart';
-import type { ChartType, DataSeriesType } from '~/interfaces';
+import React from "react";
+import { Flex, Stack, Title, useMantineTheme } from "@mantine/core";
+import LineChart from "~/components/chart/lineChart";
+import TimeInZoneChart from "~/components/chart/tImeInZoneChart";
+import type { ChartType, DataSeriesType } from "~/interfaces";
 
 export default function Charts({
   redirect,
@@ -26,7 +26,7 @@ export default function Charts({
             {metricEntry.icon(iconColor)}
             <Title order={5}>{metricEntry.title}</Title>
           </Flex>
-          {metricEntry.type === 'line' && (
+          {metricEntry.type === "line" && (
             <LineChart
               redirect={redirect}
               index={index}
@@ -39,7 +39,7 @@ export default function Charts({
               }
             />
           )}
-          {metricEntry.type === 'column' && (
+          {metricEntry.type === "column" && (
             <TimeInZoneChart
               redirect={redirect}
               index={index}

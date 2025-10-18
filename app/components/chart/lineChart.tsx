@@ -1,11 +1,11 @@
-import React from 'react';
-import { useMantineTheme } from '@mantine/core';
-import { useColorScheme } from '@mantine/hooks';
-import Highcharts, { type SeriesClickEventObject } from 'highcharts';
-import { useNavigate, type NavigateFunction } from 'react-router';
-import type { LineDataType } from '../../interfaces';
-import { dateFormatter, getSerieFormatterByType } from '../../utils/formatters';
-import Chart from './chart';
+import React from "react";
+import { useMantineTheme } from "@mantine/core";
+import { useColorScheme } from "@mantine/hooks";
+import Highcharts, { type SeriesClickEventObject } from "highcharts";
+import { useNavigate, type NavigateFunction } from "react-router";
+import type { LineDataType } from "../../interfaces";
+import { dateFormatter, getSerieFormatterByType } from "../../utils/formatters";
+import Chart from "./chart";
 
 function getOptions(
   redirect: boolean,
@@ -14,16 +14,16 @@ function getOptions(
   index: string[]
 ): Highcharts.Options {
   const theme = useMantineTheme();
-  const colorScheme = useColorScheme() === 'dark' ? theme.colors.dark[0] : theme.black;
-  const dataColor = useColorScheme() === 'dark' ? theme.colors.secondaryColor[2] : theme.colors.secondaryColor[6];
+  const colorScheme = useColorScheme() === "dark" ? theme.colors.dark[0] : theme.black;
+  const dataColor = useColorScheme() === "dark" ? theme.colors.secondaryColor[2] : theme.colors.secondaryColor[6];
 
   const plotOptions: Highcharts.Options = {
     chart: {
-      type: 'column',
+      type: "column",
       backgroundColor: undefined,
     },
     title: {
-      text: '',
+      text: "",
     },
     tooltip: {
       enabled: false,
@@ -40,7 +40,7 @@ function getOptions(
     yAxis: [
       {
         title: {
-          text: '',
+          text: "",
         },
         labels: {
           enabled: false,
@@ -82,7 +82,7 @@ function getOptions(
         formatter: lineData.formatter || getSerieFormatterByType(lineData.unit),
       },
       data: lineData.serie,
-      type: 'line',
+      type: "line",
       selected: index === 0,
     })),
   };

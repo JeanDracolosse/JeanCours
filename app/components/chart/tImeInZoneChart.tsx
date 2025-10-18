@@ -1,12 +1,12 @@
-import React from 'react';
-import { useMantineTheme } from '@mantine/core';
-import { useColorScheme } from '@mantine/hooks';
-import type { SeriesClickEventObject } from 'highcharts';
-import type { NavigateFunction } from 'react-router';
-import { useNavigate } from 'react-router';
-import type { TimeInZoneDataType } from '~/interfaces';
-import { dateFormatter } from '~/utils/formatters';
-import Chart from './chart';
+import React from "react";
+import { useMantineTheme } from "@mantine/core";
+import { useColorScheme } from "@mantine/hooks";
+import type { SeriesClickEventObject } from "highcharts";
+import type { NavigateFunction } from "react-router";
+import { useNavigate } from "react-router";
+import type { TimeInZoneDataType } from "~/interfaces";
+import { dateFormatter } from "~/utils/formatters";
+import Chart from "./chart";
 
 function getOptions(
   redirect: boolean,
@@ -15,14 +15,14 @@ function getOptions(
   index: string[]
 ): Highcharts.Options {
   const theme = useMantineTheme();
-  const colorScheme = useColorScheme() === 'dark' ? theme.colors.dark[0] : theme.black;
+  const colorScheme = useColorScheme() === "dark" ? theme.colors.dark[0] : theme.black;
   const plotOptions: Highcharts.Options = {
     chart: {
-      type: 'column',
+      type: "column",
       backgroundColor: undefined,
     },
     title: {
-      text: '',
+      text: "",
     },
     tooltip: {
       enabled: false,
@@ -38,7 +38,7 @@ function getOptions(
     },
     yAxis: {
       title: {
-        text: '',
+        text: "",
       },
       labels: {
         enabled: false,
@@ -46,7 +46,7 @@ function getOptions(
     },
     plotOptions: {
       series: {
-        stacking: 'normal',
+        stacking: "normal",
         dataLabels: {
           enabled: true,
         },
@@ -63,54 +63,54 @@ function getOptions(
     },
     series: [
       {
-        name: 'Zone 5',
+        name: "Zone 5",
         color: theme.colors.secondaryColor[8],
         legendIndex: 5,
         dataLabels: {
-          format: '{point.percentage:.0f}%',
+          format: "{point.percentage:.0f}%",
         },
         data: timeInZoneData.timeInZone5,
-        type: 'column',
+        type: "column",
       },
       {
-        name: 'Zone 4',
+        name: "Zone 4",
         color: theme.colors.secondaryColor[6],
         legendIndex: 4,
         dataLabels: {
-          format: '{point.percentage:.0f}%',
+          format: "{point.percentage:.0f}%",
         },
         data: timeInZoneData.timeInZone4,
-        type: 'column',
+        type: "column",
       },
       {
-        name: 'Zone 3',
+        name: "Zone 3",
         color: theme.colors.secondaryColor[4],
         legendIndex: 3,
         dataLabels: {
-          format: '{point.percentage:.0f}%',
+          format: "{point.percentage:.0f}%",
         },
         data: timeInZoneData.timeInZone3,
-        type: 'column',
+        type: "column",
       },
       {
-        name: 'Zone 2',
+        name: "Zone 2",
         color: theme.colors.secondaryColor[2],
         legendIndex: 2,
         dataLabels: {
-          format: '{point.percentage:.0f}%',
+          format: "{point.percentage:.0f}%",
         },
         data: timeInZoneData.timeInZone2,
-        type: 'column',
+        type: "column",
       },
       {
-        name: 'Zone 1',
+        name: "Zone 1",
         color: theme.colors.secondaryColor[0],
         legendIndex: 1,
         dataLabels: {
-          format: '{point.percentage:.0f}%',
+          format: "{point.percentage:.0f}%",
         },
         data: timeInZoneData.timeInZone1,
-        type: 'column',
+        type: "column",
       },
     ],
   };

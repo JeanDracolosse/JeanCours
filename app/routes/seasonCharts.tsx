@@ -1,12 +1,12 @@
-import React from 'react';
-import { useLoaderData } from 'react-router';
+import React from "react";
+import { useLoaderData } from "react-router";
 
-import { Blockquote, Space } from '@mantine/core';
-import { InfoCircle } from 'tabler-icons-react';
-import Charts from '~/components/chart/charts';
-import type { ChartType, DataSeriesType } from '~/interfaces';
-import { defaultChartList } from '~/utils/charts';
-import { getIndex, getMetricByWeek } from '~/utils/mongo';
+import { Blockquote, Space } from "@mantine/core";
+import { InfoCircle } from "tabler-icons-react";
+import Charts from "~/components/chart/charts";
+import type { ChartType, DataSeriesType } from "~/interfaces";
+import { defaultChartList } from "~/utils/charts";
+import { getIndex, getMetricByWeek } from "~/utils/mongo";
 const chartList: ChartType[] = defaultChartList;
 
 export async function loader() {

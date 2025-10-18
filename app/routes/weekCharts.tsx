@@ -1,10 +1,10 @@
-import React from 'react';
-import { useLoaderData } from 'react-router';
+import React from "react";
+import { useLoaderData } from "react-router";
 
-import Charts from '~/components/chart/charts';
-import type { ChartType, DataSeriesType } from '~/interfaces';
-import { defaultChartList } from '~/utils/charts';
-import { getMetricByActivity } from '~/utils/mongo';
+import Charts from "~/components/chart/charts";
+import type { ChartType, DataSeriesType } from "~/interfaces";
+import { defaultChartList } from "~/utils/charts";
+import { getMetricByActivity } from "~/utils/mongo";
 
 const chartList: ChartType[] = defaultChartList;
 

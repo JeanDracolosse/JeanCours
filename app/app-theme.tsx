@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 import {
   Box,
   ColorSchemeScript,
@@ -8,21 +8,21 @@ import {
   MantineProvider,
   mergeMantineTheme,
   type MantineProviderProps,
-} from '@mantine/core';
-import { CustomHeader } from './components/layout/customHeader';
+} from "@mantine/core";
+import { CustomHeader } from "./components/layout/customHeader";
 
-import { generateColors } from '@mantine/colors-generator';
+import { generateColors } from "@mantine/colors-generator";
 
 const appTheme = createTheme({
   colors: {
-    primaryColor: generateColors('#ff715b'),
-    secondaryColor: generateColors('#4c5454'),
+    primaryColor: generateColors("#ff715b"),
+    secondaryColor: generateColors("#4c5454"),
   },
-  primaryColor: 'primaryColor',
+  primaryColor: "primaryColor",
   primaryShade: { light: 6, dark: 8 },
   defaultGradient: {
-    from: 'orange',
-    to: 'white',
+    from: "orange",
+    to: "white",
     deg: 0,
   },
   /*fontFamily: 'Roboto',
