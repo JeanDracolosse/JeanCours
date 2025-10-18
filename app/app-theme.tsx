@@ -12,6 +12,8 @@ import { CustomHeader } from "./components/layout/customHeader";
 
 import { generateColors } from '@mantine/colors-generator';
 
+import React from "react";
+
 
 const appTheme = createTheme({
   colors: {

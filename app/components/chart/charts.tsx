@@ -2,6 +2,7 @@ import { Flex, Stack, Title, useMantineTheme } from '@mantine/core';
 import LineChart from "~/components/chart/lineChart";
 import type { ChartType, DataSeriesType } from "~/interfaces";
 import TimeInZoneChart from "~/components/chart/tImeInZoneChart";
+import React from "react";
 
 export default function Charts({
     redirect,
@@ -22,14 +23,15 @@ export default function Charts({
             justify="flex-start"
             gap="xl">
             <Title order={4}>Graphes de données</Title>
-            {chartList.map((metricEntry) => (<div><Flex
+            {chartList.map((metricEntry) => (<div
                 key={metricEntry.id}
+            ><Flex
                 id={metricEntry.id}
                 align="center"
                 ml="lg">
-                {metricEntry.icon(iconColor)}
-                <Title order={5} >{metricEntry.title}</Title>
-            </Flex>
+                    {metricEntry.icon(iconColor)}
+                    <Title order={5} >{metricEntry.title}</Title>
+                </Flex>
                 {metricEntry.type === "line" &&
                     <LineChart
                         redirect={redirect}

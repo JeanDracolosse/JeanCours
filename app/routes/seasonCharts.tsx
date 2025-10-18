@@ -8,6 +8,7 @@ import { defaultChartList } from "~/utils/charts";
 import { Space } from "@mantine/core";
 import { Blockquote } from '@mantine/core';
 import { InfoCircle } from 'tabler-icons-react';
+import React from "react";
 const chartList: ChartType[] = defaultChartList
 
 export async function loader() {

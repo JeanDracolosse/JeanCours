@@ -1,6 +1,7 @@
 import { ArrowsDoubleNeSw } from "tabler-icons-react";
 import { defaultDataLabelFormatter, kilometerDataLabelFormatter, meterDataLabelFormatter } from "./formatters";
 import type { ChartType } from "~/interfaces";
+import React from "react";
 
 export const defaultChartList: ChartType[] = [
 

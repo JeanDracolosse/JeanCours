@@ -1,8 +1,9 @@
 import { Paper, Title, Space, List } from '@mantine/core';
+import React from "react";
 
 export default function WeekTypeCard(props: { title: string, content: string[] }) {
     const items = props.content.map((item) => (
-        <List.Item>{item}</List.Item>
+        <List.Item key={item}>{item}</List.Item>
     ));
 
     return (

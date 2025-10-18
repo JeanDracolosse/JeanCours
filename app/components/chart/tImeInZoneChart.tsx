@@ -7,6 +7,7 @@ import Chart from './chart';
 import type { SeriesClickEventObject } from 'highcharts';
 import { useNavigate } from 'react-router';
 import type { NavigateFunction } from 'react-router';
+import React from "react";
 
 function getOptions(redirect: boolean, navigate: NavigateFunction, timeInZoneData: TimeInZoneDataType, index: string[]): Highcharts.Options {
     const theme = useMantineTheme()

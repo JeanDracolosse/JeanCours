@@ -1,4 +1,5 @@
 import '@mantine/core/styles.css';
+import "./app.css";
 
 import {
   isRouteErrorResponse,
@@ -11,9 +12,9 @@ import {
 
 import { ColorSchemeScript, mantineHtmlProps } from '@mantine/core';
 import { AppTheme } from './app-theme';
+import React from "react";
 
 import type { Route } from "./+types/root";
-import "./app.css";
 
 export const links: Route.LinksFunction = () => [
   { rel: "preconnect", href: "https://fonts.googleapis.com" },

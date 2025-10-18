@@ -1,4 +1,4 @@
-import type { DataLabelsFormatterCallbackFunction, YAxisLabelsOptions } from "highcharts"
+import type { DataLabelsFormatterCallbackFunction } from "highcharts"
 
 // API types
 export type HrTimeInZoneType = {

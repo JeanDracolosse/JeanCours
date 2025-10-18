@@ -3,9 +3,10 @@ import styles from './customHeader.module.css'
 import { Run, ChevronDown } from 'tabler-icons-react';
 import { Button, Center, Flex, Group, Menu, Space, ThemeIcon, Title } from '@mantine/core';
 import { NavLink } from 'react-router';
+import React from "react";
 
 
-let links = [
+const links = [
     { link: '/', label: 'Accueil' },
     {
         link: '/charts',

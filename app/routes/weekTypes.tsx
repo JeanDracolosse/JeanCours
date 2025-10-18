@@ -2,6 +2,7 @@
 
 import { Space, Title } from '@mantine/core';
 import WeekTypeCard from "../components/cards/WeekTypeCard";
+import React from "react";
 
 export default function WeekTypes() {
 

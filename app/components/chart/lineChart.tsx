@@ -5,6 +5,7 @@ import { useMantineTheme } from '@mantine/core';
 import { useColorScheme } from '@mantine/hooks';
 import Chart from './chart';
 import { useNavigate, type NavigateFunction } from 'react-router';
+import React from "react";
 
 function getOptions(redirect: boolean, navigate: NavigateFunction, lineDataArray: LineDataType[], index: string[]): Highcharts.Options {
     const theme = useMantineTheme()
@@ -53,9 +54,9 @@ function getOptions(redirect: boolean, navigate: NavigateFunction, lineDataArray
             series: {
                 events: {
                     show: (function () {
-                        var chart = this.chart,
-                            series = chart.series,
-                            i = series.length,
+                        const chart = this.chart,
+                            series = chart.series
+                        let i = series.length,
                             otherSeries;
                         while (i--) {
                             otherSeries = series[i];

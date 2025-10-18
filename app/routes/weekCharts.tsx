@@ -5,6 +5,7 @@ import { getMetricByActivity } from "~/utils/mongo";
 import type { ChartType, DataSeriesType } from "~/interfaces";
 import Charts from "~/components/chart/charts";
 import { defaultChartList } from "~/utils/charts";
+import React from "react";
 
 const chartList: ChartType[] = defaultChartList
 
