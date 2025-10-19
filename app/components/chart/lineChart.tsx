@@ -89,9 +89,9 @@ function getOptions(
           color: colorScheme,
         },
       },
+      visible: index === 0,
       data: lineData.serie,
       type: "line",
-      selected: index === 0,
     })),
   };
   if (redirect && plotOptions.plotOptions?.series?.events) {
