@@ -15,13 +15,16 @@ function getOptions(
   index: string[]
 ): Highcharts.Options {
   const theme = useMantineTheme();
-  const colorScheme = useColorScheme() === "dark" ? theme.colors.dark[0] : theme.black;
+  const colorScheme = "var(--mantine-color-text)";
   const colorIndex = useColorScheme() === "dark" ? 9 : 6;
 
   const plotOptions: Highcharts.Options = {
     chart: {
       type: "column",
       backgroundColor: undefined,
+      style: {
+        fontFamily: theme.fontFamily,
+      },
     },
     title: {
       text: "",
@@ -37,6 +40,8 @@ function getOptions(
         },
         formatter: dateFormatter,
       },
+      lineColor: colorScheme,
+      lineWidth: 0.3,
     },
     yAxis: {
       title: {
@@ -45,6 +50,9 @@ function getOptions(
       labels: {
         enabled: false,
       },
+      lineColor: colorScheme,
+      gridLineColor: colorScheme,
+      gridLineWidth: 0.3,
     },
     plotOptions: {
       series: {
@@ -70,9 +78,13 @@ function getOptions(
         legendIndex: 5,
         dataLabels: {
           format: "{point.percentage:.0f}%",
+          style: {
+            color: colorScheme,
+          },
         },
         data: timeInZoneData.timeInZone5,
         type: "column",
+        borderWidth: 0,
       },
       {
         name: "Zone 4",
@@ -80,8 +92,12 @@ function getOptions(
         legendIndex: 4,
         dataLabels: {
           format: "{point.percentage:.0f}%",
+          style: {
+            color: colorScheme,
+          },
         },
         data: timeInZoneData.timeInZone4,
+        borderWidth: 0,
         type: "column",
       },
       {
@@ -90,8 +106,12 @@ function getOptions(
         legendIndex: 3,
         dataLabels: {
           format: "{point.percentage:.0f}%",
+          style: {
+            color: colorScheme,
+          },
         },
         data: timeInZoneData.timeInZone3,
+        borderWidth: 0,
         type: "column",
       },
       {
@@ -100,8 +120,12 @@ function getOptions(
         legendIndex: 2,
         dataLabels: {
           format: "{point.percentage:.0f}%",
+          style: {
+            color: colorScheme,
+          },
         },
         data: timeInZoneData.timeInZone2,
+        borderWidth: 0,
         type: "column",
       },
       {
@@ -110,8 +134,12 @@ function getOptions(
         legendIndex: 1,
         dataLabels: {
           format: "{point.percentage:.0f}%",
+          style: {
+            color: colorScheme,
+          },
         },
         data: timeInZoneData.timeInZone1,
+        borderWidth: 0,
         type: "column",
       },
     ],

@@ -36,6 +36,8 @@ function getOptions(
         },
         formatter: dateFormatter,
       },
+      lineColor: colorScheme,
+      lineWidth: 0.3,
     },
     yAxis: [
       {
@@ -45,6 +47,9 @@ function getOptions(
         labels: {
           enabled: false,
         },
+        lineColor: colorScheme,
+        gridLineColor: colorScheme,
+        gridLineWidth: 0.3,
       },
     ],
     legend: {
@@ -75,11 +80,14 @@ function getOptions(
     },
     series: lineDataArray.map((lineData, index) => ({
       name: lineData.name,
-      color: theme.colors.chart5Color[colorIndex],
+      color: theme.colors.chart2Color[colorIndex],
       yAxis: 0,
       dataLabels: {
         enabled: true,
         formatter: lineData.formatter || getSerieFormatterByType(lineData.unit),
+        style: {
+          color: colorScheme,
+        },
       },
       data: lineData.serie,
       type: "line",

@@ -2,9 +2,12 @@ import React from "react";
 import { ArrowsDoubleNeSw, Heartbeat, ManualGearbox } from "tabler-icons-react";
 import type { ChartType } from "~/interfaces";
 import { defaultDataLabelFormatter, kilometerDataLabelFormatter, meterDataLabelFormatter } from "./formatters";
-import { List, ThemeIcon, type MantineTheme } from "@mantine/core";
+import { Text, List, ThemeIcon, type MantineTheme } from "@mantine/core";
+import type { UseColorSchemeValue } from "@mantine/hooks";
 
-export function defaultChartList(theme?: MantineTheme): ChartType[] {
+export function defaultChartList(theme?: MantineTheme, colorScheme?: UseColorSchemeValue): ChartType[] {
+  const colorIndex = colorScheme === "dark" ? 9 : 6;
+
   return [
     {
       id: "hrTimeInZone",
@@ -13,8 +16,8 @@ export function defaultChartList(theme?: MantineTheme): ChartType[] {
         <List>
           <List.Item
             icon={
-              <ThemeIcon color={theme?.colors.chart1Color[6]} size={24} radius="xl">
-                <Heartbeat size={16} />
+              <ThemeIcon color={theme?.colors.chart1Color[colorIndex]} size={24} radius="xl">
+                <Heartbeat color="var(--mantine-color-text)" size={16} />
               </ThemeIcon>
             }
           >
@@ -22,8 +25,8 @@ export function defaultChartList(theme?: MantineTheme): ChartType[] {
           </List.Item>
           <List.Item
             icon={
-              <ThemeIcon color={theme?.colors.chart2Color[6]} size={24} radius="xl">
-                <Heartbeat size={16} />
+              <ThemeIcon color={theme?.colors.chart2Color[colorIndex]} size={24} radius="xl">
+                <Heartbeat color="var(--mantine-color-text)" size={16} />
               </ThemeIcon>
             }
           >
@@ -31,8 +34,8 @@ export function defaultChartList(theme?: MantineTheme): ChartType[] {
           </List.Item>
           <List.Item
             icon={
-              <ThemeIcon color={theme?.colors.chart3Color[6]} size={24} radius="xl">
-                <Heartbeat size={16} />
+              <ThemeIcon color={theme?.colors.chart3Color[colorIndex]} size={24} radius="xl">
+                <Heartbeat color="var(--mantine-color-text)" size={16} />
               </ThemeIcon>
             }
           >
@@ -40,8 +43,8 @@ export function defaultChartList(theme?: MantineTheme): ChartType[] {
           </List.Item>
           <List.Item
             icon={
-              <ThemeIcon color={theme?.colors.chart4Color[6]} size={24} radius="xl">
-                <Heartbeat size={16} />
+              <ThemeIcon color={theme?.colors.chart4Color[colorIndex]} size={24} radius="xl">
+                <Heartbeat color="var(--mantine-color-text)" size={16} />
               </ThemeIcon>
             }
           >
@@ -49,8 +52,8 @@ export function defaultChartList(theme?: MantineTheme): ChartType[] {
           </List.Item>
           <List.Item
             icon={
-              <ThemeIcon color={theme?.colors.chart5Color[6]} size={24} radius="xl">
-                <Heartbeat size={16} />
+              <ThemeIcon color={theme?.colors.chart5Color[colorIndex]} size={24} radius="xl">
+                <Heartbeat color="var(--mantine-color-text)" size={16} />
               </ThemeIcon>
             }
           >
@@ -59,7 +62,7 @@ export function defaultChartList(theme?: MantineTheme): ChartType[] {
         </List>
       ),
       type: "column",
-      icon: (iconColor: string) => <ArrowsDoubleNeSw size={36} strokeWidth={1.5} color={iconColor} />,
+      icon: (iconColor: string) => <Heartbeat size={36} strokeWidth={1.5} color={iconColor} />,
       series: [
         {
           name: "Zone 1",
@@ -92,13 +95,13 @@ export function defaultChartList(theme?: MantineTheme): ChartType[] {
       id: "powerTimeInZone",
       title: "Zones de puissance",
       type: "column",
-      icon: (iconColor: string) => <ArrowsDoubleNeSw size={36} strokeWidth={1.5} color={iconColor} />,
+      icon: (iconColor: string) => <ManualGearbox size={36} strokeWidth={1.5} color={iconColor} />,
       description: (
         <List>
           <List.Item
             icon={
-              <ThemeIcon color={theme?.colors.chart1Color[6]} size={24} radius="xl">
-                <ManualGearbox size={16} />
+              <ThemeIcon color={theme?.colors.chart1Color[colorIndex]} size={24} radius="xl">
+                <ManualGearbox color="var(--mantine-color-text)" size={16} />
               </ThemeIcon>
             }
           >
@@ -106,8 +109,8 @@ export function defaultChartList(theme?: MantineTheme): ChartType[] {
           </List.Item>
           <List.Item
             icon={
-              <ThemeIcon color={theme?.colors.chart2Color[6]} size={24} radius="xl">
-                <ManualGearbox size={16} />
+              <ThemeIcon color={theme?.colors.chart2Color[colorIndex]} size={24} radius="xl">
+                <ManualGearbox color="var(--mantine-color-text)" size={16} />
               </ThemeIcon>
             }
           >
@@ -115,8 +118,8 @@ export function defaultChartList(theme?: MantineTheme): ChartType[] {
           </List.Item>
           <List.Item
             icon={
-              <ThemeIcon color={theme?.colors.chart3Color[6]} size={24} radius="xl">
-                <ManualGearbox size={16} />
+              <ThemeIcon color={theme?.colors.chart3Color[colorIndex]} size={24} radius="xl">
+                <ManualGearbox color="var(--mantine-color-text)" size={16} />
               </ThemeIcon>
             }
           >
@@ -124,8 +127,8 @@ export function defaultChartList(theme?: MantineTheme): ChartType[] {
           </List.Item>
           <List.Item
             icon={
-              <ThemeIcon color={theme?.colors.chart4Color[6]} size={24} radius="xl">
-                <ManualGearbox size={16} />
+              <ThemeIcon color={theme?.colors.chart4Color[colorIndex]} size={24} radius="xl">
+                <ManualGearbox color="var(--mantine-color-text)" size={16} />
               </ThemeIcon>
             }
           >
@@ -133,8 +136,8 @@ export function defaultChartList(theme?: MantineTheme): ChartType[] {
           </List.Item>
           <List.Item
             icon={
-              <ThemeIcon color={theme?.colors.chart5Color[6]} size={24} radius="xl">
-                <ManualGearbox size={16} />
+              <ThemeIcon color={theme?.colors.chart5Color[colorIndex]} size={24} radius="xl">
+                <ManualGearbox color="var(--mantine-color-text)" size={16} />
               </ThemeIcon>
             }
           >
@@ -174,6 +177,13 @@ export function defaultChartList(theme?: MantineTheme): ChartType[] {
       id: "distance",
       title: "Distance",
       type: "line",
+      description: (
+        <Text>
+          L'objectif est de faire jusqu'à 80km par semaine, autant de dénivelé que possible, mais aussi de se reposer au
+          moins toutes les 4 semaines. La variation de distance ou de dénivelé doit aussi se trouver entre 10% et
+          15%.{" "}
+        </Text>
+      ),
       icon: (iconColor: string) => <ArrowsDoubleNeSw size={36} strokeWidth={1.5} color={iconColor} />,
       series: [
         {

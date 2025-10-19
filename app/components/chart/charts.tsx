@@ -1,8 +1,9 @@
 import React from "react";
-import { Flex, Stack, Title, useMantineTheme } from "@mantine/core";
+import { Accordion, Flex, Stack, Title, useMantineTheme } from "@mantine/core";
 import LineChart from "~/components/chart/lineChart";
 import TimeInZoneChart from "~/components/chart/tImeInZoneChart";
 import type { ChartType, DataSeriesType } from "~/interfaces";
+import { InfoCircle } from "tabler-icons-react";
 
 export default function Charts({
   redirect,
@@ -20,12 +21,22 @@ export default function Charts({
   return (
     <Stack align="stretch" justify="flex-start" gap="xl">
       {chartList.map((metricEntry) => (
-        <div key={metricEntry.id}>
-          <Flex id={metricEntry.id} direction="column" align="flex-start" ml="lg">
-            {metricEntry.icon(iconColor)}
-            <Title order={3}>{metricEntry.title}</Title>
-            {metricEntry.description}
-          </Flex>
+        <div id={metricEntry.id} key={metricEntry.id}>
+          <Accordion
+            variant="unstyled"
+            chevron={<InfoCircle color="var(--mantine-color-text)" />}
+            disableChevronRotation={true}
+          >
+            <Accordion.Item value={metricEntry.title}>
+              <Accordion.Control icon={metricEntry.icon(iconColor)}>
+                <Title order={3} style={{ color: "var(--mantine-color-text)" }}>
+                  {" "}
+                  {metricEntry.title}
+                </Title>
+              </Accordion.Control>
+              <Accordion.Panel>{metricEntry.description}</Accordion.Panel>
+            </Accordion.Item>
+          </Accordion>
           {metricEntry.type === "line" && (
             <LineChart
               redirect={redirect}

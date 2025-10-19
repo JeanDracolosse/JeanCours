@@ -7,6 +7,7 @@ import Charts from "~/components/chart/charts";
 import type { DataSeriesType } from "~/interfaces";
 import { defaultChartList } from "~/utils/charts";
 import { getIndex, getMetricByWeek } from "~/utils/mongo";
+import { useColorScheme } from "@mantine/hooks";
 
 export async function loader() {
   const metricList = defaultChartList()
@@ -24,10 +25,11 @@ export default function SeasonCharts() {
     metricValues: DataSeriesType;
   };
 
-  const chartList = defaultChartList(useMantineTheme());
+  const chartList = defaultChartList(useMantineTheme(), useColorScheme());
   return (
     <Stack gap="xl">
       <Title order={1}>Données saison en cours</Title>
+      <Text>La saison a commencé le 13 octobre 2025.</Text>
       <Blockquote mb="xl" icon={<InfoCircle />} mt="xl">
         <Text>Cliquez sur les données d'une semaine pour accéder au détail</Text>
       </Blockquote>

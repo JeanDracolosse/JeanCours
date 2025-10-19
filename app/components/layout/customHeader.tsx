@@ -1,7 +1,7 @@
 import React from "react";
 import styles from "./customHeader.module.css";
 
-import { Button, Center, Flex, Group, Menu, Space, ThemeIcon, Title } from "@mantine/core";
+import { Button, Center, Flex, Group, Menu, Space, ThemeIcon, Title, useMantineTheme } from "@mantine/core";
 import { NavLink } from "react-router";
 import { ChevronDown, Run } from "tabler-icons-react";
 
@@ -78,7 +78,7 @@ export function CustomHeader() {
     >
       <Flex
         style={{
-          borderBottom: "1px solid #dee2e6",
+          borderBottom: "1px solid light-dark(var(--mantine-color-gray-3), var(--mantine-color-dark-4))",
         }}
         mih={50}
         justify="space-evenly"

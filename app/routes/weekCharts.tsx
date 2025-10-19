@@ -1,30 +1,42 @@
 import React from "react";
 import { useLoaderData } from "react-router";
-import { Stack, Title, useMantineTheme } from "@mantine/core";
+import { Stack, Title, Text, useMantineTheme } from "@mantine/core";
 
 import Charts from "~/components/chart/charts";
 import type { ChartType, DataSeriesType } from "~/interfaces";
 import { defaultChartList } from "~/utils/charts";
 import { getMetricByActivity } from "~/utils/mongo";
+import { useColorScheme } from "@mantine/hooks";
 
 export async function loader({ params }: { params: { year: string; week: string } }) {
   const chartList: ChartType[] = defaultChartList();
   const metricList = chartList.map((entry) => entry.series?.map((entry) => entry.metric)).flat() as string[];
   const metricValues = await getMetricByActivity(params.year, params.week, metricList);
-  return { metricValues };
+  const date = new Date(parseFloat(params.year), 0, 1 + (parseFloat(params.week) - 1) * 7);
+  return { metricValues, date };
 }
 
 export default function WeekCharts() {
-  const { metricValues } = useLoaderData() as {
+  const { metricValues, date } = useLoaderData() as {
     metricValues: DataSeriesType;
+    date: Date;
   };
 
   const index = metricValues.startTimeLocal;
-  const chartList = defaultChartList(useMantineTheme());
+  const chartList = defaultChartList(useMantineTheme(), useColorScheme());
 
   return (
     <Stack gap="xl">
-      <Title order={4}>Données semaine</Title>
+      <Title order={1}>Données semaine</Title>
+      <Text>
+        Semaine du{" "}
+        {new Intl.DateTimeFormat("fr-FR", {
+          year: "numeric",
+          month: "long",
+          day: "numeric",
+        }).format(date)}
+        .
+      </Text>
       <Charts redirect={false} chartList={chartList} index={index} metricValues={metricValues} />
     </Stack>
   );
