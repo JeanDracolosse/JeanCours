@@ -16,6 +16,8 @@ function getOptions(
 ): Highcharts.Options {
   const theme = useMantineTheme();
   const colorScheme = useColorScheme() === "dark" ? theme.colors.dark[0] : theme.black;
+  const colorIndex = useColorScheme() === "dark" ? 9 : 6;
+
   const plotOptions: Highcharts.Options = {
     chart: {
       type: "column",
@@ -64,7 +66,7 @@ function getOptions(
     series: [
       {
         name: "Zone 5",
-        color: theme.colors.secondaryColor[8],
+        color: theme.colors.chart5Color[colorIndex],
         legendIndex: 5,
         dataLabels: {
           format: "{point.percentage:.0f}%",
@@ -74,7 +76,7 @@ function getOptions(
       },
       {
         name: "Zone 4",
-        color: theme.colors.secondaryColor[6],
+        color: theme.colors.chart4Color[colorIndex],
         legendIndex: 4,
         dataLabels: {
           format: "{point.percentage:.0f}%",
@@ -84,7 +86,7 @@ function getOptions(
       },
       {
         name: "Zone 3",
-        color: theme.colors.secondaryColor[4],
+        color: theme.colors.chart3Color[colorIndex],
         legendIndex: 3,
         dataLabels: {
           format: "{point.percentage:.0f}%",
@@ -94,7 +96,7 @@ function getOptions(
       },
       {
         name: "Zone 2",
-        color: theme.colors.secondaryColor[2],
+        color: theme.colors.chart2Color[colorIndex],
         legendIndex: 2,
         dataLabels: {
           format: "{point.percentage:.0f}%",
@@ -104,7 +106,7 @@ function getOptions(
       },
       {
         name: "Zone 1",
-        color: theme.colors.secondaryColor[0],
+        color: theme.colors.chart1Color[colorIndex],
         legendIndex: 1,
         dataLabels: {
           format: "{point.percentage:.0f}%",

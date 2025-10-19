@@ -15,20 +15,15 @@ import { generateColors } from "@mantine/colors-generator";
 
 const appTheme = createTheme({
   colors: {
-    primaryColor: generateColors("#ff715b"),
-    secondaryColor: generateColors("#4c5454"),
+    primaryColor: generateColors("#ee4266"),
+    chart1Color: generateColors("#0ead69"),
+    chart2Color: generateColors("#3bceac"),
+    chart3Color: generateColors("#ffd23f"),
+    chart4Color: generateColors("#ee4266"),
+    chart5Color: generateColors("#540d6e"),
   },
   primaryColor: "primaryColor",
   primaryShade: { light: 6, dark: 8 },
-  defaultGradient: {
-    from: "orange",
-    to: "white",
-    deg: 0,
-  },
-  /*fontFamily: 'Roboto',
-  headings: {
-    fontFamily: 'Roboto',
-  }*/
 });
 
 const theme = mergeMantineTheme(DEFAULT_THEME, appTheme);

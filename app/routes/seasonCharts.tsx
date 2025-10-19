@@ -1,16 +1,17 @@
 import React from "react";
 import { useLoaderData } from "react-router";
 
-import { Blockquote, Space } from "@mantine/core";
+import { Blockquote, Stack, Text, Title, useMantineTheme } from "@mantine/core";
 import { InfoCircle } from "tabler-icons-react";
 import Charts from "~/components/chart/charts";
-import type { ChartType, DataSeriesType } from "~/interfaces";
+import type { DataSeriesType } from "~/interfaces";
 import { defaultChartList } from "~/utils/charts";
 import { getIndex, getMetricByWeek } from "~/utils/mongo";
-const chartList: ChartType[] = defaultChartList;
 
 export async function loader() {
-  const metricList = chartList.map((entry) => entry.series?.map((entry) => entry.metric)).flat() as string[];
+  const metricList = defaultChartList()
+    .map((entry) => entry.series?.map((entry) => entry.metric))
+    .flat() as string[];
   const metricValues = await getMetricByWeek(metricList);
   const index = await getIndex();
 
@@ -23,12 +24,14 @@ export default function SeasonCharts() {
     metricValues: DataSeriesType;
   };
 
+  const chartList = defaultChartList(useMantineTheme());
   return (
-    <Space h="xl">
+    <Stack gap="xl">
+      <Title order={1}>Données saison en cours</Title>
       <Blockquote mb="xl" icon={<InfoCircle />} mt="xl">
-        Cliquer sur les données d'une semaine permet d'en voir le détail
+        <Text>Cliquez sur les données d'une semaine pour accéder au détail</Text>
       </Blockquote>
       <Charts redirect={true} chartList={chartList} index={index} metricValues={metricValues} />
-    </Space>
+    </Stack>
   );
 }

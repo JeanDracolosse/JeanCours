@@ -32,6 +32,7 @@ export type DataSeriesType = {
 export type ChartType = {
   id: string;
   title: string;
+  description?: JSX.Element;
   type: string;
   icon: (iconColor: string) => JSX.Element;
   series: {

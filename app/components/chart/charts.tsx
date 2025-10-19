@@ -19,12 +19,12 @@ export default function Charts({
   const iconColor = theme.colors[theme.primaryColor][6];
   return (
     <Stack align="stretch" justify="flex-start" gap="xl">
-      <Title order={4}>Graphes de données</Title>
       {chartList.map((metricEntry) => (
         <div key={metricEntry.id}>
-          <Flex id={metricEntry.id} align="center" ml="lg">
+          <Flex id={metricEntry.id} direction="column" align="flex-start" ml="lg">
             {metricEntry.icon(iconColor)}
-            <Title order={5}>{metricEntry.title}</Title>
+            <Title order={3}>{metricEntry.title}</Title>
+            {metricEntry.description}
           </Flex>
           {metricEntry.type === "line" && (
             <LineChart

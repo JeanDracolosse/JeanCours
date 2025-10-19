@@ -15,7 +15,7 @@ function getOptions(
 ): Highcharts.Options {
   const theme = useMantineTheme();
   const colorScheme = useColorScheme() === "dark" ? theme.colors.dark[0] : theme.black;
-  const dataColor = useColorScheme() === "dark" ? theme.colors.secondaryColor[2] : theme.colors.secondaryColor[6];
+  const colorIndex = useColorScheme() === "dark" ? 9 : 6;
 
   const plotOptions: Highcharts.Options = {
     chart: {
@@ -75,7 +75,7 @@ function getOptions(
     },
     series: lineDataArray.map((lineData, index) => ({
       name: lineData.name,
-      color: dataColor,
+      color: theme.colors.chart5Color[colorIndex],
       yAxis: 0,
       dataLabels: {
         enabled: true,
