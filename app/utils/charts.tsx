@@ -316,7 +316,7 @@ export function defaultChartList(theme?: MantineTheme, colorScheme?: UseColorSch
       id: "feel",
       title: "Ressenti",
       type: "line",
-      description: <Text>Mon état de forme (de 0 à 5) et la difficultée de chaque sortie (de 0 à 10). </Text>,
+      description: <Text>Mon état de forme (de 0 à 4) et la difficultée de chaque sortie (de 1 à 10). </Text>,
       icon: (iconColor: string) => <MoodHappy size={36} strokeWidth={1.5} color={iconColor} />,
       series: [
         {
