@@ -1,5 +1,5 @@
 import React from "react";
-import { Accordion, Flex, Stack, Title, useMantineTheme } from "@mantine/core";
+import { Accordion, Stack, Title, useMantineTheme } from "@mantine/core";
 import LineChart from "~/components/chart/lineChart";
 import TimeInZoneChart from "~/components/chart/tImeInZoneChart";
 import type { ChartType, DataSeriesType } from "~/interfaces";

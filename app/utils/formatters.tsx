@@ -79,9 +79,51 @@ export const kilometerDataLabelFormatter: DataLabelsFormatterCallbackFunction = 
   );
 };
 
+export const percentDataLabelFormatter: DataLabelsFormatterCallbackFunction = function (this: Point): string {
+  if (this.index !== undefined && this.series.data[this.index].y !== undefined) {
+    return (Math.round(100 * (this.series.data[this.index].y || 0)) / 100)?.toString() + "%";
+  }
+  return "";
+};
+
+export const caloriesDataLabelFormatter: DataLabelsFormatterCallbackFunction = function (this: Point): string {
+  if (this.index !== undefined && this.series.data[this.index].y !== undefined) {
+    return (Math.round(100 * (this.series.data[this.index].y || 0)) / 100)?.toString() + "kCal";
+  }
+  return "";
+};
+
+export const centimeterDataLabelFormatter: DataLabelsFormatterCallbackFunction = function (this: Point): string {
+  if (this.index !== undefined && this.series.data[this.index].y !== undefined) {
+    return (Math.round(100 * (this.series.data[this.index].y || 0)) / 100)?.toString() + "cm";
+  }
+  return "";
+};
+
+export const milliSecondDataLabelFormatter: DataLabelsFormatterCallbackFunction = function (this: Point): string {
+  if (this.index !== undefined && this.series.data[this.index].y !== undefined) {
+    return (Math.round(100 * (this.series.data[this.index].y || 0)) / 100)?.toString() + "ms";
+  }
+  return "";
+};
+
 export const defaultDataLabelFormatter: DataLabelsFormatterCallbackFunction = function (this: Point): string {
   if (this.index !== undefined && this.series.data[this.index].y !== undefined) {
-    return Math.round(this.series.data[this.index].y || 0)?.toString() || "";
+    return (Math.round(100 * (this.series.data[this.index].y || 0)) / 100)?.toString() || "";
+  }
+  return "";
+};
+
+export const fiveDataLabelFormatter: DataLabelsFormatterCallbackFunction = function (this: Point): string {
+  if (this.index !== undefined && this.series.data[this.index].y !== undefined) {
+    return (Math.round(5 * (this.series.data[this.index].y || 0)) / 100)?.toString() || "";
+  }
+  return "";
+};
+
+export const tenDataLabelFormatter: DataLabelsFormatterCallbackFunction = function (this: Point): string {
+  if (this.index !== undefined && this.series.data[this.index].y !== undefined) {
+    return (Math.round(10 * (this.series.data[this.index].y || 0)) / 100)?.toString() || "";
   }
   return "";
 };

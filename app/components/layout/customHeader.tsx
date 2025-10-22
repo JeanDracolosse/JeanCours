@@ -1,7 +1,7 @@
 import React from "react";
 import styles from "./customHeader.module.css";
 
-import { Button, Center, Flex, Group, Menu, Space, ThemeIcon, Title, useMantineTheme } from "@mantine/core";
+import { Button, Center, Flex, Group, Menu, Space, ThemeIcon, Title } from "@mantine/core";
 import { NavLink } from "react-router";
 import { ChevronDown, Run } from "tabler-icons-react";
 
@@ -17,6 +17,9 @@ const links = [
         label: "Zones de puissance",
       },
       { link: "/charts#distanceChart", label: "Distances" },
+      { link: "/charts#metrics", label: "Métriques" },
+      { link: "/charts#training", label: "Effet entraînement" },
+      { link: "/charts#feel", label: "Ressenti entraînement" },
     ],
   },
   {
@@ -29,6 +32,9 @@ const links = [
         label: "Zones de puissance",
       },
       { link: "/weekCharts#distanceChart", label: "Distances" },
+      { link: "/weekCharts#metrics", label: "Métriques" },
+      { link: "/weekCharts#training", label: "Effet entraînement" },
+      { link: "/weekCharts#feel", label: "Ressenti entraînement" },
     ],
   },
   { link: "/weekTypes", label: "Types de semaine" },

@@ -38,6 +38,7 @@ export type ChartType = {
   series: {
     name: string;
     metric: string;
+    aggregation: string;
     formatter: DataLabelsFormatterCallbackFunction;
   }[];
 };

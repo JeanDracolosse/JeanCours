@@ -28,10 +28,19 @@ export async function getDistance(): Promise<DistanceType> {
   return distance;
 }
 
-export async function getMetricByWeek(metricList: string[]): Promise<DataSeriesType> {
+export async function getMetricSumByWeek(metricList: string[]): Promise<DataSeriesType> {
   const params = new URLSearchParams();
   metricList.forEach((metric) => params.append("metrics", metric));
-  const metricsByWeekUrl = `${process.env.BACKEND_URL}/metricsByWeek?${params}`;
+  const metricsByWeekUrl = `${process.env.BACKEND_URL}/metricsSumByWeek?${params}`;
+  const metricsByWeekRes = await fetch(metricsByWeekUrl);
+  const metricsByWeek = await metricsByWeekRes.json();
+  return metricsByWeek;
+}
+
+export async function getMetricAvgByWeek(metricList: string[]): Promise<DataSeriesType> {
+  const params = new URLSearchParams();
+  metricList.forEach((metric) => params.append("metrics", metric));
+  const metricsByWeekUrl = `${process.env.BACKEND_URL}/metricsAvgByWeek?${params}`;
   const metricsByWeekRes = await fetch(metricsByWeekUrl);
   const metricsByWeek = await metricsByWeekRes.json();
   return metricsByWeek;

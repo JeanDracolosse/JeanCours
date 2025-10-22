@@ -6,14 +6,22 @@ import { InfoCircle } from "tabler-icons-react";
 import Charts from "~/components/chart/charts";
 import type { DataSeriesType } from "~/interfaces";
 import { defaultChartList } from "~/utils/charts";
-import { getIndex, getMetricByWeek } from "~/utils/mongo";
+import { getIndex, getMetricAvgByWeek, getMetricSumByWeek } from "~/utils/mongo";
 import { useColorScheme } from "@mantine/hooks";
 
 export async function loader() {
-  const metricList = defaultChartList()
-    .map((entry) => entry.series?.map((entry) => entry.metric))
+  const metricSumList = defaultChartList()
+    .map((entry) => entry.series?.filter((serie) => serie.aggregation === "sum").map((entry) => entry.metric))
     .flat() as string[];
-  const metricValues = await getMetricByWeek(metricList);
+  const metricSumValues = await getMetricSumByWeek(metricSumList);
+
+  const metricAvgList = defaultChartList()
+    .map((entry) => entry.series?.filter((serie) => serie.aggregation === "avg").map((entry) => entry.metric))
+    .flat() as string[];
+  const metricAvgValues = await getMetricAvgByWeek(metricAvgList);
+
+  const metricValues: DataSeriesType = { ...metricAvgValues, ...metricSumValues };
+
   const index = await getIndex();
 
   return { index, metricValues };
