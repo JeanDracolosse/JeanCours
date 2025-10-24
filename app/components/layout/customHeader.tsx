@@ -10,7 +10,7 @@ const links = [
   {
     link: "/charts",
     label: "Saison",
-    links: [
+    /*links: [
       { link: "/charts#hrInTimeZoneChart", label: "Zone BPM" },
       {
         link: "/charts#powerInTimeZoneChart",
@@ -20,12 +20,12 @@ const links = [
       { link: "/charts#metrics", label: "Métriques" },
       { link: "/charts#training", label: "Effet entraînement" },
       { link: "/charts#feel", label: "Ressenti entraînement" },
-    ],
+    ],*/
   },
   {
     link: "/weekCharts",
     label: "Semaine",
-    links: [
+    /*links: [
       { link: "/weekCharts#hrInTimeZoneChart", label: "Zone BPM" },
       {
         link: "/weekCharts#powerInTimeZoneChart",
@@ -35,7 +35,7 @@ const links = [
       { link: "/weekCharts#metrics", label: "Métriques" },
       { link: "/weekCharts#training", label: "Effet entraînement" },
       { link: "/weekCharts#feel", label: "Ressenti entraînement" },
-    ],
+    ],*/
   },
   { link: "/weekTypes", label: "Types de semaine" },
 ];

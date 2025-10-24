@@ -15,7 +15,7 @@ import { generateColors } from "@mantine/colors-generator";
 
 const appTheme = createTheme({
   colors: {
-    primaryColor: generateColors("#ee4266"),
+    primaryColor: generateColors("#1f7cdb"),
     chart1Color: generateColors("#0ead69"),
     chart2Color: generateColors("#3bceac"),
     chart3Color: generateColors("#ffd23f"),

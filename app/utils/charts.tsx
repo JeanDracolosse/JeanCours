@@ -1,13 +1,5 @@
 import React from "react";
-import {
-  ArrowsDoubleNeSw,
-  DeviceDesktopAnalytics,
-  Heartbeat,
-  ManualGearbox,
-  MoodHappy,
-  RulerMeasure,
-  StepInto,
-} from "tabler-icons-react";
+import { ArrowsDoubleNeSw, Heartbeat, ManualGearbox, MoodHappy, RulerMeasure, StepInto } from "tabler-icons-react";
 import type { ChartType } from "~/interfaces";
 import {
   caloriesDataLabelFormatter,
