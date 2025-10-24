@@ -17,8 +17,8 @@ export default function Home() {
           Tout est parti d'une simple interdiction d'accéder à mon Drive depuis mon lieu de travail ...
         </Text>
         <Text mt="md">
-          Le site est fait pour que je puisse suivre au jour le jour mon entraînement de course à pied et planifier mes sorties. Et
-          si je me sens l'âme d'un data analysist, pourquoi pas aussi exploiter un peu ces données.
+          Le site est fait pour que je puisse suivre au jour le jour mon entraînement de course à pied et planifier mes
+          sorties. Et si je me sens l'âme d'un data analysist, pourquoi pas aussi exploiter un peu ces données.
         </Text>
         <Text mt="md">On y trouve les sections suivantes:</Text>
         <List

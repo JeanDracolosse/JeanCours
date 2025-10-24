@@ -18,7 +18,6 @@ export default function Charts({
 }) {
   const theme = useMantineTheme();
   const iconColor = theme.colors[theme.primaryColor][6];
-  debugger;
   return (
     <Stack align="stretch" justify="flex-start" gap="xl">
       {chartList.map((metricEntry) => (

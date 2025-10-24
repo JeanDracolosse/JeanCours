@@ -33,9 +33,20 @@ export default function SeasonCharts() {
 
   const chartList = defaultChartList(useMantineTheme(), useColorScheme());
   return (
-    <Stack gap="xl">
-      <Title order={1}>Données saison en cours</Title>
-      <Text>La saison a commencé le 13 octobre 2025.</Text>
+    <Stack gap="md">
+      <Title pl="md" order={1}>
+        Saison en cours
+      </Title>
+      <Title order={2}>
+        La saison a commencé le{" "}
+        <Text span c="primaryColor" inherit>
+          13 octobre 2025
+        </Text>
+      </Title>
+      <Text>
+        Première phase d'entraînement jusqu'à 2026. <br /> Pour l'instant, l'idée c'est de voir si j'arrive à me
+        réhabituer à courir dans les montagnes. Puis en janvier, je me fixe un objectif pour l'été.
+      </Text>
       <Blockquote mb="xl" icon={<InfoCircle />} mt="xl">
         <Text>Cliquez sur les données d'une semaine pour accéder au détail</Text>
       </Blockquote>
