@@ -116,7 +116,7 @@ export const defaultDataLabelFormatter: DataLabelsFormatterCallbackFunction = fu
 
 export const fiveDataLabelFormatter: DataLabelsFormatterCallbackFunction = function (this: Point): string {
   if (this.index !== undefined && this.series.data[this.index].y !== undefined) {
-    return (Math.round( (this.series.data[this.index].y || 0)) / 25)?.toString() || "";
+    return (Math.round(this.series.data[this.index].y || 0) / 25)?.toString() || "";
   }
   return "";
 };

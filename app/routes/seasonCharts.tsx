@@ -1,7 +1,7 @@
-import React from "react";
-import { useLoaderData } from "react-router";
+import React, { Suspense } from "react";
+import { Await, useLoaderData } from "react-router";
 
-import { Blockquote, Stack, Text, Title, useMantineTheme } from "@mantine/core";
+import { Blockquote, Flex, Loader, Stack, Text, Title, useMantineTheme } from "@mantine/core";
 import { InfoCircle } from "tabler-icons-react";
 import Charts from "~/components/chart/charts";
 import type { DataSeriesType } from "~/interfaces";
@@ -13,24 +13,22 @@ export async function loader() {
   const metricSumList = defaultChartList()
     .map((entry) => entry.series?.filter((serie) => serie.aggregation === "sum").map((entry) => entry.metric))
     .flat() as string[];
-  const metricSumValues = await getMetricSumByWeek(metricSumList);
-
   const metricAvgList = defaultChartList()
     .map((entry) => entry.series?.filter((serie) => serie.aggregation === "avg").map((entry) => entry.metric))
     .flat() as string[];
-  const metricAvgValues = await getMetricAvgByWeek(metricAvgList);
 
-  const metricValues: DataSeriesType = { ...metricAvgValues, ...metricSumValues };
+  const metricSumValues = getMetricSumByWeek(metricSumList);
+  const metricAvgValues = getMetricAvgByWeek(metricAvgList);
+  const index = getIndex();
 
-  const index = await getIndex();
-
-  return { index, metricValues };
+  return { index, metricAvgValues, metricSumValues };
 }
 
 export default function SeasonCharts() {
-  const { index, metricValues } = useLoaderData() as {
+  const { index, metricAvgValues, metricSumValues } = useLoaderData() as {
     index: string[];
-    metricValues: DataSeriesType;
+    metricAvgValues: DataSeriesType;
+    metricSumValues: DataSeriesType;
   };
 
   const chartList = defaultChartList(useMantineTheme(), useColorScheme());
@@ -41,7 +39,24 @@ export default function SeasonCharts() {
       <Blockquote mb="xl" icon={<InfoCircle />} mt="xl">
         <Text>Cliquez sur les données d'une semaine pour accéder au détail</Text>
       </Blockquote>
-      <Charts redirect={true} chartList={chartList} index={index} metricValues={metricValues} />
+      <Suspense
+        fallback={
+          <Flex justify="center" align="center">
+            <Loader size={50} />
+          </Flex>
+        }
+      >
+        <Await resolve={Promise.all([index, metricAvgValues, metricSumValues])}>
+          {([index, metricAvgValues, metricSumValues]) => (
+            <Charts
+              redirect={true}
+              chartList={chartList}
+              index={index}
+              metricValues={{ ...metricAvgValues, ...metricSumValues }}
+            />
+          )}
+        </Await>
+      </Suspense>
     </Stack>
   );
 }
