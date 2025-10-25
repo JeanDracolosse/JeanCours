@@ -34,7 +34,7 @@ export type ChartType = {
   title: string;
   description: JSX.Element;
   type: string;
-  icon: (iconColor: string) => JSX.Element;
+  icon: (iconColor: string, size: number) => JSX.Element;
   series: {
     name: string;
     metric: string;

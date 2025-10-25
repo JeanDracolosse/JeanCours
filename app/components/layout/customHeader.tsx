@@ -75,35 +75,27 @@ export function CustomHeader() {
   });
 
   return (
-    <header
+    <Flex
+      component="header"
       style={{
-        position: "sticky",
-        top: 0,
-        zIndex: 1000,
+        borderBottom: "1px solid light-dark(var(--mantine-color-gray-3), var(--mantine-color-dark-4))",
       }}
+      justify="space-evenly"
+      align="end"
+      direction="row"
+      pl="xl"
+      pt="sm"
+      bg="light-dark(var(--mantine-color-gray-0), var(--mantine-color-dark-6))"
     >
-      <Flex
-        style={{
-          borderBottom: "1px solid light-dark(var(--mantine-color-gray-3), var(--mantine-color-dark-4))",
-        }}
-        mih={50}
-        justify="space-evenly"
-        align="end"
-        direction="row"
-        pl="xl"
-        pt="sm"
-        bg="light-dark(var(--mantine-color-gray-0), var(--mantine-color-dark-6))"
-      >
-        <Flex gap="xs" justify="center" align="end" direction="row">
-          <ThemeIcon size="lg" radius="xl" mb="sm">
-            <Run size={48} />
-          </ThemeIcon>
-          <Title mb="xs" order={4}>
-            Jean Cours
-          </Title>
-        </Flex>
-        <Group gap={5}>{items}</Group>
+      <Flex gap="xs" justify="center" align="end" direction="row">
+        <ThemeIcon size="lg" radius="xl" mb="sm">
+          <Run size={48} />
+        </ThemeIcon>
+        <Title mb="xs" order={4}>
+          Jean Cours
+        </Title>
       </Flex>
-    </header>
+      <Group gap={5}>{items}</Group>
+    </Flex>
   );
 }

@@ -1,3 +1,4 @@
+import React from "react";
 import { Shoe } from "tabler-icons-react";
 import { Container, Flex, Image, List, Text, ThemeIcon, Title } from "@mantine/core";
 export default function Home() {

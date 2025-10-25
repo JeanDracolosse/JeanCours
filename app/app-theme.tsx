@@ -1,17 +1,18 @@
 import React from "react";
 import {
-  Box,
   ColorSchemeScript,
   Container,
   createTheme,
   DEFAULT_THEME,
   MantineProvider,
   mergeMantineTheme,
+  AppShell,
   type MantineProviderProps,
 } from "@mantine/core";
 import { CustomHeader } from "./components/layout/customHeader";
 
 import { generateColors } from "@mantine/colors-generator";
+import { useDisclosure } from "@mantine/hooks";
 
 const appTheme = createTheme({
   colors: {
@@ -29,16 +30,27 @@ const appTheme = createTheme({
 const theme = mergeMantineTheme(DEFAULT_THEME, appTheme);
 
 export function AppTheme({ children, ...props }: MantineProviderProps) {
+  const [opened] = useDisclosure();
   return (
     <>
       <ColorSchemeScript defaultColorScheme="auto" />
       <MantineProvider theme={theme} {...props} defaultColorScheme="auto">
-        <Box>
-          <CustomHeader />
-          <Container size="xl" mt="xl">
-            {children}
-          </Container>
-        </Box>
+        <AppShell
+          padding="md"
+          header={{ height: 60 }}
+          navbar={{
+            width: { md: 60, lg: 300 },
+            breakpoint: "md",
+            collapsed: { mobile: !opened },
+          }}
+        >
+          <AppShell.Header>
+            <CustomHeader />
+          </AppShell.Header>
+          <AppShell.Main>
+            <Container>{children}</Container>
+          </AppShell.Main>
+        </AppShell>
       </MantineProvider>
     </>
   );

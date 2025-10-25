@@ -8,6 +8,7 @@ import type { ChartType, DataSeriesType } from "~/interfaces";
 import { defaultChartList } from "~/utils/charts";
 import { getMetricByActivity } from "~/utils/mongo";
 import { useColorScheme } from "@mantine/hooks";
+import { NavBar } from "~/components/layout/navBar";
 
 export async function loader({ params }: { params: { year: string; week: string } }) {
   const chartList: ChartType[] = defaultChartList();
@@ -53,7 +54,7 @@ export default function WeekCharts() {
     previousYear = nextYear - 1;
   }
 
-  let navigate = useNavigate();
+  const navigate = useNavigate();
   const redirectToPreviousWeek = () => {
     navigate(`/weekCharts/${previousYear}/${previousWeek}`);
   };
@@ -62,49 +63,52 @@ export default function WeekCharts() {
   };
 
   return (
-    <Stack gap="md">
-      <Title pl="md" order={1}>
-        Semaine du{" "}
-        <Text span c="primaryColor" inherit>
-          {new Intl.DateTimeFormat("fr-FR", {
-            year: "numeric",
-            month: "long",
-            day: "numeric",
-          }).format(date)}{" "}
+    <div>
+      <NavBar />
+      <Stack gap="md">
+        <Title pl="md" order={1}>
+          Semaine du{" "}
+          <Text span c="primaryColor" inherit>
+            {new Intl.DateTimeFormat("fr-FR", {
+              year: "numeric",
+              month: "long",
+              day: "numeric",
+            }).format(date)}{" "}
+          </Text>
+        </Title>
+        <Title order={2}>
+          Changer de semaine{" "}
+          <ActionIcon variant="filled" aria-label="Settings" onClick={redirectToPreviousWeek}>
+            <ArrowLeft style={{ width: "70%", height: "70%" }} />
+          </ActionIcon>{" "}
+          <ActionIcon variant="filled" aria-label="Settings" onClick={redirectToNextWeek}>
+            <ArrowRight style={{ width: "70%", height: "70%" }} />
+          </ActionIcon>
+        </Title>
+        <Text>
+          Liste des entraînements de la semaine. <br /> Je suis routinier, j'aime garder un schéma fixe pour mes
+          entraînements. Le lundi et le samedi pour le repos, le dimanche pour la cource longue, et un aller-retour
+          travail en courant. Mais avoir une vie active fait que c'est plus facile d'improviser au jour le jour...{" "}
         </Text>
-      </Title>
-      <Title order={2}>
-        Changer de semaine{" "}
-        <ActionIcon variant="filled" aria-label="Settings" onClick={redirectToPreviousWeek}>
-          <ArrowLeft style={{ width: "70%", height: "70%" }} />
-        </ActionIcon>{" "}
-        <ActionIcon variant="filled" aria-label="Settings" onClick={redirectToNextWeek}>
-          <ArrowRight style={{ width: "70%", height: "70%" }} />
-        </ActionIcon>
-      </Title>
-      <Text>
-        Liste des entraînements de la semaine. <br /> Je suis routinier, j'aime garder un schéma fixe pour mes
-        entraînements. Le lundi et le samedi pour le repos, le dimanche pour la cource longue, et un aller-retour
-        travail en courant. Mais avoir une vie active fait que c'est plus facile d'improviser au jour le jour...{" "}
-      </Text>
-      <Suspense
-        fallback={
-          <Flex justify="center" align="center">
-            <Loader size={50} />
-          </Flex>
-        }
-      >
-        <Await resolve={metricValues} errorElement={<ErrorElement />}>
-          {(metricValues) => (
-            <Charts
-              redirect={false}
-              chartList={chartList}
-              index={metricValues.startTimeLocal}
-              metricValues={metricValues}
-            />
-          )}
-        </Await>
-      </Suspense>
-    </Stack>
+        <Suspense
+          fallback={
+            <Flex justify="center" align="center">
+              <Loader size={50} />
+            </Flex>
+          }
+        >
+          <Await resolve={metricValues} errorElement={<ErrorElement />}>
+            {(metricValues) => (
+              <Charts
+                redirect={false}
+                chartList={chartList}
+                index={metricValues.startTimeLocal}
+                metricValues={metricValues}
+              />
+            )}
+          </Await>
+        </Suspense>
+      </Stack>
+    </div>
   );
 }

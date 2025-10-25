@@ -3,7 +3,6 @@ import { Accordion, Card, Stack, Title, useMantineTheme } from "@mantine/core";
 import LineChart from "~/components/chart/lineChart";
 import TimeInZoneChart from "~/components/chart/tImeInZoneChart";
 import type { ChartType, DataSeriesType } from "~/interfaces";
-import { InfoCircle } from "tabler-icons-react";
 
 export default function Charts({
   redirect,
@@ -26,7 +25,7 @@ export default function Charts({
             <Card.Section>
               <Accordion mb="md" variant="default">
                 <Accordion.Item value={metricEntry.title}>
-                  <Accordion.Control icon={metricEntry.icon(iconColor)}>
+                  <Accordion.Control icon={metricEntry.icon(iconColor, 36)}>
                     <Title order={3} style={{ color: "var(--mantine-color-text)" }}>
                       {metricEntry.title}
                     </Title>

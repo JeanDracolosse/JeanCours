@@ -15,6 +15,10 @@ import {
 import { Text, List, ThemeIcon, type MantineTheme } from "@mantine/core";
 import type { UseColorSchemeValue } from "@mantine/hooks";
 
+export function defaultNavbarContent() {
+  return defaultChartList().map((entry) => ({ icon: entry.icon, label: entry.title, link: "#" + entry.id }));
+}
+
 export function defaultChartList(theme?: MantineTheme, colorScheme?: UseColorSchemeValue): ChartType[] {
   const colorIndex = colorScheme === "dark" ? 9 : 6;
 
@@ -72,7 +76,7 @@ export function defaultChartList(theme?: MantineTheme, colorScheme?: UseColorSch
         </List>
       ),
       type: "column",
-      icon: (iconColor: string) => <Heartbeat size={36} strokeWidth={1.5} color={iconColor} />,
+      icon: (iconColor: string, size: number) => <Heartbeat size={size} strokeWidth={1.5} color={iconColor} />,
       series: [
         {
           name: "Zone 1",
@@ -110,7 +114,7 @@ export function defaultChartList(theme?: MantineTheme, colorScheme?: UseColorSch
       id: "powerTimeInZone",
       title: "Zones de puissance",
       type: "column",
-      icon: (iconColor: string) => <ManualGearbox size={36} strokeWidth={1.5} color={iconColor} />,
+      icon: (iconColor: string, size: number) => <ManualGearbox size={size} strokeWidth={1.5} color={iconColor} />,
       description: (
         <List>
           <List.Item
@@ -204,7 +208,7 @@ export function defaultChartList(theme?: MantineTheme, colorScheme?: UseColorSch
           15%.{" "}
         </Text>
       ),
-      icon: (iconColor: string) => <ArrowsDoubleNeSw size={36} strokeWidth={1.5} color={iconColor} />,
+      icon: (iconColor: string, size: number) => <ArrowsDoubleNeSw size={size} strokeWidth={1.5} color={iconColor} />,
       series: [
         {
           name: "Distance",
@@ -231,7 +235,7 @@ export function defaultChartList(theme?: MantineTheme, colorScheme?: UseColorSch
       title: "Statistiques de performance",
       type: "line",
       description: <Text>Je ne sais pas si ces données seront utiles, mais elles sont là! </Text>,
-      icon: (iconColor: string) => <RulerMeasure size={36} strokeWidth={1.5} color={iconColor} />,
+      icon: (iconColor: string, size: number) => <RulerMeasure size={size} strokeWidth={1.5} color={iconColor} />,
       series: [
         {
           name: "V02 Max",
@@ -282,7 +286,7 @@ export function defaultChartList(theme?: MantineTheme, colorScheme?: UseColorSch
       title: "Effet de la séance",
       type: "line",
       description: <Text>Charge et effet de l'entraînement. </Text>,
-      icon: (iconColor: string) => <StepInto size={36} strokeWidth={1.5} color={iconColor} />,
+      icon: (iconColor: string, size: number) => <StepInto size={size} strokeWidth={1.5} color={iconColor} />,
       series: [
         {
           name: "Charge d'entraînement",
@@ -309,7 +313,7 @@ export function defaultChartList(theme?: MantineTheme, colorScheme?: UseColorSch
       title: "Ressenti",
       type: "line",
       description: <Text>Mon état de forme (de 0 à 4) et la difficultée de chaque sortie (de 1 à 10). </Text>,
-      icon: (iconColor: string) => <MoodHappy size={36} strokeWidth={1.5} color={iconColor} />,
+      icon: (iconColor: string, size: number) => <MoodHappy size={size} strokeWidth={1.5} color={iconColor} />,
       series: [
         {
           name: "Etat de forme",
