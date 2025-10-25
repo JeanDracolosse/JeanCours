@@ -1,6 +1,5 @@
 import { Shoe } from "tabler-icons-react";
 import { Container, Flex, Image, List, Text, ThemeIcon, Title } from "@mantine/core";
-import home from "../../public/home.jpg";
 export default function Home() {
   return (
     <Flex>
@@ -42,7 +41,7 @@ export default function Home() {
           </List.Item>
         </List>
       </Container>
-      <Image src={home} radius="md" visibleFrom="md" />
+      <Image src="/home.jpg" radius="md" visibleFrom="md" />
     </Flex>
   );
 }

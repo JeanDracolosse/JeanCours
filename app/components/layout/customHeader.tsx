@@ -11,12 +11,12 @@ const links = [
     link: "/charts",
     label: "Saison",
     /*links: [
-      { link: "/charts#hrInTimeZoneChart", label: "Zone BPM" },
+      { link: "/charts#hrTimeInZone", label: "Zone BPM" },
       {
-        link: "/charts#powerInTimeZoneChart",
+        link: "/charts#powerTimeInZone",
         label: "Zones de puissance",
       },
-      { link: "/charts#distanceChart", label: "Distances" },
+      { link: "/charts#distance", label: "Distances" },
       { link: "/charts#metrics", label: "Métriques" },
       { link: "/charts#training", label: "Effet entraînement" },
       { link: "/charts#feel", label: "Ressenti entraînement" },
@@ -92,7 +92,7 @@ export function CustomHeader() {
         direction="row"
         pl="xl"
         pt="sm"
-        bg="var(--mantine-color-body)"
+        bg="light-dark(var(--mantine-color-gray-0), var(--mantine-color-dark-6))"
       >
         <Flex gap="xs" justify="center" align="end" direction="row">
           <ThemeIcon size="lg" radius="xl" mb="sm">

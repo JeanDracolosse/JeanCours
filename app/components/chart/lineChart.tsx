@@ -20,7 +20,10 @@ function getOptions(
   const plotOptions: Highcharts.Options = {
     chart: {
       type: "column",
-      backgroundColor: undefined,
+      backgroundColor: "var(--mantine-color-body)",
+      borderColor: "light-dark(var(--mantine-color-gray-3), var(--mantine-color-dark-4))",
+      borderWidth: 1,
+      borderRadius: 8,
     },
     title: {
       text: "",
