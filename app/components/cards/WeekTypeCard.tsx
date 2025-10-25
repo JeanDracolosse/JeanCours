@@ -1,14 +1,45 @@
 import React from "react";
-import { List, Paper, Space, Title } from "@mantine/core";
+import { Card, Flex, Container, Title, Image, Divider, Box, ThemeIcon, Text } from "@mantine/core";
 
-export default function WeekTypeCard(props: { title: string; content: string[] }) {
-  const items = props.content.map((item) => <List.Item key={item}>{item}</List.Item>);
+export default function WeekTypeCard(props: {
+  title: string;
+  subTitle: string;
+  order: string;
+  content: { title: string; text: string; icon: JSX.Element }[];
+}) {
+  const items = props.content.map((item) => (
+    <Flex gap="md" direction="row" key={item.title}>
+      <ThemeIcon variant="light" size={50} radius="md">
+        {item.icon}
+      </ThemeIcon>
+      <div>
+        <Text fw={700} fz="lg">
+          {item.title}
+        </Text>
+        <Text c="dimmed">{item.text}</Text>
+      </div>
+    </Flex>
+  ));
 
   return (
-    <Paper p="xl">
-      <Title order={5}>{props.title}</Title>
-      <Space h="md" />
-      <List>{items}</List>
-    </Paper>
+    <Card withBorder radius="md" p={0}>
+      <Flex direction={props.order} wrap="nowrap" justify="flex-start" align="flex-start">
+        <Box w="100%">
+          <Container>
+            <Title order={3}>
+              {props.title}{" "}
+              <Text span c="dimmed">
+                {props.subTitle}
+              </Text>
+            </Title>
+          </Container>
+          <Divider />
+          <Flex gap="sm" direction="column" m="md">
+            {items}
+          </Flex>
+        </Box>
+        <Image maw="30%" src="/home.jpg" visibleFrom="md" />
+      </Flex>
+    </Card>
   );
 }
