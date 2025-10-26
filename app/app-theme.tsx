@@ -48,7 +48,9 @@ export function AppTheme({ children, ...props }: MantineProviderProps) {
             <CustomHeader />
           </AppShell.Header>
           <AppShell.Main>
-            <Container>{children}</Container>
+            <Container p="0">
+              {children}
+            </Container>
           </AppShell.Main>
         </AppShell>
       </MantineProvider>

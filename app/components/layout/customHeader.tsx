@@ -1,9 +1,10 @@
 import React from "react";
 import styles from "./customHeader.module.css";
 
-import { Button, Center, Flex, Group, Menu, Space, ThemeIcon, Title } from "@mantine/core";
+import { Burger, Button, Center, Flex, Group, Menu, Space, ThemeIcon, Title, Container, Box } from "@mantine/core";
 import { NavLink } from "react-router";
 import { ChevronDown, Run } from "tabler-icons-react";
+import { useDisclosure } from "@mantine/hooks";
 
 const links = [
   { link: "/", label: "Accueil" },
@@ -41,6 +42,7 @@ const links = [
 ];
 
 export function CustomHeader() {
+  const [opened, { toggle }] = useDisclosure();
   const items = links.map((link) => {
     const menuItems = link.links?.map((item) => (
       <Menu.Item className={styles.menuLabel} component={NavLink} to={item.link} key={item.link}>
@@ -75,27 +77,32 @@ export function CustomHeader() {
   });
 
   return (
-    <Flex
+    <Box
       component="header"
       style={{
         borderBottom: "1px solid light-dark(var(--mantine-color-gray-3), var(--mantine-color-dark-4))",
       }}
-      justify="space-evenly"
-      align="end"
-      direction="row"
-      pl="xl"
-      pt="sm"
+
       bg="light-dark(var(--mantine-color-gray-0), var(--mantine-color-dark-6))"
     >
-      <Flex gap="xs" justify="center" align="end" direction="row">
-        <ThemeIcon size="lg" radius="xl" mb="sm">
-          <Run size={48} />
-        </ThemeIcon>
-        <Title mb="xs" order={4}>
-          Jean Cours
-        </Title>
+      <Flex
+        justify="space-evenly"
+        align="end"
+        direction="row"
+        pl="xl"
+        pt="sm">
+        <Flex gap="xs" justify={{ base: "space-between", "md": "center" }} align="end" direction="row">
+          <ThemeIcon size="lg" radius="xl" mb="sm">
+            <Run size={48} />
+          </ThemeIcon>
+          <Title mb="xs" order={4}>
+            Jean Cours
+          </Title>
+        </Flex>
+        <Burger hiddenFrom="md" opened={opened} onClick={toggle} aria-label="Toggle navigation" />
+        <Group visibleFrom="md" gap={5}>{items}</Group>
       </Flex>
-      <Group gap={5}>{items}</Group>
-    </Flex>
+      {opened && <Flex direction="column" hiddenFrom="md" gap={5}>{items}</Flex>}
+    </Box>
   );
 }
