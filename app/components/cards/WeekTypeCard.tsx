@@ -5,7 +5,8 @@ export default function WeekTypeCard(props: {
   title: string;
   subTitle: string;
   order: string;
-  content: { title: string; text: string; icon: JSX.Element }[];
+  photo: string;
+  content: { title: string; text: string; icon: JSX.Element; }[];
 }) {
   const items = props.content.map((item) => (
     <Flex gap="md" direction="row" key={item.title}>
@@ -38,7 +39,7 @@ export default function WeekTypeCard(props: {
             {items}
           </Flex>
         </Box>
-        <Image maw="30%" src="/home.jpg" visibleFrom="md" />
+        <Image maw="30%" src={props.photo} visibleFrom="md" />
       </Flex>
     </Card>
   );

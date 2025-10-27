@@ -16,7 +16,7 @@ function getOptions(
 ): Highcharts.Options {
   const theme = useMantineTheme();
   const colorScheme = "var(--mantine-color-text)";
-  const colorIndex = useColorScheme() === "dark" ? 9 : 6;
+  const colorIndex = useColorScheme() === "dark" ? 8 : 6;
 
   const plotOptions: Highcharts.Options = {
     chart: {

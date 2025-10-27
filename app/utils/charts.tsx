@@ -31,7 +31,7 @@ export function defaultChartList(theme?: MantineTheme, colorScheme?: UseColorSch
           <List.Item
             icon={
               <ThemeIcon color={theme?.colors.chart1Color[colorIndex]} size={24} radius="xl">
-                <Heartbeat color="var(--mantine-color-text)" size={16} />
+                <Heartbeat  size={16} />
               </ThemeIcon>
             }
           >
@@ -40,7 +40,7 @@ export function defaultChartList(theme?: MantineTheme, colorScheme?: UseColorSch
           <List.Item
             icon={
               <ThemeIcon color={theme?.colors.chart2Color[colorIndex]} size={24} radius="xl">
-                <Heartbeat color="var(--mantine-color-text)" size={16} />
+                <Heartbeat size={16} />
               </ThemeIcon>
             }
           >
@@ -49,7 +49,7 @@ export function defaultChartList(theme?: MantineTheme, colorScheme?: UseColorSch
           <List.Item
             icon={
               <ThemeIcon color={theme?.colors.chart3Color[colorIndex]} size={24} radius="xl">
-                <Heartbeat color="var(--mantine-color-text)" size={16} />
+                <Heartbeat  size={16} />
               </ThemeIcon>
             }
           >
@@ -58,7 +58,7 @@ export function defaultChartList(theme?: MantineTheme, colorScheme?: UseColorSch
           <List.Item
             icon={
               <ThemeIcon color={theme?.colors.chart4Color[colorIndex]} size={24} radius="xl">
-                <Heartbeat color="var(--mantine-color-text)" size={16} />
+                <Heartbeat size={16} />
               </ThemeIcon>
             }
           >
@@ -67,7 +67,7 @@ export function defaultChartList(theme?: MantineTheme, colorScheme?: UseColorSch
           <List.Item
             icon={
               <ThemeIcon color={theme?.colors.chart5Color[colorIndex]} size={24} radius="xl">
-                <Heartbeat color="var(--mantine-color-text)" size={16} />
+                <Heartbeat size={16} />
               </ThemeIcon>
             }
           >
@@ -120,7 +120,7 @@ export function defaultChartList(theme?: MantineTheme, colorScheme?: UseColorSch
           <List.Item
             icon={
               <ThemeIcon color={theme?.colors.chart1Color[colorIndex]} size={24} radius="xl">
-                <ManualGearbox color="var(--mantine-color-text)" size={16} />
+                <ManualGearbox  size={16} />
               </ThemeIcon>
             }
           >
@@ -129,7 +129,7 @@ export function defaultChartList(theme?: MantineTheme, colorScheme?: UseColorSch
           <List.Item
             icon={
               <ThemeIcon color={theme?.colors.chart2Color[colorIndex]} size={24} radius="xl">
-                <ManualGearbox color="var(--mantine-color-text)" size={16} />
+                <ManualGearbox size={16} />
               </ThemeIcon>
             }
           >
@@ -138,7 +138,7 @@ export function defaultChartList(theme?: MantineTheme, colorScheme?: UseColorSch
           <List.Item
             icon={
               <ThemeIcon color={theme?.colors.chart3Color[colorIndex]} size={24} radius="xl">
-                <ManualGearbox color="var(--mantine-color-text)" size={16} />
+                <ManualGearbox  size={16} />
               </ThemeIcon>
             }
           >
@@ -147,7 +147,7 @@ export function defaultChartList(theme?: MantineTheme, colorScheme?: UseColorSch
           <List.Item
             icon={
               <ThemeIcon color={theme?.colors.chart4Color[colorIndex]} size={24} radius="xl">
-                <ManualGearbox color="var(--mantine-color-text)" size={16} />
+                <ManualGearbox size={16} />
               </ThemeIcon>
             }
           >
@@ -156,7 +156,7 @@ export function defaultChartList(theme?: MantineTheme, colorScheme?: UseColorSch
           <List.Item
             icon={
               <ThemeIcon color={theme?.colors.chart5Color[colorIndex]} size={24} radius="xl">
-                <ManualGearbox color="var(--mantine-color-text)" size={16} />
+                <ManualGearbox size={16} />
               </ThemeIcon>
             }
           >

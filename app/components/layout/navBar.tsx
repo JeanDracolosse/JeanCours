@@ -8,7 +8,7 @@ export function NavBar() {
     <UnstyledButton key={link.link} component={NavLink} viewTransition to={{ hash: link.link }} pl="md" pr="md">
       <Flex gap="xs" align="center">
         {link.icon("var(--mantine-color-primaryColor-6)", 25)}
-        <Text truncate="end" lineClamp={1} visibleFrom="lg" size="sm">
+        <Text truncate="end" lineClamp={1} visibleFrom="lg">
           {link.label}
         </Text>
       </Flex>
