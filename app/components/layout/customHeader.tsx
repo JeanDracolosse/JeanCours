@@ -1,7 +1,7 @@
 import React from "react";
 import styles from "./customHeader.module.css";
 
-import { Burger, Button, Center, Flex, Group, Menu, Space, ThemeIcon, Title, Container, Box, AppShell } from "@mantine/core";
+import { Burger, Button, Center, Flex, Group, Menu, Space, ThemeIcon, Title, Box, AppShell } from "@mantine/core";
 import { NavLink } from "react-router";
 import { ChevronDown, Run } from "tabler-icons-react";
 import { useDisclosure } from "@mantine/hooks";
@@ -80,7 +80,6 @@ export function CustomHeader() {
   return (
     <div>
       <AppShell.Header>
-
         <Box
           component="header"
           style={{
@@ -107,12 +106,20 @@ export function CustomHeader() {
                 Jean Cours
               </Title>
             </Flex>
-            <Burger hiddenFrom="md" opened={opened} onClick={toggle} aria-label="Toggle navigation" pb="lg"/>
-            <Group visibleFrom="md" gap={5}>{items}</Group>
+            <Burger hiddenFrom="md" opened={opened} onClick={toggle} aria-label="Toggle navigation" pb="lg" />
+            <Group visibleFrom="md" gap={5}>
+              {items}
+            </Group>
           </Flex>
         </Box>
       </AppShell.Header>
-      {opened && <AppShell.Navbar><Flex component="nav" direction="column" gap={5}>{items}</Flex></AppShell.Navbar>}
+      {opened && (
+        <AppShell.Navbar>
+          <Flex component="nav" direction="column" gap={5}>
+            {items}
+          </Flex>
+        </AppShell.Navbar>
+      )}
     </div>
   );
 }

@@ -33,17 +33,12 @@ export function AppTheme({ children, ...props }: MantineProviderProps) {
     <>
       <ColorSchemeScript defaultColorScheme="auto" />
       <MantineProvider theme={theme} {...props} defaultColorScheme="auto">
-        <AppShell
-          padding="md"
-          header={{ height: 60 }}
-        >
+        <AppShell padding="md" header={{ height: 60 }}>
           <AppShell.Header>
             <CustomHeader />
           </AppShell.Header>
           <AppShell.Main>
-            <Container p="0">
-              {children}
-            </Container>
+            <Container p="0">{children}</Container>
           </AppShell.Main>
         </AppShell>
       </MantineProvider>

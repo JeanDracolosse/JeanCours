@@ -1,6 +1,6 @@
 import React, { Suspense } from "react";
 import { Await, useLoaderData, useNavigate } from "react-router";
-import { Stack, Title, Text, useMantineTheme, Flex, Loader, ActionIcon, Container } from "@mantine/core";
+import { Stack, Title, Text, useMantineTheme, Flex, Loader, ActionIcon } from "@mantine/core";
 import { ArrowLeft, ArrowRight } from "tabler-icons-react";
 
 import Charts from "~/components/chart/charts";

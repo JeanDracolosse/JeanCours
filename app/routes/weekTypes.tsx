@@ -14,15 +14,15 @@ export default function WeekTypes() {
       </Title>
 
       <Text c="dimmed" mt="md">
-        Je perds trop de temps à feuilleter mes bouquins ... 
+        Je perds trop de temps à feuilleter mes bouquins ...
       </Text>
       <Text mt="md">
-       Je vais essayer de compiler petit à petit les ressources que je peux trouver dans des livres et des sites. L'objectif n'est pas de fabriquer l'entraînement parfait, mais celui qui m'irait le mieux.
+        Je vais essayer de compiler petit à petit les ressources que je peux trouver dans des livres et des sites.
+        L'objectif n'est pas de fabriquer l'entraînement parfait, mais celui qui m'irait le mieux.
       </Text>
 
       <Space h="xl" />
       <Stack gap="xl">
-
         <WeekTypeCard
           title="Base"
           subTitle="augmentation de volume, sans prise de risque"
@@ -45,7 +45,11 @@ export default function WeekTypes() {
           order="row-reverse"
           photo="/photos/others/3.jpg"
           content={[
-            { title: "Zones", text: "Séances Z3 de 5 à 10%, puis Z4 à partir de 5% quand possible", icon: <ChartBar /> },
+            {
+              title: "Zones",
+              text: "Séances Z3 de 5 à 10%, puis Z4 à partir de 5% quand possible",
+              icon: <ChartBar />,
+            },
             { title: "Anaérobie", text: "2 séances de sprints en côte/foulées bondissantes", icon: <MoodSadDizzy /> },
             { title: "Sortie longue", text: "Weekend: sortie longue de 30 à 40% du volume", icon: <Clock /> },
           ]}

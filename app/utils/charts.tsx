@@ -21,7 +21,7 @@ export function defaultNavbarContent() {
 
 export function defaultChartList(theme?: MantineTheme, colorScheme?: UseColorSchemeValue): ChartType[] {
   const colorIndex = colorScheme === "dark" ? 8 : 6;
-  const colorIcon = colorScheme === "dark" ? theme?.colors.dark[6] : theme?.colors.light
+  const colorIcon = colorScheme === "dark" ? theme?.colors.dark[6] : theme?.colors.light;
 
   return [
     {
