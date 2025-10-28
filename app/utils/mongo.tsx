@@ -1,4 +1,4 @@
-import type { DataSeriesType, DistanceType, HrTimeInZoneType, PowerTimeInZoneType } from "../interfaces";
+import type { DataSeriesType, DistanceType, HrTimeInZoneType, PowerTimeInZoneType, WeekType } from "../interfaces";
 
 export async function getHrTimeInZone(): Promise<HrTimeInZoneType> {
   const hrTimeInZoneApiUrl = `${process.env.BACKEND_URL}/hrTimeInZone`;
@@ -12,6 +12,13 @@ export async function getPowerTimeInZone(): Promise<PowerTimeInZoneType> {
   const powerTimeInZoneRes = await fetch(powerTimeInZoneApiUrl);
   const powerTimeInZone = await powerTimeInZoneRes.json();
   return powerTimeInZone;
+}
+
+export async function getWeekTypes(): Promise<WeekType[]> {
+  const indexApiUrl = `${process.env.BACKEND_URL}/weekTypes`;
+  const indexRes = await fetch(indexApiUrl);
+  const index = await indexRes.json();
+  return index;
 }
 
 export async function getIndex(): Promise<string[]> {

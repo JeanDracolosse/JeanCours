@@ -1,14 +1,15 @@
 import React, { Suspense } from "react";
 import { Await, useLoaderData } from "react-router";
 
-import { Blockquote, Flex, Loader, Stack, Text, Title, useMantineTheme } from "@mantine/core";
+import { Blockquote, Flex, Loader, Space, Stack, Text, Title, useMantineTheme } from "@mantine/core";
 import { InfoCircle } from "tabler-icons-react";
 import Charts from "~/components/chart/charts";
-import type { DataSeriesType } from "~/interfaces";
+import type { DataSeriesType, WeekType } from "~/interfaces";
 import { defaultChartList } from "~/utils/charts";
-import { getIndex, getMetricAvgByWeek, getMetricSumByWeek } from "~/utils/mongo";
+import { getIndex, getMetricAvgByWeek, getMetricSumByWeek, getWeekTypes } from "~/utils/mongo";
 import { useColorScheme } from "@mantine/hooks";
 import { NavBar } from "~/components/layout/navBar";
+import WeekTypeChart from "~/components/chart/weekTypeChart";
 
 export async function loader() {
   const metricSumList = defaultChartList()
@@ -20,16 +21,20 @@ export async function loader() {
 
   const metricSumValues = getMetricSumByWeek(metricSumList);
   const metricAvgValues = getMetricAvgByWeek(metricAvgList);
+
+  const weekTypes = getWeekTypes();
+
   const index = getIndex();
 
-  return { index, metricAvgValues, metricSumValues };
+  return { index, metricAvgValues, metricSumValues, weekTypes };
 }
 
 export default function SeasonCharts() {
-  const { index, metricAvgValues, metricSumValues } = useLoaderData() as {
+  const { index, metricAvgValues, metricSumValues, weekTypes } = useLoaderData() as {
     index: string[];
     metricAvgValues: DataSeriesType;
     metricSumValues: DataSeriesType;
+    weekTypes: WeekType[];
   };
 
   const chartList = defaultChartList(useMantineTheme(), useColorScheme());
@@ -61,14 +66,22 @@ export default function SeasonCharts() {
             </Flex>
           }
         >
-          <Await resolve={Promise.all([index, metricAvgValues, metricSumValues])}>
-            {([index, metricAvgValues, metricSumValues]) => (
-              <Charts
-                redirect={true}
-                chartList={chartList}
-                index={index}
-                metricValues={{ ...metricAvgValues, ...metricSumValues }}
-              />
+          <Await resolve={Promise.all([index, metricAvgValues, metricSumValues, weekTypes])}>
+            {([index, metricAvgValues, metricSumValues, weekTypes]) => (
+              <div>
+                <WeekTypeChart
+                  distance={metricSumValues["distance"].slice(Math.max(metricSumValues["distance"].length - 3, 1))}
+                  index={weekTypes.map((entry) => entry.date)}
+                  label={weekTypes.map((entry) => entry.label)}
+                />
+                <Space h="xl" />
+                <Charts
+                  redirect={true}
+                  chartList={chartList}
+                  index={index}
+                  metricValues={{ ...metricAvgValues, ...metricSumValues }}
+                />
+              </div>
             )}
           </Await>
         </Suspense>

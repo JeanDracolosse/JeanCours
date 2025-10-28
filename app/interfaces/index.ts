@@ -17,6 +17,11 @@ export type PowerTimeInZoneType = {
   powerTimeInZone_5: string[];
 };
 
+export type WeekType = {
+  date: string;
+  label: string;
+};
+
 export type DistanceType = {
   distance: string[];
   elevationGain: string[];
