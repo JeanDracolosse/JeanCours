@@ -20,7 +20,8 @@ export function defaultNavbarContent() {
 }
 
 export function defaultChartList(theme?: MantineTheme, colorScheme?: UseColorSchemeValue): ChartType[] {
-  const colorIndex = colorScheme === "dark" ? 9 : 6;
+  const colorIndex = colorScheme === "dark" ? 8 : 6;
+  const colorIcon = colorScheme === "dark" ? theme?.colors.dark[6] : theme?.colors.light
 
   return [
     {
@@ -31,7 +32,7 @@ export function defaultChartList(theme?: MantineTheme, colorScheme?: UseColorSch
           <List.Item
             icon={
               <ThemeIcon color={theme?.colors.chart1Color[colorIndex]} size={24} radius="xl">
-                <Heartbeat  size={16} />
+                <Heartbeat size={16} color={colorIcon} />
               </ThemeIcon>
             }
           >
@@ -40,7 +41,7 @@ export function defaultChartList(theme?: MantineTheme, colorScheme?: UseColorSch
           <List.Item
             icon={
               <ThemeIcon color={theme?.colors.chart2Color[colorIndex]} size={24} radius="xl">
-                <Heartbeat size={16} />
+                <Heartbeat size={16} color={colorIcon} />
               </ThemeIcon>
             }
           >
@@ -49,7 +50,7 @@ export function defaultChartList(theme?: MantineTheme, colorScheme?: UseColorSch
           <List.Item
             icon={
               <ThemeIcon color={theme?.colors.chart3Color[colorIndex]} size={24} radius="xl">
-                <Heartbeat  size={16} />
+                <Heartbeat size={16} color={colorIcon} />
               </ThemeIcon>
             }
           >
@@ -58,7 +59,7 @@ export function defaultChartList(theme?: MantineTheme, colorScheme?: UseColorSch
           <List.Item
             icon={
               <ThemeIcon color={theme?.colors.chart4Color[colorIndex]} size={24} radius="xl">
-                <Heartbeat size={16} />
+                <Heartbeat size={16} color={colorIcon} />
               </ThemeIcon>
             }
           >
@@ -67,7 +68,7 @@ export function defaultChartList(theme?: MantineTheme, colorScheme?: UseColorSch
           <List.Item
             icon={
               <ThemeIcon color={theme?.colors.chart5Color[colorIndex]} size={24} radius="xl">
-                <Heartbeat size={16} />
+                <Heartbeat size={16} color={colorIcon} />
               </ThemeIcon>
             }
           >
@@ -120,7 +121,7 @@ export function defaultChartList(theme?: MantineTheme, colorScheme?: UseColorSch
           <List.Item
             icon={
               <ThemeIcon color={theme?.colors.chart1Color[colorIndex]} size={24} radius="xl">
-                <ManualGearbox  size={16} />
+                <ManualGearbox size={16} color={colorIcon} />
               </ThemeIcon>
             }
           >
@@ -129,7 +130,7 @@ export function defaultChartList(theme?: MantineTheme, colorScheme?: UseColorSch
           <List.Item
             icon={
               <ThemeIcon color={theme?.colors.chart2Color[colorIndex]} size={24} radius="xl">
-                <ManualGearbox size={16} />
+                <ManualGearbox size={16} color={colorIcon} />
               </ThemeIcon>
             }
           >
@@ -138,7 +139,7 @@ export function defaultChartList(theme?: MantineTheme, colorScheme?: UseColorSch
           <List.Item
             icon={
               <ThemeIcon color={theme?.colors.chart3Color[colorIndex]} size={24} radius="xl">
-                <ManualGearbox  size={16} />
+                <ManualGearbox size={16} color={colorIcon} />
               </ThemeIcon>
             }
           >
@@ -147,7 +148,7 @@ export function defaultChartList(theme?: MantineTheme, colorScheme?: UseColorSch
           <List.Item
             icon={
               <ThemeIcon color={theme?.colors.chart4Color[colorIndex]} size={24} radius="xl">
-                <ManualGearbox size={16} />
+                <ManualGearbox size={16} color={colorIcon} />
               </ThemeIcon>
             }
           >
@@ -156,7 +157,7 @@ export function defaultChartList(theme?: MantineTheme, colorScheme?: UseColorSch
           <List.Item
             icon={
               <ThemeIcon color={theme?.colors.chart5Color[colorIndex]} size={24} radius="xl">
-                <ManualGearbox size={16} />
+                <ManualGearbox size={16} color={colorIcon} />
               </ThemeIcon>
             }
           >

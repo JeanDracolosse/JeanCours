@@ -12,11 +12,10 @@ import {
 import { CustomHeader } from "./components/layout/customHeader";
 
 import { generateColors } from "@mantine/colors-generator";
-import { useDisclosure } from "@mantine/hooks";
 
 const appTheme = createTheme({
   colors: {
-    primaryColor: generateColors("#1f7cdb"),
+    primaryColor: generateColors("#3bceac"),
     chart1Color: generateColors("#0ead69"),
     chart2Color: generateColors("#3bceac"),
     chart3Color: generateColors("#ffd23f"),

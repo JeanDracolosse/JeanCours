@@ -32,7 +32,7 @@ export default function TrainingTypes() {
             { title: "Threshold", text: "15 minutes à l'intensité T (ex: 3 x 5 min T, 1 min réc)", icon: <CellSignal2 /> },
             { title: "Intervalle", text: "10 min allure I (ex: 2 x 5 min I, 2 min réc)", icon: <CellSignal3 /> },
             { title: "Repetition", text: "5 min R (ex: 5 x 1 min R, 1 min réc, ou 5 x 400m R, 400m réc, ou 10 x 200m R, 200m réc)", icon: <CellSignal5 /> },
-            { title: "VDOT (50)", text: "R: 4:15/km, I: 3:55/km, R: 3:35/km", icon: <Gauge /> },
+            { title: "VDOT (50)", text: "T: 4:15/km, I: 3:55/km, R: 3:35/km", icon: <Gauge /> },
           ]}
         />
       </Stack>
