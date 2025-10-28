@@ -30,7 +30,6 @@ const appTheme = createTheme({
 const theme = mergeMantineTheme(DEFAULT_THEME, appTheme);
 
 export function AppTheme({ children, ...props }: MantineProviderProps) {
-  const [opened] = useDisclosure();
   return (
     <>
       <ColorSchemeScript defaultColorScheme="auto" />
@@ -38,11 +37,6 @@ export function AppTheme({ children, ...props }: MantineProviderProps) {
         <AppShell
           padding="md"
           header={{ height: 60 }}
-          navbar={{
-            width: { md: 60, lg: 300 },
-            breakpoint: "md",
-            collapsed: { mobile: !opened },
-          }}
         >
           <AppShell.Header>
             <CustomHeader />

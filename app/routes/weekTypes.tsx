@@ -1,11 +1,11 @@
 import React from "react";
-import { Stack, Space, Title, Text, Container } from "@mantine/core";
+import { Stack, Space, Title, Text, Box } from "@mantine/core";
 import WeekTypeCard from "../components/cards/WeekTypeCard";
 import { MoodSmile, Clock, ChartBar, MoodSadDizzy, MoodSadSquint } from "tabler-icons-react";
 
 export default function WeekTypes() {
   return (
-    <Container>
+    <Box>
       <Title order={1}>
         Description succinte de mon{" "}
         <Text span c="primaryColor" inherit>
@@ -87,6 +87,6 @@ export default function WeekTypes() {
           ]}
         />
       </Stack>
-    </Container>
+    </Box>
   );
 }

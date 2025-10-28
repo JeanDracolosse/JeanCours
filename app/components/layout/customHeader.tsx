@@ -1,7 +1,7 @@
 import React from "react";
 import styles from "./customHeader.module.css";
 
-import { Burger, Button, Center, Flex, Group, Menu, Space, ThemeIcon, Title, Container, Box } from "@mantine/core";
+import { Burger, Button, Center, Flex, Group, Menu, Space, ThemeIcon, Title, Container, Box, AppShell } from "@mantine/core";
 import { NavLink } from "react-router";
 import { ChevronDown, Run } from "tabler-icons-react";
 import { useDisclosure } from "@mantine/hooks";
@@ -39,6 +39,7 @@ const links = [
     ],*/
   },
   { link: "/weekTypes", label: "Types de semaine" },
+  { link: "/trainingTypes", label: "Types de scéances" },
 ];
 
 export function CustomHeader() {
@@ -77,32 +78,41 @@ export function CustomHeader() {
   });
 
   return (
-    <Box
-      component="header"
-      style={{
-        borderBottom: "1px solid light-dark(var(--mantine-color-gray-3), var(--mantine-color-dark-4))",
-      }}
+    <div>
+      <AppShell.Header>
 
-      bg="light-dark(var(--mantine-color-gray-0), var(--mantine-color-dark-6))"
-    >
-      <Flex
-        justify="space-evenly"
-        align="end"
-        direction="row"
-        pl="xl"
-        pt="sm">
-        <Flex gap="xs" justify={{ base: "space-between", "md": "center" }} align="end" direction="row">
-          <ThemeIcon size="lg" radius="xl" mb="sm">
-            <Run size={48} />
-          </ThemeIcon>
-          <Title mb="xs" order={4}>
-            Jean Cours
-          </Title>
-        </Flex>
-        <Burger hiddenFrom="md" opened={opened} onClick={toggle} aria-label="Toggle navigation" />
-        <Group visibleFrom="md" gap={5}>{items}</Group>
-      </Flex>
-      {opened && <Flex direction="column" hiddenFrom="md" gap={5}>{items}</Flex>}
-    </Box>
+        <Box
+          component="header"
+          style={{
+            borderBottom: "1px solid light-dark(var(--mantine-color-gray-3), var(--mantine-color-dark-4))",
+          }}
+          bg="light-dark(var(--mantine-color-gray-0), var(--mantine-color-dark-6))"
+        >
+          <Flex
+            justify="space-evenly"
+            align="end"
+            pl="xl"
+            pt="sm"
+            component="header"
+            style={{
+              borderBottom: "1px solid light-dark(var(--mantine-color-gray-3), var(--mantine-color-dark-4))",
+            }}
+            bg="light-dark(var(--mantine-color-gray-0), var(--mantine-color-dark-6))"
+          >
+            <Flex gap="xs" justify="center" align="end" direction="row">
+              <ThemeIcon size="lg" radius="xl" mb="sm">
+                <Run size={48} />
+              </ThemeIcon>
+              <Title mb="xs" order={4}>
+                Jean Cours
+              </Title>
+            </Flex>
+            <Burger hiddenFrom="md" opened={opened} onClick={toggle} aria-label="Toggle navigation" pb="lg"/>
+            <Group visibleFrom="md" gap={5}>{items}</Group>
+          </Flex>
+        </Box>
+      </AppShell.Header>
+      {opened && <AppShell.Navbar><Flex component="nav" direction="column" gap={5}>{items}</Flex></AppShell.Navbar>}
+    </div>
   );
 }

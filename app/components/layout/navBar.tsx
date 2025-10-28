@@ -2,13 +2,16 @@ import React from "react";
 import { AppShell, Flex, Space, UnstyledButton, Text } from "@mantine/core";
 import { defaultNavbarContent } from "~/utils/charts";
 import { NavLink } from "react-router";
+import { useDisclosure } from "@mantine/hooks";
 
 export function NavBar() {
+  const [opened] = useDisclosure();
+
   const links = defaultNavbarContent().map((link) => (
     <UnstyledButton key={link.link} component={NavLink} viewTransition to={{ hash: link.link }} pl="md" pr="md">
       <Flex gap="xs" align="center">
         {link.icon("var(--mantine-color-primaryColor-6)", 25)}
-        <Text truncate="end" lineClamp={1} visibleFrom="lg">
+        <Text truncate="end" lineClamp={1} visibleFrom="lg" size="sm">
           {link.label}
         </Text>
       </Flex>
@@ -16,8 +19,10 @@ export function NavBar() {
   ));
 
   return (
-    <AppShell.Navbar>
+    <AppShell.Navbar
+      visibleFrom="md">
       <Flex
+
         component="nav"
         style={{
           height: "100%",

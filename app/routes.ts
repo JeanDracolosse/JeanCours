@@ -6,4 +6,5 @@ export default [
   route("weekCharts", "routes/currentWeekCharts.tsx"),
   route("charts", "routes/seasonCharts.tsx"),
   route("weekTypes", "routes/weekTypes.tsx"),
+  route("trainingTypes", "routes/trainingTypes.tsx"),
 ] satisfies RouteConfig;
