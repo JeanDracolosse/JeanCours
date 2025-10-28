@@ -89,12 +89,7 @@ function getOptions(
       },
     },
     legend: {
-      itemStyle: {
-        color: colorScheme,
-      },
-      itemHiddenStyle: {
-        color: colorScheme,
-      },
+      enabled: false
     },
     series: [
       {
