@@ -2,7 +2,19 @@ import React from "react";
 import { Accordion, Card, Stack, Title, useMantineTheme } from "@mantine/core";
 import LineChart from "~/components/chart/lineChart";
 import TimeInZoneChart from "~/components/chart/tImeInZoneChart";
-import type { ChartType, DataSeriesType } from "~/interfaces";
+import ZoneShareChart from "~/components/chart/zoneShareChart";
+import type { ChartType, DataSeriesType, TimeInZoneDataType } from "~/interfaces";
+
+// Column charts have exactly 5 series, zone 1 to zone 5.
+function timeInZoneData(chart: ChartType, metricValues: DataSeriesType): TimeInZoneDataType {
+  return {
+    timeInZone1: metricValues[chart.series[0].metric],
+    timeInZone2: metricValues[chart.series[1].metric],
+    timeInZone3: metricValues[chart.series[2].metric],
+    timeInZone4: metricValues[chart.series[3].metric],
+    timeInZone5: metricValues[chart.series[4].metric],
+  };
+}
 
 export default function Charts({
   redirect,
@@ -52,17 +64,14 @@ export default function Charts({
               />
             )}
             {metricEntry.type === "column" && (
-              <TimeInZoneChart
-                redirect={redirect}
-                index={indexes?.[metricEntry.id] ?? index}
-                timeInZoneData={{
-                  timeInZone1: metricValues[metricEntry.series[0].metric],
-                  timeInZone2: metricValues[metricEntry.series[1].metric],
-                  timeInZone3: metricValues[metricEntry.series[2].metric],
-                  timeInZone4: metricValues[metricEntry.series[3].metric],
-                  timeInZone5: metricValues[metricEntry.series[4].metric],
-                }}
-              />
+              <Stack gap="md">
+                <TimeInZoneChart
+                  redirect={redirect}
+                  index={indexes?.[metricEntry.id] ?? index}
+                  timeInZoneData={timeInZoneData(metricEntry, metricValues)}
+                />
+                <ZoneShareChart timeInZoneData={timeInZoneData(metricEntry, metricValues)} />
+              </Stack>
             )}
           </Card>
         </div>

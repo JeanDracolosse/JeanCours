@@ -19,6 +19,13 @@ export const dateFormatter: AxisLabelsFormatterCallbackFunction = function (
   }).format(date);
 };
 
+// Seconds as "12h05", or "45min" under an hour.
+export function formatDuration(seconds: number): string {
+  const minutes = Math.round(seconds / 60);
+  if (minutes < 60) return `${minutes}min`;
+  return `${Math.floor(minutes / 60)}h${String(minutes % 60).padStart(2, "0")}`;
+}
+
 export const meterFormatter: AxisLabelsFormatterCallbackFunction = function (
   this: AxisLabelsFormatterContextObject
 ): string {
