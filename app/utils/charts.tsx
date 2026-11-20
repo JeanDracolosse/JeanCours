@@ -15,6 +15,9 @@ import {
 import { Text, List, ThemeIcon, type MantineTheme } from "@mantine/core";
 import type { UseColorSchemeValue } from "@mantine/hooks";
 
+// First day of the current season (YYYY-MM-DD), sent as `from` to the weekly routes.
+export const SEASON_START = "2026-07-20";
+
 export function defaultNavbarContent() {
   return defaultChartList().map((entry) => ({ icon: entry.icon, label: entry.title, link: "#" + entry.id }));
 }
