@@ -10,6 +10,7 @@ import { getIndex, getMetricAvgByWeek, getMetricSumByWeek, getTrainingLoad, getW
 import { useColorScheme } from "@mantine/hooks";
 import { NavBar } from "~/components/layout/navBar";
 import WeekTypeChart from "~/components/chart/weekTypeChart";
+import { integerDataLabelFormatter, kilometerDataLabelFormatter } from "~/utils/formatters";
 
 const season = { from: SEASON_START };
 
@@ -95,10 +96,12 @@ export default function SeasonCharts() {
           >
             {([index, metricAvgValues, metricSumValues, trainingLoad, weekTypes]) => (
               <div>
+                {/* Weekly TSS by week type; distance when the training load is unavailable (409). */}
                 <WeekTypeChart
-                  distance={metricSumValues["distance"].slice(Math.max(metricSumValues["distance"].length - 3, 1))}
-                  index={weekTypes.map((entry) => entry.date)}
-                  label={weekTypes.map((entry) => entry.label)}
+                  index={index}
+                  values={trainingLoad.tss ?? metricSumValues["distance"]}
+                  formatter={trainingLoad.tss ? integerDataLabelFormatter : kilometerDataLabelFormatter}
+                  weekTypes={weekTypes}
                 />
                 <Space h="xl" />
                 <Charts

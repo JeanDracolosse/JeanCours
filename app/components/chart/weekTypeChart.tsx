@@ -1,25 +1,41 @@
 import React from "react";
 import { useMantineTheme } from "@mantine/core";
 import { useColorScheme } from "@mantine/hooks";
-import type { Chart, Point, SeriesClickEventObject } from "highcharts";
+import type { DataLabelsFormatterCallbackFunction, Point, SeriesClickEventObject } from "highcharts";
 import type { NavigateFunction } from "react-router";
 import { useNavigate } from "react-router";
-import { dateFormatter, kilometerDataLabelFormatter } from "~/utils/formatters";
-import type { MetricValue } from "~/interfaces";
+import { dateFormatter } from "~/utils/formatters";
+import type { MetricValue, WeekType } from "~/interfaces";
 import { weekChartsPath } from "~/utils/isoWeek";
 import ChartDraw from "./chart";
 
-function getOptions(
-  navigate: NavigateFunction,
-  distance: MetricValue[],
-  label: string[],
-  index: string[]
-): Highcharts.Options {
+// One column per week of `index`, colored by the planned week type (matched on the Monday's date).
+export default function WeekTypeChart({
+  index,
+  values,
+  formatter,
+  weekTypes,
+}: {
+  index: string[];
+  values: MetricValue[];
+  formatter: DataLabelsFormatterCallbackFunction;
+  weekTypes: WeekType[];
+}) {
+  const navigate: NavigateFunction = useNavigate();
   const theme = useMantineTheme();
   const colorScheme = "var(--mantine-color-text)";
   const colorIndex = useColorScheme() === "dark" ? 8 : 6;
 
-  const plotOptions: Highcharts.Options = {
+  const typeColors: Record<string, string> = {
+    Base: theme.colors.chart2Color[colorIndex],
+    Récupération: theme.colors.chart1Color[colorIndex],
+    Intensive: theme.colors.chart3Color[colorIndex],
+    Spécifique: theme.colors.chart4Color[colorIndex],
+  };
+  const labelByDate = new Map(weekTypes.map((entry) => [entry.date, entry.label]));
+  const labels = index.map((date) => labelByDate.get(date.slice(0, 10)) ?? "");
+
+  const options: Highcharts.Options = {
     chart: {
       type: "column",
       backgroundColor: "var(--mantine-color-body)",
@@ -28,29 +44,6 @@ function getOptions(
       borderRadius: 8,
       style: {
         fontFamily: theme.fontFamily,
-      },
-      events: {
-        load: function (this: Chart) {
-          console.log(this);
-          this.series[0].points.forEach(function (i, e) {
-            switch (label[e]) {
-              case "Base":
-                i.update({ color: theme.colors.chart2Color[colorIndex] });
-                break;
-              case "Récupération":
-                i.update({ color: theme.colors.chart1Color[colorIndex] });
-                break;
-              case "Intensive":
-                i.update({ color: theme.colors.chart3Color[colorIndex] });
-                break;
-              case "Spécifique":
-                i.update({ color: theme.colors.chart4Color[colorIndex] });
-                break;
-              default:
-                break;
-            }
-          });
-        },
       },
     },
     title: {
@@ -83,11 +76,11 @@ function getOptions(
     },
     plotOptions: {
       series: {
-        stacking: "normal",
-        dataLabels: {
-          enabled: true,
+        events: {
+          click: function (event: SeriesClickEventObject) {
+            navigate(weekChartsPath(this.chart.xAxis[0].categories[event.point.x]));
+          },
         },
-        events: {},
       },
     },
     legend: {
@@ -95,51 +88,32 @@ function getOptions(
     },
     series: [
       {
+        type: "column",
+        borderWidth: 0,
+        color: theme.colors.gray[colorIndex - 2],
+        data: values.map((y, i) => ({ y, color: typeColors[labels[i]] })),
         dataLabels: [
           {
+            enabled: true,
             formatter: function (this: Point) {
-              if (this.index !== undefined) {
-                return label[this.index];
-              }
-              return "";
+              return this.index !== undefined ? labels[this.index] : "";
             },
             style: {
               color: colorScheme,
             },
           },
           {
-            formatter: kilometerDataLabelFormatter,
+            enabled: true,
+            formatter,
             verticalAlign: "top",
             style: {
               color: colorScheme,
             },
           },
         ],
-        data: distance,
-        type: "column",
-        borderWidth: 0,
       },
     ],
   };
-  if (plotOptions.plotOptions?.series?.events) {
-    plotOptions.plotOptions.series.events.click = function (event: SeriesClickEventObject) {
-      navigate(weekChartsPath(this.chart.xAxis[0].categories[event.point.x]));
-    };
-  }
 
-  return plotOptions;
-}
-
-export default function WeekTypeChart({
-  distance,
-  label,
-  index,
-}: {
-  distance: MetricValue[];
-  label: string[];
-  index: string[];
-}) {
-  const navigate: NavigateFunction = useNavigate();
-  const options: Highcharts.Options = getOptions(navigate, distance, label, index);
   return <ChartDraw options={options} />;
 }
