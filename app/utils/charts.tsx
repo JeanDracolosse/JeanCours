@@ -180,7 +180,7 @@ export function defaultChartList(theme?: MantineTheme, colorScheme?: UseColorSch
         },
         {
           name: "Zone 3",
-          metric: "hrTimeInZone_3",
+          metric: "powerTimeInZone_3",
           aggregation: "sum",
           formatter: defaultDataLabelFormatter,
         },
