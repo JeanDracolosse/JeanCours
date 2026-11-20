@@ -6,11 +6,14 @@ import {
   ManualGearbox,
   MoodHappy,
   RulerMeasure,
+  Run,
   StepInto,
 } from "tabler-icons-react";
 import type { ChartType } from "~/interfaces";
 import {
+  bpmDataLabelFormatter,
   caloriesDataLabelFormatter,
+  celsiusDataLabelFormatter,
   centimeterDataLabelFormatter,
   defaultDataLabelFormatter,
   fiveDataLabelFormatter,
@@ -18,8 +21,10 @@ import {
   kilometerDataLabelFormatter,
   meterDataLabelFormatter,
   milliSecondDataLabelFormatter,
+  paceDataLabelFormatter,
   percentDataLabelFormatter,
   tenDataLabelFormatter,
+  wattDataLabelFormatter,
 } from "./formatters";
 import { Text, List, ThemeIcon, type MantineTheme } from "@mantine/core";
 import type { UseColorSchemeValue } from "@mantine/hooks";
@@ -240,6 +245,57 @@ export function defaultChartList(theme?: MantineTheme, colorScheme?: UseColorSch
           metric: "elevationLoss",
           aggregation: "sum",
           formatter: meterDataLabelFormatter,
+        },
+      ],
+    },
+    {
+      id: "intensity",
+      title: "Allure et intensité",
+      type: "line",
+      description: (
+        <Text>
+          Allure moyenne de chaque sortie, et allure ajustée à la pente (comme si le terrain était plat), avec la
+          fréquence cardiaque, la puissance et la température mesurée par la montre. Par semaine, les moyennes sont
+          pondérées par la durée des sorties.
+        </Text>
+      ),
+      icon: (iconColor: string, size: number) => <Run size={size} strokeWidth={1.5} color={iconColor} />,
+      series: [
+        {
+          name: "Allure",
+          metric: "averageSpeed",
+          aggregation: "avg",
+          formatter: paceDataLabelFormatter,
+        },
+        {
+          name: "Allure ajustée à la pente",
+          metric: "avgGradeAdjustedSpeed",
+          aggregation: "avg",
+          formatter: paceDataLabelFormatter,
+        },
+        {
+          name: "Fréquence cardiaque",
+          metric: "averageHR",
+          aggregation: "avg",
+          formatter: bpmDataLabelFormatter,
+        },
+        {
+          name: "Puissance",
+          metric: "avgPower",
+          aggregation: "avg",
+          formatter: wattDataLabelFormatter,
+        },
+        {
+          name: "Température min",
+          metric: "minTemperature",
+          aggregation: "avg",
+          formatter: celsiusDataLabelFormatter,
+        },
+        {
+          name: "Température max",
+          metric: "maxTemperature",
+          aggregation: "avg",
+          formatter: celsiusDataLabelFormatter,
         },
       ],
     },

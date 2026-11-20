@@ -121,6 +121,26 @@ export const defaultDataLabelFormatter: DataLabelsFormatterCallbackFunction = fu
   return "";
 };
 
+// Labels a point with its rounded value and a unit, or nothing for empty points.
+function unitDataLabelFormatter(format: (y: number) => string): DataLabelsFormatterCallbackFunction {
+  return function (this: Point): string {
+    const y = this.index !== undefined ? this.series.data[this.index].y : undefined;
+    return y ? format(y) : "";
+  };
+}
+
+// Speed in m/s, shown as a pace in min/km.
+export const paceDataLabelFormatter = unitDataLabelFormatter((metersPerSecond) => {
+  const secondsPerKm = Math.round(1000 / metersPerSecond);
+  return `${Math.floor(secondsPerKm / 60)}:${String(secondsPerKm % 60).padStart(2, "0")}/km`;
+});
+
+export const bpmDataLabelFormatter = unitDataLabelFormatter((bpm) => `${Math.round(bpm)}bpm`);
+
+export const wattDataLabelFormatter = unitDataLabelFormatter((watts) => `${Math.round(watts)}W`);
+
+export const celsiusDataLabelFormatter = unitDataLabelFormatter((celsius) => `${Math.round(celsius)}°C`);
+
 export const integerDataLabelFormatter: DataLabelsFormatterCallbackFunction = function (this: Point): string {
   if (this.index !== undefined && this.series.data[this.index].y !== undefined) {
     return Math.round(this.series.data[this.index].y || 0).toString();
