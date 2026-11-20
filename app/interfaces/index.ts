@@ -1,20 +1,24 @@
 import type { DataLabelsFormatterCallbackFunction } from "highcharts";
 
-// API types
+// API types (see the backend Swagger at /docs)
+
+// Weekly sums are 0 for weeks without runs, weekly averages are null.
+export type MetricValue = number | null;
+
 export type HrTimeInZoneType = {
-  hrTimeInZone_1: string[];
-  hrTimeInZone_2: string[];
-  hrTimeInZone_3: string[];
-  hrTimeInZone_4: string[];
-  hrTimeInZone_5: string[];
+  hrTimeInZone_1: number[];
+  hrTimeInZone_2: number[];
+  hrTimeInZone_3: number[];
+  hrTimeInZone_4: number[];
+  hrTimeInZone_5: number[];
 };
 
 export type PowerTimeInZoneType = {
-  powerTimeInZone_1: string[];
-  powerTimeInZone_2: string[];
-  powerTimeInZone_3: string[];
-  powerTimeInZone_4: string[];
-  powerTimeInZone_5: string[];
+  powerTimeInZone_1: number[];
+  powerTimeInZone_2: number[];
+  powerTimeInZone_3: number[];
+  powerTimeInZone_4: number[];
+  powerTimeInZone_5: number[];
 };
 
 export type WeekType = {
@@ -23,15 +27,19 @@ export type WeekType = {
 };
 
 export type DistanceType = {
-  distance: string[];
-  elevationGain: string[];
-  kilometerEffort: string[];
-  fullKilometerEffort: string[];
+  distance: number[];
+  elevationGain: number[];
+  elevationLoss: number[];
+  kilometerEffort: number[];
+  fullKilometerEffort: number[];
 };
 
-export type DataSeriesType = {
-  [key: string]: string[];
-};
+export type DataSeriesType = Record<string, MetricValue[]>;
+
+// One value per run; startTimeLocal is always included.
+export type ActivityMetricsType = DataSeriesType & { startTimeLocal: string[] };
+
+export type DateRange = { from?: string; to?: string };
 
 // Chart types
 export type ChartType = {
@@ -49,16 +57,16 @@ export type ChartType = {
 };
 
 export type LineDataType = {
-  serie: string[];
+  serie: MetricValue[];
   name: string;
   unit?: string;
   formatter?: DataLabelsFormatterCallbackFunction;
 };
 
 export type TimeInZoneDataType = {
-  timeInZone1: string[];
-  timeInZone2: string[];
-  timeInZone3: string[];
-  timeInZone4: string[];
-  timeInZone5: string[];
+  timeInZone1: MetricValue[];
+  timeInZone2: MetricValue[];
+  timeInZone3: MetricValue[];
+  timeInZone4: MetricValue[];
+  timeInZone5: MetricValue[];
 };

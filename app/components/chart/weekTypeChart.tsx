@@ -5,11 +5,13 @@ import type { Chart, Point, SeriesClickEventObject } from "highcharts";
 import type { NavigateFunction } from "react-router";
 import { useNavigate } from "react-router";
 import { dateFormatter, kilometerDataLabelFormatter } from "~/utils/formatters";
+import type { MetricValue } from "~/interfaces";
+import { weekChartsPath } from "~/utils/isoWeek";
 import ChartDraw from "./chart";
 
 function getOptions(
   navigate: NavigateFunction,
-  distance: string[],
+  distance: MetricValue[],
   label: string[],
   index: string[]
 ): Highcharts.Options {
@@ -121,14 +123,7 @@ function getOptions(
   };
   if (plotOptions.plotOptions?.series?.events) {
     plotOptions.plotOptions.series.events.click = function (event: SeriesClickEventObject) {
-      const dateString = this.chart.xAxis[0].categories[event.point.x];
-      const date = new Date(dateString);
-      const year = date.getFullYear();
-
-      const startDate = new Date(year, 0, 1);
-      const days = Math.floor((date.getTime() - startDate.getTime()) / (24 * 60 * 60 * 1000));
-      const weekNumber = Math.ceil((days + 1) / 7);
-      navigate(`/weekCharts/${year}/${weekNumber}`);
+      navigate(weekChartsPath(this.chart.xAxis[0].categories[event.point.x]));
     };
   }
 
@@ -140,7 +135,7 @@ export default function WeekTypeChart({
   label,
   index,
 }: {
-  distance: string[];
+  distance: MetricValue[];
   label: string[];
   index: string[];
 }) {

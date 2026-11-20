@@ -4,8 +4,9 @@ import { Stack, Title, Text, useMantineTheme, Flex, Loader, ActionIcon } from "@
 import { ArrowLeft, ArrowRight } from "tabler-icons-react";
 
 import Charts from "~/components/chart/charts";
-import type { ChartType, DataSeriesType } from "~/interfaces";
+import type { ActivityMetricsType, ChartType } from "~/interfaces";
 import { defaultChartList } from "~/utils/charts";
+import { isoWeekMonday, shiftIsoWeek } from "~/utils/isoWeek";
 import { getMetricByActivity } from "~/utils/mongo";
 import { useColorScheme } from "@mantine/hooks";
 import { NavBar } from "~/components/layout/navBar";
@@ -13,10 +14,11 @@ import { NavBar } from "~/components/layout/navBar";
 export async function loader({ params }: { params: { year: string; week: string } }) {
   const chartList: ChartType[] = defaultChartList();
   const metricList = chartList.map((entry) => entry.series?.map((entry) => entry.metric)).flat() as string[];
-  const date = new Date(parseFloat(params.year), 0, 1 + (parseFloat(params.week) - 1) * 7);
+  const year = parseInt(params.year);
+  const week = parseInt(params.week);
 
-  const metricValues = getMetricByActivity(params.year, params.week, metricList);
-  return { metricValues, date, year: params.year, week: params.week };
+  const metricValues = getMetricByActivity(year, week, metricList);
+  return { metricValues, date: isoWeekMonday(year, week), year, week };
 }
 
 function ErrorElement() {
@@ -32,35 +34,21 @@ function ErrorElement() {
 
 export default function WeekCharts() {
   const { metricValues, date, year, week } = useLoaderData() as {
-    metricValues: DataSeriesType;
+    metricValues: ActivityMetricsType;
     date: Date;
-    year: string;
-    week: string;
+    year: number;
+    week: number;
   };
 
   const chartList = defaultChartList(useMantineTheme(), useColorScheme());
 
-  let nextWeek = parseInt(week) + 1;
-  let nextYear = parseInt(year);
-  if (nextWeek > 51) {
-    nextWeek = 1;
-    nextYear = nextYear + 1;
-  }
-
-  let previousWeek = parseInt(week) - 1;
-  let previousYear = parseInt(year);
-  if (previousWeek < 1) {
-    previousWeek = 0;
-    previousYear = nextYear - 1;
-  }
-
   const navigate = useNavigate();
-  const redirectToPreviousWeek = () => {
-    navigate(`/weekCharts/${previousYear}/${previousWeek}`);
+  const redirectToWeek = (delta: number) => {
+    const target = shiftIsoWeek(year, week, delta);
+    navigate(`/weekCharts/${target.year}/${target.week}`);
   };
-  const redirectToNextWeek = () => {
-    navigate(`/weekCharts/${nextYear}/${nextWeek}`);
-  };
+  const redirectToPreviousWeek = () => redirectToWeek(-1);
+  const redirectToNextWeek = () => redirectToWeek(1);
 
   return (
     <div>
@@ -73,7 +61,8 @@ export default function WeekCharts() {
               year: "numeric",
               month: "long",
               day: "numeric",
-            }).format(date)}{" "}
+              timeZone: "UTC",
+            }).format(new Date(date))}{" "}
           </Text>
         </Title>
         <Title order={2}>

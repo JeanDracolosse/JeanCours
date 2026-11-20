@@ -1,65 +1,68 @@
-import type { DataSeriesType, DistanceType, HrTimeInZoneType, PowerTimeInZoneType, WeekType } from "../interfaces";
+import type {
+  ActivityMetricsType,
+  DataSeriesType,
+  DateRange,
+  DistanceType,
+  HrTimeInZoneType,
+  PowerTimeInZoneType,
+  WeekType,
+} from "../interfaces";
 
-export async function getHrTimeInZone(): Promise<HrTimeInZoneType> {
-  const hrTimeInZoneApiUrl = `${process.env.BACKEND_URL}/hrTimeInZone`;
-  const hrTimeInZoneRes = await fetch(hrTimeInZoneApiUrl);
-  const hrTimeInZone = await hrTimeInZoneRes.json();
-  return hrTimeInZone;
+// Calls the backend API (BACKEND_URL). Throws on any non-2xx answer, with the backend's `detail` as message.
+async function fetchApi<T>(path: string, params: URLSearchParams = new URLSearchParams()): Promise<T> {
+  const query = params.toString();
+  const res = await fetch(`${process.env.BACKEND_URL}${path}${query ? `?${query}` : ""}`);
+  if (!res.ok) {
+    let detail: unknown = res.statusText;
+    try {
+      detail = (await res.json()).detail ?? detail;
+    } catch {
+      // Body is not JSON: keep the status text.
+    }
+    throw new Error(`${res.status} ${path}: ${typeof detail === "string" ? detail : JSON.stringify(detail)}`);
+  }
+  return res.json();
 }
 
-export async function getPowerTimeInZone(): Promise<PowerTimeInZoneType> {
-  const powerTimeInZoneApiUrl = `${process.env.BACKEND_URL}/powerTimeInZone`;
-  const powerTimeInZoneRes = await fetch(powerTimeInZoneApiUrl);
-  const powerTimeInZone = await powerTimeInZoneRes.json();
-  return powerTimeInZone;
-}
-
-export async function getWeekTypes(): Promise<WeekType[]> {
-  const indexApiUrl = `${process.env.BACKEND_URL}/weekTypes`;
-  const indexRes = await fetch(indexApiUrl);
-  const index = await indexRes.json();
-  return index;
-}
-
-export async function getIndex(): Promise<string[]> {
-  const indexApiUrl = `${process.env.BACKEND_URL}/index`;
-  const indexRes = await fetch(indexApiUrl);
-  const index = await indexRes.json();
-  return index;
-}
-
-export async function getDistance(): Promise<DistanceType> {
-  const distanceApiUrl = `${process.env.BACKEND_URL}/distance`;
-  const distanceRes = await fetch(distanceApiUrl);
-  const distance = await distanceRes.json();
-  return distance;
-}
-
-export async function getMetricSumByWeek(metricList: string[]): Promise<DataSeriesType> {
+function rangeParams(range: DateRange = {}, metricList: string[] = []): URLSearchParams {
   const params = new URLSearchParams();
+  if (range.from) params.append("from", range.from);
+  if (range.to) params.append("to", range.to);
   metricList.forEach((metric) => params.append("metrics", metric));
-  const metricsByWeekUrl = `${process.env.BACKEND_URL}/metricsSumByWeek?${params}`;
-  const metricsByWeekRes = await fetch(metricsByWeekUrl);
-  const metricsByWeek = await metricsByWeekRes.json();
-  return metricsByWeek;
+  return params;
 }
 
-export async function getMetricAvgByWeek(metricList: string[]): Promise<DataSeriesType> {
-  const params = new URLSearchParams();
-  metricList.forEach((metric) => params.append("metrics", metric));
-  const metricsByWeekUrl = `${process.env.BACKEND_URL}/metricsAvgByWeek?${params}`;
-  const metricsByWeekRes = await fetch(metricsByWeekUrl);
-  const metricsByWeek = await metricsByWeekRes.json();
-  return metricsByWeek;
+export function getHrTimeInZone(range?: DateRange): Promise<HrTimeInZoneType> {
+  return fetchApi("/hrTimeInZone", rangeParams(range));
 }
 
-export async function getMetricByActivity(year: string, week: string, metricList: string[]): Promise<DataSeriesType> {
-  const params = new URLSearchParams();
-  params.append("year", year);
-  params.append("week", week);
-  metricList.forEach((metric) => params.append("metrics", metric));
-  const metricsByActivityUrl = `${process.env.BACKEND_URL}/metricsByActivity?${params}`;
-  const metricsByActivityRes = await fetch(metricsByActivityUrl);
-  const metricsByActivity = await metricsByActivityRes.json();
-  return metricsByActivity;
+export function getPowerTimeInZone(range?: DateRange): Promise<PowerTimeInZoneType> {
+  return fetchApi("/powerTimeInZone", rangeParams(range));
+}
+
+export function getWeekTypes(): Promise<WeekType[]> {
+  return fetchApi("/weekTypes");
+}
+
+export function getIndex(range?: DateRange): Promise<string[]> {
+  return fetchApi("/index", rangeParams(range));
+}
+
+export function getDistance(range?: DateRange): Promise<DistanceType> {
+  return fetchApi("/distance", rangeParams(range));
+}
+
+export function getMetricSumByWeek(metricList: string[], range?: DateRange): Promise<DataSeriesType> {
+  return fetchApi("/metricsSumByWeek", rangeParams(range, metricList));
+}
+
+export function getMetricAvgByWeek(metricList: string[], range?: DateRange): Promise<DataSeriesType> {
+  return fetchApi("/metricsAvgByWeek", rangeParams(range, metricList));
+}
+
+export function getMetricByActivity(year: number, week: number, metricList: string[]): Promise<ActivityMetricsType> {
+  const params = rangeParams({}, metricList);
+  params.append("year", year.toString());
+  params.append("week", week.toString());
+  return fetchApi("/metricsByActivity", params);
 }

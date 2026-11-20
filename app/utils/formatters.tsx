@@ -8,14 +8,14 @@ import {
 export const dateFormatter: AxisLabelsFormatterCallbackFunction = function (
   this: AxisLabelsFormatterContextObject
 ): string {
-  let date = Date.parse(this.value.toString());
-  if (this.value.toString().includes("T00:00:00")) {
-    date = date - 7 * 24 * 60 * 60 * 1000;
-  }
+  // Backend dates are local times without offset: read them as UTC and format in UTC so they display as sent.
+  const value = this.value.toString();
+  const date = Date.parse(/[zZ]|[+-]\d\d:\d\d$/.test(value) ? value : value + "Z");
   return new Intl.DateTimeFormat("fr-FR", {
     year: "numeric",
     month: "long",
     day: "numeric",
+    timeZone: "UTC",
   }).format(date);
 };
 

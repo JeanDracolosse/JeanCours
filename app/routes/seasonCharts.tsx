@@ -1,15 +1,29 @@
 import React, { Suspense } from "react";
-import { Await, useLoaderData } from "react-router";
+import { Await, useAsyncError, useLoaderData } from "react-router";
 
 import { Blockquote, Flex, Loader, Space, Stack, Text, Title, useMantineTheme } from "@mantine/core";
 import { InfoCircle } from "tabler-icons-react";
 import Charts from "~/components/chart/charts";
 import type { DataSeriesType, WeekType } from "~/interfaces";
-import { defaultChartList } from "~/utils/charts";
+import { defaultChartList, SEASON_START } from "~/utils/charts";
 import { getIndex, getMetricAvgByWeek, getMetricSumByWeek, getWeekTypes } from "~/utils/mongo";
 import { useColorScheme } from "@mantine/hooks";
 import { NavBar } from "~/components/layout/navBar";
 import WeekTypeChart from "~/components/chart/weekTypeChart";
+
+const season = { from: SEASON_START };
+
+function ErrorElement() {
+  const error = useAsyncError();
+  return (
+    <Stack pl="xl" align="stretch" justify="flex-start">
+      <Title pt="xl" order={4}>
+        Impossible de charger les données de la saison
+      </Title>
+      <Text c="dimmed">{error instanceof Error ? error.message : String(error)}</Text>
+    </Stack>
+  );
+}
 
 export async function loader() {
   const metricSumList = defaultChartList()
@@ -19,12 +33,12 @@ export async function loader() {
     .map((entry) => entry.series?.filter((serie) => serie.aggregation === "avg").map((entry) => entry.metric))
     .flat() as string[];
 
-  const metricSumValues = getMetricSumByWeek(metricSumList);
-  const metricAvgValues = getMetricAvgByWeek(metricAvgList);
+  const metricSumValues = getMetricSumByWeek(metricSumList, season);
+  const metricAvgValues = getMetricAvgByWeek(metricAvgList, season);
 
   const weekTypes = getWeekTypes();
 
-  const index = getIndex();
+  const index = getIndex(season);
 
   return { index, metricAvgValues, metricSumValues, weekTypes };
 }
@@ -49,7 +63,9 @@ export default function SeasonCharts() {
         <Title order={2}>
           La saison a commencé le{" "}
           <Text span c="primaryColor" inherit>
-            13 octobre 2025
+            {new Intl.DateTimeFormat("fr-FR", { dateStyle: "long", timeZone: "UTC" }).format(
+              new Date(SEASON_START + "T00:00:00Z")
+            )}
           </Text>
         </Title>
         <Text>
@@ -66,7 +82,10 @@ export default function SeasonCharts() {
             </Flex>
           }
         >
-          <Await resolve={Promise.all([index, metricAvgValues, metricSumValues, weekTypes])}>
+          <Await
+            resolve={Promise.all([index, metricAvgValues, metricSumValues, weekTypes])}
+            errorElement={<ErrorElement />}
+          >
             {([index, metricAvgValues, metricSumValues, weekTypes]) => (
               <div>
                 <WeekTypeChart
