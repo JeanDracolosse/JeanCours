@@ -4,9 +4,9 @@ import { Await, useAsyncError, useLoaderData } from "react-router";
 import { Blockquote, Flex, Loader, Space, Stack, Text, Title, useMantineTheme } from "@mantine/core";
 import { InfoCircle } from "tabler-icons-react";
 import Charts from "~/components/chart/charts";
-import type { DataSeriesType, WeekType } from "~/interfaces";
+import type { DataSeriesType, TrainingLoadWeeksType, WeekType } from "~/interfaces";
 import { defaultChartList, SEASON_START } from "~/utils/charts";
-import { getIndex, getMetricAvgByWeek, getMetricSumByWeek, getWeekTypes } from "~/utils/mongo";
+import { getIndex, getMetricAvgByWeek, getMetricSumByWeek, getTrainingLoad, getWeekTypes } from "~/utils/mongo";
 import { useColorScheme } from "@mantine/hooks";
 import { NavBar } from "~/components/layout/navBar";
 import WeekTypeChart from "~/components/chart/weekTypeChart";
@@ -40,12 +40,19 @@ export async function loader() {
 
   const index = getIndex(season);
 
-  return { index, metricAvgValues, metricSumValues, weekTypes };
+  // A 409 (no heart-rate threshold) leaves this chart empty instead of failing the page.
+  const trainingLoad = getTrainingLoad(season).catch((error): Partial<TrainingLoadWeeksType> => {
+    console.error(error);
+    return {};
+  });
+
+  return { index, metricAvgValues, metricSumValues, trainingLoad, weekTypes };
 }
 
 export default function SeasonCharts() {
-  const { index, metricAvgValues, metricSumValues, weekTypes } = useLoaderData() as {
+  const { index, metricAvgValues, metricSumValues, trainingLoad, weekTypes } = useLoaderData() as {
     index: string[];
+    trainingLoad: Partial<TrainingLoadWeeksType>;
     metricAvgValues: DataSeriesType;
     metricSumValues: DataSeriesType;
     weekTypes: WeekType[];
@@ -69,8 +76,8 @@ export default function SeasonCharts() {
           </Text>
         </Title>
         <Text>
-          Première phase d'entraînement jusqu'à 2026. <br /> Pour l'instant, l'idée c'est de voir si j'arrive à me
-          réhabituer à courir dans les montagnes. Puis en janvier, je me fixe un objectif pour l'été.
+          Première phase d'entraînement jusqu'à janvier 2027. <br /> Pour l'instant, l'idée c'est de voir si j'arrive à
+          me réhabituer à courir dans les montagnes. Puis en janvier, je me fixe un objectif pour l'été.
         </Text>
         <Blockquote mb="xl" icon={<InfoCircle />} mt="xl">
           <Text>Cliquez sur les données d'une semaine pour accéder au détail</Text>
@@ -83,10 +90,10 @@ export default function SeasonCharts() {
           }
         >
           <Await
-            resolve={Promise.all([index, metricAvgValues, metricSumValues, weekTypes])}
+            resolve={Promise.all([index, metricAvgValues, metricSumValues, trainingLoad, weekTypes])}
             errorElement={<ErrorElement />}
           >
-            {([index, metricAvgValues, metricSumValues, weekTypes]) => (
+            {([index, metricAvgValues, metricSumValues, trainingLoad, weekTypes]) => (
               <div>
                 <WeekTypeChart
                   distance={metricSumValues["distance"].slice(Math.max(metricSumValues["distance"].length - 3, 1))}
@@ -98,7 +105,7 @@ export default function SeasonCharts() {
                   redirect={true}
                   chartList={chartList}
                   index={index}
-                  metricValues={{ ...metricAvgValues, ...metricSumValues }}
+                  metricValues={{ ...metricAvgValues, ...metricSumValues, ...trainingLoad }}
                 />
               </div>
             )}

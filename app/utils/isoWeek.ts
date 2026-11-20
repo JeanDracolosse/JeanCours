@@ -29,6 +29,13 @@ export function isoWeekMonday(year: number, week: number): Date {
   return new Date(week1Monday + (week - 1) * 7 * DAY_MS);
 }
 
+// Monday and Sunday of an ISO week, as YYYY-MM-DD.
+export function isoWeekRange(year: number, week: number): { from: string; to: string } {
+  const monday = isoWeekMonday(year, week);
+  const sunday = new Date(monday.getTime() + 6 * DAY_MS);
+  return { from: monday.toISOString().slice(0, 10), to: sunday.toISOString().slice(0, 10) };
+}
+
 export function shiftIsoWeek(year: number, week: number, delta: number): IsoWeek {
   return toIsoWeek(new Date(isoWeekMonday(year, week).getTime() + delta * 7 * DAY_MS).toISOString());
 }

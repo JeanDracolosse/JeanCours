@@ -114,6 +114,13 @@ export const defaultDataLabelFormatter: DataLabelsFormatterCallbackFunction = fu
   return "";
 };
 
+export const integerDataLabelFormatter: DataLabelsFormatterCallbackFunction = function (this: Point): string {
+  if (this.index !== undefined && this.series.data[this.index].y !== undefined) {
+    return Math.round(this.series.data[this.index].y || 0).toString();
+  }
+  return "";
+};
+
 export const fiveDataLabelFormatter: DataLabelsFormatterCallbackFunction = function (this: Point): string {
   if (this.index !== undefined && this.series.data[this.index].y !== undefined) {
     return (Math.round(this.series.data[this.index].y || 0) / 25)?.toString() || "";

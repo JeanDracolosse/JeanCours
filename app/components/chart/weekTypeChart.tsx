@@ -91,7 +91,7 @@ function getOptions(
       },
     },
     legend: {
-      enabled: false
+      enabled: false,
     },
     series: [
       {

@@ -8,11 +8,14 @@ export default function Charts({
   redirect,
   chartList,
   index,
+  indexes,
   metricValues,
 }: {
   redirect: boolean;
   chartList: ChartType[];
   index: string[];
+  // x-axis per chart id, for charts that don't use `index` (e.g. daily training load on the week page).
+  indexes?: Record<string, string[]>;
   metricValues: DataSeriesType;
 }) {
   const theme = useMantineTheme();
@@ -38,7 +41,7 @@ export default function Charts({
             {metricEntry.type === "line" && (
               <LineChart
                 redirect={redirect}
-                index={index}
+                index={indexes?.[metricEntry.id] ?? index}
                 lineDataArray={
                   metricEntry.series?.map((serie) => ({
                     name: serie.name,
@@ -51,7 +54,7 @@ export default function Charts({
             {metricEntry.type === "column" && (
               <TimeInZoneChart
                 redirect={redirect}
-                index={index}
+                index={indexes?.[metricEntry.id] ?? index}
                 timeInZoneData={{
                   timeInZone1: metricValues[metricEntry.series[0].metric],
                   timeInZone2: metricValues[metricEntry.series[1].metric],

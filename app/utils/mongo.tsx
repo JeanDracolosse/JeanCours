@@ -5,6 +5,8 @@ import type {
   DistanceType,
   HrTimeInZoneType,
   PowerTimeInZoneType,
+  TrainingLoadDaysType,
+  TrainingLoadWeeksType,
   WeekType,
 } from "../interfaces";
 
@@ -58,6 +60,15 @@ export function getMetricSumByWeek(metricList: string[], range?: DateRange): Pro
 
 export function getMetricAvgByWeek(metricList: string[], range?: DateRange): Promise<DataSeriesType> {
   return fetchApi("/metricsAvgByWeek", rangeParams(range, metricList));
+}
+
+// Both throw a 409 error when no heart-rate threshold is stored in the backend.
+export function getTrainingLoad(range?: DateRange): Promise<TrainingLoadWeeksType> {
+  return fetchApi("/trainingLoad", rangeParams(range));
+}
+
+export function getTrainingLoadByDay(range?: DateRange): Promise<TrainingLoadDaysType> {
+  return fetchApi("/trainingLoadByDay", rangeParams(range));
 }
 
 export function getMetricByActivity(year: number, week: number, metricList: string[]): Promise<ActivityMetricsType> {

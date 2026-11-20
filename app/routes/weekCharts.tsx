@@ -4,21 +4,31 @@ import { Stack, Title, Text, useMantineTheme, Flex, Loader, ActionIcon } from "@
 import { ArrowLeft, ArrowRight } from "tabler-icons-react";
 
 import Charts from "~/components/chart/charts";
-import type { ActivityMetricsType, ChartType } from "~/interfaces";
+import type { ActivityMetricsType, ChartType, TrainingLoadDaysType } from "~/interfaces";
 import { defaultChartList } from "~/utils/charts";
-import { isoWeekMonday, shiftIsoWeek } from "~/utils/isoWeek";
-import { getMetricByActivity } from "~/utils/mongo";
+import { isoWeekMonday, isoWeekRange, shiftIsoWeek } from "~/utils/isoWeek";
+import { getMetricByActivity, getTrainingLoadByDay } from "~/utils/mongo";
 import { useColorScheme } from "@mantine/hooks";
 import { NavBar } from "~/components/layout/navBar";
 
+const EMPTY_DAYS: TrainingLoadDaysType = { date: [], tss: [], ctl: [], atl: [], tsb: [] };
+
 export async function loader({ params }: { params: { year: string; week: string } }) {
   const chartList: ChartType[] = defaultChartList();
-  const metricList = chartList.map((entry) => entry.series?.map((entry) => entry.metric)).flat() as string[];
+  // Training load is daily here, from its own route: keep it out of the per-run metrics.
+  const metricList = chartList
+    .map((entry) => entry.series?.filter((serie) => serie.aggregation !== "trainingLoad").map((entry) => entry.metric))
+    .flat() as string[];
   const year = parseInt(params.year);
   const week = parseInt(params.week);
 
   const metricValues = getMetricByActivity(year, week, metricList);
-  return { metricValues, date: isoWeekMonday(year, week), year, week };
+  // A 409 (no heart-rate threshold) leaves this chart empty instead of failing the page.
+  const dailyLoad = getTrainingLoadByDay(isoWeekRange(year, week)).catch((error) => {
+    console.error(error);
+    return EMPTY_DAYS;
+  });
+  return { metricValues, dailyLoad, date: isoWeekMonday(year, week), year, week };
 }
 
 function ErrorElement() {
@@ -33,8 +43,9 @@ function ErrorElement() {
 }
 
 export default function WeekCharts() {
-  const { metricValues, date, year, week } = useLoaderData() as {
+  const { metricValues, dailyLoad, date, year, week } = useLoaderData() as {
     metricValues: ActivityMetricsType;
+    dailyLoad: TrainingLoadDaysType;
     date: Date;
     year: number;
     week: number;
@@ -86,13 +97,14 @@ export default function WeekCharts() {
             </Flex>
           }
         >
-          <Await resolve={metricValues} errorElement={<ErrorElement />}>
-            {(metricValues) => (
+          <Await resolve={Promise.all([metricValues, dailyLoad])} errorElement={<ErrorElement />}>
+            {([{ startTimeLocal, ...runMetrics }, { date: days, ...dailyLoad }]) => (
               <Charts
                 redirect={false}
                 chartList={chartList}
-                index={metricValues.startTimeLocal}
-                metricValues={metricValues}
+                index={startTimeLocal}
+                indexes={{ trainingLoad: days }}
+                metricValues={{ ...runMetrics, ...dailyLoad }}
               />
             )}
           </Await>

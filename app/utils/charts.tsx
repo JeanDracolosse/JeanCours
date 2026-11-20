@@ -1,11 +1,20 @@
 import React from "react";
-import { ArrowsDoubleNeSw, Heartbeat, ManualGearbox, MoodHappy, RulerMeasure, StepInto } from "tabler-icons-react";
+import {
+  ArrowsDoubleNeSw,
+  Barbell,
+  Heartbeat,
+  ManualGearbox,
+  MoodHappy,
+  RulerMeasure,
+  StepInto,
+} from "tabler-icons-react";
 import type { ChartType } from "~/interfaces";
 import {
   caloriesDataLabelFormatter,
   centimeterDataLabelFormatter,
   defaultDataLabelFormatter,
   fiveDataLabelFormatter,
+  integerDataLabelFormatter,
   kilometerDataLabelFormatter,
   meterDataLabelFormatter,
   milliSecondDataLabelFormatter,
@@ -309,6 +318,46 @@ export function defaultChartList(theme?: MantineTheme, colorScheme?: UseColorSch
           metric: "anaerobicTrainingEffect",
           aggregation: "avg",
           formatter: defaultDataLabelFormatter,
+        },
+      ],
+    },
+    {
+      id: "trainingLoad",
+      title: "Forme et fatigue",
+      type: "line",
+      description: (
+        <Text>
+          La charge (TSS) est calculée à partir de la fréquence cardiaque : une heure au seuil vaut 100. La fitness
+          (CTL) est la moyenne de la charge sur 42 jours, la fatigue (ATL) sur 7 jours. La forme (TSB) est la fitness
+          moins la fatigue de la veille : négative quand je suis fatigué, positive quand je suis frais. Par semaine, la
+          charge est le total de la semaine, et les autres valeurs sont celles du dernier jour.
+        </Text>
+      ),
+      icon: (iconColor: string, size: number) => <Barbell size={size} strokeWidth={1.5} color={iconColor} />,
+      series: [
+        {
+          name: "Charge (TSS)",
+          metric: "tss",
+          aggregation: "trainingLoad",
+          formatter: integerDataLabelFormatter,
+        },
+        {
+          name: "Fitness (CTL)",
+          metric: "ctl",
+          aggregation: "trainingLoad",
+          formatter: integerDataLabelFormatter,
+        },
+        {
+          name: "Fatigue (ATL)",
+          metric: "atl",
+          aggregation: "trainingLoad",
+          formatter: integerDataLabelFormatter,
+        },
+        {
+          name: "Forme (TSB)",
+          metric: "tsb",
+          aggregation: "trainingLoad",
+          formatter: integerDataLabelFormatter,
         },
       ],
     },

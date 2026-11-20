@@ -41,6 +41,11 @@ export type ActivityMetricsType = DataSeriesType & { startTimeLocal: string[] };
 
 export type DateRange = { from?: string; to?: string };
 
+// hrTSS, fitness (CTL), fatigue (ATL) and form (TSB). Weekly arrays are aligned with /index.
+export type TrainingLoadWeeksType = { tss: MetricValue[]; ctl: MetricValue[]; atl: MetricValue[]; tsb: MetricValue[] };
+
+export type TrainingLoadDaysType = { date: string[]; tss: number[]; ctl: number[]; atl: number[]; tsb: number[] };
+
 // Chart types
 export type ChartType = {
   id: string;
@@ -51,7 +56,9 @@ export type ChartType = {
   series: {
     name: string;
     metric: string;
-    aggregation: string;
+    // sum / avg: /metricsSumByWeek or /metricsAvgByWeek (or /metricsByActivity on the week page).
+    // trainingLoad: a key of /trainingLoad (season) or /trainingLoadByDay (week).
+    aggregation: "sum" | "avg" | "trainingLoad";
     formatter: DataLabelsFormatterCallbackFunction;
   }[];
 };
